@@ -9,8 +9,8 @@ public class Katane {
 	private Dice dice;
 	private RessourceProductionManager RPM;
 	private TradeManager TM;
-	private BuildManagerWorker BMW; 	
-	
+	private BuildManagerWorker BMW;
+
 	public Katane() {
 		System.out.println("-- Katane --");
 		this.instanciate();
@@ -35,3 +35,4 @@ public class Katane {
 		this.world = world;
 	}
 }
+

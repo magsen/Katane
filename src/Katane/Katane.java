@@ -1,9 +1,27 @@
+/*********************************************************************************
+*     File Name           :     Katane.java
+*     Created By          :     The LO43 Katane team
+*     Creation Date       :     [2018-09-14 13:32]
+*     Last Modified       :     [2018-12-26 15:53]
+*     Description         :     Katane is the main class of the Model part of the Model/Control/View architechture
+**********************************************************************************/
+
 package Katane;
 
 import java.util.ArrayList;
 
 
+/* The class Katane
+ *      Attributes :
+ *      	- List of World (a list to store the multiples boards of this game)
+ *      	- List of Player
+ *      	- The Dice
+ *      	- The RessourceProductionManager (RPM), which handles the attribution of the ressources to players
+ *      	- The TradeManager (TM), which handles the trades of ressources between players
+ *      	- The BuildManagerWorker (BMW), which handles the building of Towns by the players
+ */
 public class Katane {
+
 	private ArrayList<World> world;
 	private ArrayList<Player> player;
 	private Dice dice;
@@ -11,10 +29,13 @@ public class Katane {
 	private TradeManager TM;
 	private BuildManagerWorker BMW;
 
+	/* Constructor */
 	public Katane() {
 		System.out.println("-- Katane --");
 		this.instanciate();
 	}
+
+	/* Instanciation of classes */
 	private void instanciate() {
 		this.dice = new Dice(6);
 		this.RPM = new RessourceProductionManager(this);
@@ -28,9 +49,13 @@ public class Katane {
 		this.player.add(new Player(this,3));
 		this.player.add(new Player(this,4));
 	}
+
+	/* Get a World in the list */
 	public ArrayList<World> getWorld() {
 		return world;
 	}
+
+	/* Set a World in the list */
 	public void setWorld(ArrayList<World> world) {
 		this.world = world;
 	}

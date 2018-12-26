@@ -17,7 +17,7 @@ OUTPUT_EXEC=$(OUTPUT_DIR)/$(OUT).jar
 # −−−−− FLAGS −−−−−
 FLAGS_WARNING_SYNTAX=-Xlint:all
 FLAGS_WARNING_DOCUMENTATION=-Xdoclint:all # This forces the documentation
-FLAGS_WARNINGS=$(FLAGS_WARNING_SYNTAX) # $(FLAGS_WARNING_DOCUMENTATION)
+FLAGS_WARNINGS=$(FLAGS_WARNING_SYNTAX) $(FLAGS_WARNING_DOCUMENTATION)
 FLAGS= $(FLAGS_WARNINGS) $(DEBUG)
 
 
@@ -74,10 +74,10 @@ compilePackage: $(FILES_OUTPUT_WITH_DESTINATION) # This one is just to call the 
 $(FILES_OUTPUT_WITH_DESTINATION):
 	javac $(FLAGS) -cp $(OUTPUT_DIR) -d $(OUTPUT_DIR) $(FILES_IN_PACKAGES_WITH_SOURCE)
 
-# Compile by launching a submakefile with an additionnnal debug flag
+
 debug: clean
 	@echo "Launch compilation in DEBUG mode\n--------------------------------"
-	$(MAKE) DEBUG="-g"
+	$(MAKE) DEBUG="-g" # Launch a sub-Makefile with debug
 
 
 .PHONY: clean print

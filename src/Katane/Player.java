@@ -2,7 +2,7 @@
 *     File Name           :     Player.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2018-12-26 18:11]
+*     Last Modified       :     [2019-01-01 23:23]
 *     Description         :     The Player class represents a player of the game.
 **********************************************************************************/
 
@@ -64,5 +64,22 @@ public class Player {
 	/* Set the ressource in the list */
 	public void setRessource(ArrayList<Ressource> ressource) {
 		this.ressource = ressource;
+	}
+
+	public boolean isEnoughRessourceRoad () {
+		for (Ressource r : ressource) {
+			// TODO
+		}
+		return true;
+	}
+
+	public boolean isEnoughRessourceDolorean () {
+			// TODO
+		return true;
+	}
+
+	public boolean isEnoughRessourceTimeTown () {
+			// TODO
+		return true;
 	}
 }

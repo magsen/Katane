@@ -2,7 +2,7 @@
 *     File Name           :     Player.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-01 23:23]
+*     Last Modified       :     [2019-01-04 01:27]
 *     Description         :     The Player class represents a player of the game.
 **********************************************************************************/
 
@@ -22,13 +22,15 @@ public class Player {
 	private int playerNumber;
 	private int victoryPoint;
 	private ArrayList<Ressource> ressource;
+	private ArrayList<Town> townList;
 
 	/* Constructor */
 	public Player(Katane katane, int i) {
 		this.katane = katane;
 		this.setPlayerNumber(i);
 		System.out.println("-- Player "+i+" --");
-		this.ressource = new ArrayList<>();
+		this.townList = new ArrayList<Town>();
+		this.ressource = new ArrayList<Ressource>();
 		this.ressource.add(new Wood());
 		this.ressource.add(new Wool());
 		this.ressource.add(new Brick());
@@ -81,5 +83,9 @@ public class Player {
 	public boolean isEnoughRessourceTimeTown () {
 			// TODO
 		return true;
+	}
+
+	public void addTownToPlayerList (Town town) {
+		townList.add(town);
 	}
 }

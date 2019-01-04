@@ -2,7 +2,7 @@
 *     File Name           :     Ressource.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2018-12-26 17:10]
+*     Last Modified       :     [2019-01-04 03:24]
 *     Description         :     Abstract class of the types of ressources
 **********************************************************************************/
 
@@ -26,5 +26,9 @@ public abstract class Ressource {
 	/* Constructor */
 	public Ressource() {
 		this.quantity = 0;
+	}
+
+	public void print () {
+		System.out.println("I'm some ressource");
 	}
 }

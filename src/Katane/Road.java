@@ -2,7 +2,7 @@
 *     File Name           :     Road.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-02 01:55]
+*     Last Modified       :     [2019-01-04 01:59]
 *     Description         :     Building type Road
 **********************************************************************************/
 
@@ -30,5 +30,9 @@ public class Road extends Building{
 	/* Set the adjacent roads in the list */
 	public void setAdjacentRoad(ArrayList<Road> adjacentRoad) {
 		this.adjacentRoad = adjacentRoad;
+	}
+
+	public void addAdjacentRoad(Road road) {
+		adjacentRoad.add(road);
 	}
 }

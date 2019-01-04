@@ -2,16 +2,17 @@
 *     File Name           :     TileMap.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-01 23:32]
+*     Last Modified       :     [2019-01-04 04:14]
 *     Description         :     The data structure to represent the tile map (tile set)
 **********************************************************************************/
 
 package Katane;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /* Class TileMap is basicly an HashMap that assign to Coordinates (the key), a 2-dimention vector like (x, y), to a Tile (Mapped value). */
-public class TileMap extends Map {
+public class TileMap extends ObjectMap {
 
 	/* The HashMap of tiles */
 	private HashMap<Coordinates, Tile> tileSet;
@@ -20,6 +21,34 @@ public class TileMap extends Map {
 	public TileMap () {
 		tileSet = new HashMap<Coordinates, Tile>();
 		createDefaultTileSet();
+	}
+
+	public HashMap<Coordinates, Tile> getTileSet () {
+		return tileSet;
+	}
+
+	/* Get the road at specified coordinates */
+	public Tile getTile (Coordinates coor) {
+		Coordinates c;
+		for ( Map.Entry<Coordinates, Tile> entry : tileSet.entrySet()) {
+			c = entry.getKey();
+			if (c.equals(coor)) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+
+	/* Test whether or not there is a road at the specified coordinates */
+	public boolean isTile (Coordinates coor) {
+		Coordinates c;
+		for ( Map.Entry<Coordinates, Tile> entry : tileSet.entrySet()) {
+			c = entry.getKey();
+			if (c.equals(coor)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/*

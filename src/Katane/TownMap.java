@@ -2,12 +2,13 @@
 *     File Name           :     TownMap.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-04 04:12]
+*     Last Modified       :     [2019-01-04 23:19]
 *     Description         :     The data structure to represent the Town map (Town set)
 **********************************************************************************/
 
 package Katane;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +23,9 @@ public class TownMap extends ObjectMap {
 	}
 
 	/* This function add a town to the town map - Don't do any kind of checking. */
-	public int addTownToMap (Coordinates coor, Town town) {
-		townSet.put(coor, town);
-		return 1; //TODO
+	public void addTownToMap (Coordinates coor, Town town) {
+		Coordinates c = new Coordinates(coor);
+		townSet.put(c, town);
 	}
 
 	/* Get the town at specified coordinates */
@@ -45,9 +46,40 @@ public class TownMap extends ObjectMap {
 		for ( Map.Entry<Coordinates, Town> entry : townSet.entrySet()) {
 			c = entry.getKey();
 			if (c.equals(coor)) {
+				System.out.println("isTown retourne true");
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/* Test whether or not there is a Dolorean at the specified coordinates, if there is, check the owner. */
+	public boolean isDoloreanOwner (Coordinates coor, Player player) {
+		Coordinates c;
+		Town t;
+		for ( Map.Entry<Coordinates, Town> entry : townSet.entrySet()) {
+			c = entry.getKey();
+			if (c.equals(coor)) {
+				t = entry.getValue();
+				if (t instanceof Dolorean) {
+					return t.isOwner(player);
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+
+	public ArrayList<Road> generateAdjacentRoads (Coordinates coor, RoadMap roadSet) {
+		ArrayList<Coordinates> adjRoads = coor.townToAdjacentRoads();
+		ArrayList<Road> roadList = new ArrayList<Road>();
+
+		for ( Coordinates c : adjRoads ) {
+			if (roadSet.isRoad(coor)) {
+				roadList.add(roadSet.getRoad(coor));
+			}
+		}
+		return roadList;
 	}
 }

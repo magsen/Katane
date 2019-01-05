@@ -2,11 +2,13 @@
 *     File Name           :     Town.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-01 19:03]
+*     Last Modified       :     [2019-01-04 05:16]
 *     Description         :     Town is an abstract Building and is used to implement Dolorean and TimeTown
 **********************************************************************************/
 
 package Katane;
+
+import java.util.ArrayList;
 
 /* Class Town */
 public abstract class Town extends Building {
@@ -17,5 +19,4 @@ public abstract class Town extends Building {
 		//must verify that you can build before add
 		//this.tile.addBuilding(this);
 	}
-
 }

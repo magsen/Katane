@@ -2,7 +2,7 @@
 *     File Name           :     Player.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-04 03:06]
+*     Last Modified       :     [2019-01-05 02:57]
 *     Description         :     The Player class represents a player of the game.
 **********************************************************************************/
 
@@ -69,28 +69,71 @@ public class Player {
 	}
 
 	public boolean isEnoughRessourceRoad () {
-		for (Ressource r : ressource) {
-			// TODO
-		}
+		isEnoughRessource(0, 0, 1, 1, 0);
 		return true;
 	}
 
 	public boolean isEnoughRessourceDolorean () {
-			// TODO
+		isEnoughRessource(0, 1, 1, 1, 1);
 		return true;
 	}
 
 	public boolean isEnoughRessourceTimeTown () {
-			// TODO
+		isEnoughRessource(3, 2, 0, 0, 0);
 		return true;
 	}
 
-	public boolean isEnoughRessource (int wood, int wool, int brick, int ore, int grain) {
+	public boolean isEnoughRessource (int brick, int grain, int ore, int wood, int wool) {
 		for ( Ressource r : ressource ) {
-			System.out.println(r instanceof Wool);
+			if (r instanceof Brick) {
+				if ( r.getQuantity() < brick) {
+					return false;
+				}
+			} else {
+				if (r instanceof Grain) {
+					if ( r.getQuantity() < grain) {
+						return false;
+					}
+				} else {
+					if (r instanceof Ore) {
+						if ( r.getQuantity() < ore) {
+							return false;
+						}
+					} else {
+						if (r instanceof Wood) {
+							if ( r.getQuantity() < wood) {
+								return false;
+							}
+						} else {
+							if (r instanceof Wool) {
+								if ( r.getQuantity() < wool) {
+									return false;
+								}
+							} else {
+							}
+						}
+					}
+				}
+			}
 		}
 		return true;
 	}
+
+	/*
+	public boolean isEnoughRessource (Ressource... ressourceARGV) {
+		for ( Ressource rARGV : ressourceARGV ) {
+			for ( Ressource r : ressource ) {
+				if (rARGV.getClass() == r.getClass()) {
+					if (rARGV.getQuantity() > r.getQuantity()) {
+						System.out.println("-- Pwah assé de reçoursse --");
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	*/
 
 	public void addTownToPlayerList (Town town) {
 		townList.add(town);

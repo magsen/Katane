@@ -2,7 +2,7 @@
 *     File Name           :     Wool.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2018-12-27 07:06]
+*     Last Modified       :     [2019-01-05 02:32]
 *     Description         :     Wool is a type of Ressource
 **********************************************************************************/
 
@@ -14,6 +14,10 @@ public class Wool extends Ressource {
 	/* Constructor */
 	public Wool() {
 		super();
+	}
+
+	public Wool(int quantity) {
+		super(quantity);
 	}
 
 	// TEST

@@ -2,7 +2,7 @@
 *     File Name           :     Coordinates.java
 *     Created By          :     The LO43 project Katane
 *     Creation Date       :     [2018-12-29 05:55]
-*     Last Modified       :     [2019-01-04 03:42]
+*     Last Modified       :     [2019-01-04 19:56]
 *     Description         :     A class that corresponds to the coordinates on the map
 **********************************************************************************/
 
@@ -34,6 +34,10 @@ public class Coordinates {
 
 	public boolean equals (Coordinates coor) {
 		return ( (x == coor.getXCoordinate()) && (y == coor.getYCoordinate()) );
+	}
+
+	public String toString () {
+		return "(" + x + ", " + y + ")";
 	}
 
 	/* Set manually the coordinates with 2 integers */

@@ -2,7 +2,7 @@
 *     File Name           :     Grain.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2018-12-27 07:05]
+*     Last Modified       :     [2019-01-05 02:34]
 *     Description         :     Grain is a type of Ressource.
 **********************************************************************************/
 
@@ -14,6 +14,10 @@ public class Grain extends Ressource {
 	/* Constructor */
 	public Grain() {
 		super();
+	}
+
+	public Grain(int quantity) {
+		super(quantity);
 	}
 
 	// TEST

@@ -2,7 +2,7 @@
 *     File Name           :     Tile.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-04 03:25]
+*     Last Modified       :     [2019-01-04 19:58]
 *     Description         :     Class to gather the list of tiles
 **********************************************************************************/
 

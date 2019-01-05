@@ -2,7 +2,7 @@
 *     File Name           :     RoadMap.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-04 04:11]
+*     Last Modified       :     [2019-01-04 23:21]
 *     Description         :     The data structure to represent the road map (road set)
 **********************************************************************************/
 
@@ -49,7 +49,8 @@ public class RoadMap extends ObjectMap {
 
 	/* Add a road to the road set */
 	public void addRoadToMap (Coordinates coor, Road road) {
-		roadSet.put(coor, road);
+		Coordinates c = new Coordinates(coor);
+		roadSet.put(c, road);
 	}
 
 	public ArrayList<Road> generateAdjacentRoads (Coordinates coor) {
@@ -67,7 +68,7 @@ public class RoadMap extends ObjectMap {
 
 	public void updateAdjacentRoads (Coordinates coor, Road road) {
 		for ( Road rd : generateAdjacentRoads(coor) ) {
-			rd.addAdjacentRoad(road);
+			rd.addAdjacentRoads(road);
 		}
 	}
 }

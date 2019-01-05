@@ -2,7 +2,7 @@
 *     File Name           :     Tile.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-05 05:53]
+*     Last Modified       :     [2019-01-05 16:04]
 *     Description         :     Class to gather the list of tiles
 **********************************************************************************/
 
@@ -28,6 +28,15 @@ public class Tile {
 	/* Add a the town to the list of adjacent towns */
 	public void addTown(Town town) {
 		this.townList.add(town);
+	}
+
+	public void addToTownList (Town t) {
+		townList.add(t);
+	}
+
+	public void updateTownToTownList (Town tOld, Town tNew) {
+		townList.remove(tOld);
+		townList.add(tNew);
 	}
 
 	public void replaceTown (Town tOld, Town tNew) {

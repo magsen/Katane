@@ -2,7 +2,7 @@
 *     File Name           :     TileMap.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-05 05:41]
+*     Last Modified       :     [2019-01-05 16:20]
 *     Description         :     The data structure to represent the tile map (tile set)
 **********************************************************************************/
 
@@ -10,6 +10,7 @@ package Katane;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 
 /* Class TileMap is basicly an HashMap that assign to Coordinates (the key), a 2-dimention vector like (x, y), to a Tile (Mapped value). */
 public class TileMap extends ObjectMap {
@@ -39,6 +40,24 @@ public class TileMap extends ObjectMap {
 		return null;
 	}
 
+	public void addTownToTilesTownList (Coordinates coor, Town town) {
+		ArrayList<Coordinates> adjTiles = coor.townToAdjacentTiles();
+		Tile t = null;
+		for (Coordinates c : adjTiles) {
+			t = getTile(c);
+		}
+		t.addToTownList(town);
+	}
+
+	public void updateTownToTilesTownList (Coordinates coor, Town tOld, Town tNew) {
+		ArrayList<Coordinates> adjTiles = coor.townToAdjacentTiles();
+		Tile t = null;
+		for (Coordinates c : adjTiles) {
+			t = getTile(c);
+		}
+		t.updateTownToTownList(tOld, tNew);
+	}
+
 	/* Test whether or not there is a road at the specified coordinates */
 	public boolean isTile (Coordinates coor) {
 		Coordinates c;
@@ -50,6 +69,8 @@ public class TileMap extends ObjectMap {
 		}
 		return false;
 	}
+
+
 
 	/*
 	 * Creates the Tile Set, it is hard-coded (as you can see).

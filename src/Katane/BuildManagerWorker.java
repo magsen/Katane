@@ -2,7 +2,7 @@
 *     File Name           :     BuildManagerWorker.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-05 01:54]
+*     Last Modified       :     [2019-01-05 04:37]
 *     Description         :     The BuildManagerWorker handles the creation of the towns
 *     					The BuildManagerWorker is often called BMW.
 **********************************************************************************/
@@ -68,7 +68,7 @@ public class BuildManagerWorker {
 			if (townSet.isDoloreanOwner(coordinates, player) == true) {
 				Town town = new TimeTown(player, coordinates);
 				town.setAdjacentRoads(townSet.generateAdjacentRoads(coordinates, roadSet)); // Set the road nead
-				townSet.addTownToMap(coordinates, town);
+				townSet.replaceTownToMap(coordinates, town);
 				return true;
 			} else {
 				System.out.println("There is already a TimeTown there or is owned by the another player");

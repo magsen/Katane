@@ -2,7 +2,7 @@
 *     File Name           :     TownMap.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-04 23:19]
+*     Last Modified       :     [2019-01-05 04:44]
 *     Description         :     The data structure to represent the Town map (Town set)
 **********************************************************************************/
 
@@ -26,6 +26,17 @@ public class TownMap extends ObjectMap {
 	public void addTownToMap (Coordinates coor, Town town) {
 		Coordinates c = new Coordinates(coor);
 		townSet.put(c, town);
+	}
+
+	public void replaceTownToMap (Coordinates coor, Town town) {
+		Coordinates c;
+		for ( Map.Entry<Coordinates, Town> entry : townSet.entrySet()) {
+			c = entry.getKey();
+			if (c.equals(coor)) {
+				Town t = entry.getValue();
+				t = town;
+			}
+		}
 	}
 
 	/* Get the town at specified coordinates */

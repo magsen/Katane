@@ -2,7 +2,7 @@
 *     File Name           :     Coordinates.java
 *     Created By          :     The LO43 project Katane
 *     Creation Date       :     [2018-12-29 05:55]
-*     Last Modified       :     [2019-01-05 05:52]
+*     Last Modified       :     [2019-01-06 04:04]
 *     Description         :     A class that corresponds to the coordinates on the map
 **********************************************************************************/
 
@@ -106,9 +106,9 @@ public class Coordinates {
 			}
 			coor = new Coordinates(x, k - 1);
 			townCoordinatesList.add(coor);
-			coor = new Coordinates(x, k + 1);
+			coor = new Coordinates(x, k);
 			townCoordinatesList.add(coor);
-			coor = new Coordinates(x - 1, k);
+			coor = new Coordinates(x - 1, k + 1);
 			townCoordinatesList.add(coor);
 		}
 		return townCoordinatesList;

@@ -2,7 +2,7 @@
 *     File Name           :     Launcher.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-05 06:12]
+*     Last Modified       :     [2019-01-06 04:05]
 *     Description         :     The launcher (main class)
 **********************************************************************************/
 
@@ -38,6 +38,7 @@ public class Launcher {
 		coor = new Coordinates(2, 2);
 		tile = tileMap.getTile(coor);
 		tile.print();
+		coor.setCoordinates(1, -4);
 
 		/*
 		(coor.roadToAdjacentTowns()).forEach((coordinates) -> coordinates.print());
@@ -51,10 +52,13 @@ public class Launcher {
 		bmw.buildDolorean(P, W, coor);
 		bmw.buildTimeTown(P, W, coor);
 		bmw.buildTimeTown(P, W, coor);
-		coor.setCoordinates(1, 1);
+		coor.setCoordinates(1, 2);
 		bmw.buildDolorean(P, W, coor);
 		bmw.buildTimeTown(P, W, coor);
+		//coor.setCoordinates(2, 4);
+		//bmw.buildRoad(P, W, coor);
 
 		townSet.forEach( (c, t) -> {c.print();System.out.println(t.toString());});
+		(bmw.possibleRoadsBuild(P, W)).forEach( (c) -> c.print());
 	}
 }

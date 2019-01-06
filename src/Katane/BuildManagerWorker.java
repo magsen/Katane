@@ -2,7 +2,7 @@
 *     File Name           :     BuildManagerWorker.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-06 01:32]
+*     Last Modified       :     [2019-01-06 03:50]
 *     Description         :     The BuildManagerWorker handles the creation of the towns
 *     					The BuildManagerWorker is often called BMW.
 **********************************************************************************/
@@ -11,6 +11,7 @@ package Katane;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.Iterator;
 
 /* The BuildManagerWorker is called by the players to construct cities */
 public class BuildManagerWorker {
@@ -23,7 +24,8 @@ public class BuildManagerWorker {
 	}
 
 	/* CARE ASSUME THAT THE RULES AUTHORIZE THIS PLACEMENT */
-	public boolean buildRoad (Player player, World world, Coordinates coordinates) {
+	public boolean buildRoad (Player player, World world, Coordinates coor) {
+		Coordinates coordinates = new Coordinates(coor);
 		TownMap townSet = world.getTownSet();
 		RoadMap roadSet = world.getRoadSet();
 		if (player.isEnoughRessourceRoad() == false) {
@@ -44,7 +46,8 @@ public class BuildManagerWorker {
 		}
 	}
 
-	public boolean buildDolorean (Player player, World world, Coordinates coordinates) {
+	public boolean buildDolorean (Player player, World world, Coordinates coor) {
+		Coordinates coordinates = new Coordinates(coor);
 		TownMap townSet = world.getTownSet();
 		TileMap tileSet = world.getTileSet();
 		RoadMap roadSet = world.getRoadSet();
@@ -66,7 +69,8 @@ public class BuildManagerWorker {
 		}
 	}
 
-	public boolean buildTimeTown (Player player, World world, Coordinates coordinates) {
+	public boolean buildTimeTown (Player player, World world, Coordinates coor) {
+		Coordinates coordinates = new Coordinates(coor);
 		TownMap townSet = world.getTownSet();
 		RoadMap roadSet = world.getRoadSet();
 		TileMap tileSet = world.getTileSet();
@@ -92,21 +96,54 @@ public class BuildManagerWorker {
 	public ArrayList<Coordinates> possibleRoadsBuild (Player player, World world) {
 
 		RoadMap roadSet = world.getRoadSet();
-		Stack<Road> stRoads = new Stack<Road>();
+		Stack<Coordinates> stRoads = new Stack<Coordinates>();
+		ArrayList<Coordinates> coordinateList = new ArrayList<Coordinates>();
 		Coordinates coorPlayerTown;
 		for (Town t : player.getTownList()) {
+			System.out.println("1ère ville exlorée" + t.toString());
 			coorPlayerTown = t.getCoordinates();
 
 			for ( Coordinates coorAdjRoads : coorPlayerTown.townToAdjacentRoads() ) {
-				if (roadSet.isRoad(coorAdjRoads) && roadSet.isOwner(coorAdjRoads, player)) {
-					stRoads.push(roadSet.getRoad(coorAdjRoads));
+				if (roadSet.isRoad(coorAdjRoads)) {
+					if (roadSet.isOwner(coorAdjRoads, player)) {
+						stRoads.push(coorAdjRoads);
+					}
+				} else {
+					System.out.println("Added " + coorAdjRoads.toString());
+					addWithoutRepetition(coordinateList, coorAdjRoads);
 				}
 			}
 		}
 
+		Coordinates coorRoad;
+		Road r;
+		while (stRoads.isEmpty() == false) {
+			coorRoad = stRoads.pop();
+			r = roadSet.getRoad(coorRoad);
+			r.setLengthPosition(1);
+			for ( Coordinates coorAdjRoads : coorRoad.townToAdjacentRoads() ) {
+				if (roadSet.isRoad(coorAdjRoads)) {
 
+					if (roadSet.isOwner(coorAdjRoads, player) && (roadSet.getRoad(coorAdjRoads)).getLengthPosition() < 1) {
+						stRoads.push(coorAdjRoads);
+					}
+				} else {
+					addWithoutRepetition(coordinateList, coorAdjRoads);
+				}
+			}
+		}
+		return coordinateList;
+	}
 
-
-		return null;
+	private void addWithoutRepetition (ArrayList<Coordinates> coordinateList, Coordinates coordinate) {
+		Iterator<Coordinates> i = coordinateList.iterator();
+		Coordinates c;
+		while (i.hasNext()) {
+			c = i.next();
+			if (c.equals(coordinate)) {
+				return;
+			}
+		}
+		coordinateList.add(coordinate);
 	}
 }

@@ -2,7 +2,7 @@
 *     File Name           :     Road.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-06 01:32]
+*     Last Modified       :     [2019-01-06 03:04]
 *     Description         :     Building type Road
 **********************************************************************************/
 
@@ -13,13 +13,21 @@ import java.util.ArrayList;
 /* Class Road which is a Building */
 public class Road extends Building{
 
-	private boolean isBeingUsed;
+	private int lengthPosition; //temporary variable
+
 	/* Constructor - Owned by a Player and is on a Tile (tile list) */
 	public Road(Player player, Coordinates coor) {
 		super(player, coor);
-		isBeingUsed = false;
+		lengthPosition = 0;
 		//must verify that you can build before add
 		//this.tile.addBuilding(this);
+	}
+
+	public int getLengthPosition() {
+		return lengthPosition;
+	}
+	public void setLengthPosition(int lengthPosition) {
+		this.lengthPosition = lengthPosition;
 	}
 
 	/* Get the adjacent roads in the list */

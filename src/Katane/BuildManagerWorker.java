@@ -2,12 +2,15 @@
 *     File Name           :     BuildManagerWorker.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-05 16:16]
+*     Last Modified       :     [2019-01-06 01:32]
 *     Description         :     The BuildManagerWorker handles the creation of the towns
 *     					The BuildManagerWorker is often called BMW.
 **********************************************************************************/
 
 package Katane;
+
+import java.util.ArrayList;
+import java.util.Stack;
 
 /* The BuildManagerWorker is called by the players to construct cities */
 public class BuildManagerWorker {
@@ -21,6 +24,7 @@ public class BuildManagerWorker {
 
 	/* CARE ASSUME THAT THE RULES AUTHORIZE THIS PLACEMENT */
 	public boolean buildRoad (Player player, World world, Coordinates coordinates) {
+		TownMap townSet = world.getTownSet();
 		RoadMap roadSet = world.getRoadSet();
 		if (player.isEnoughRessourceRoad() == false) {
 			System.out.println("Error while creating a Road: not enough ressources");
@@ -34,6 +38,7 @@ public class BuildManagerWorker {
 				road.setAdjacentRoads(roadSet.generateAdjacentRoads(coordinates)); // Set the road nead
 				roadSet.addRoadToMap(coordinates, road);
 				roadSet.updateAdjacentRoads(coordinates, road);
+				townSet.updateAdjacentRoads(coordinates, roadSet, road);
 				return true;
 			}
 		}
@@ -82,5 +87,26 @@ public class BuildManagerWorker {
 			}
 		}
 		return false;
+	}
+
+	public ArrayList<Coordinates> possibleRoadsBuild (Player player, World world) {
+
+		RoadMap roadSet = world.getRoadSet();
+		Stack<Road> stRoads = new Stack<Road>();
+		Coordinates coorPlayerTown;
+		for (Town t : player.getTownList()) {
+			coorPlayerTown = t.getCoordinates();
+
+			for ( Coordinates coorAdjRoads : coorPlayerTown.townToAdjacentRoads() ) {
+				if (roadSet.isRoad(coorAdjRoads) && roadSet.isOwner(coorAdjRoads, player)) {
+					stRoads.push(roadSet.getRoad(coorAdjRoads));
+				}
+			}
+		}
+
+
+
+
+		return null;
 	}
 }

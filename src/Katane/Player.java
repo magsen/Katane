@@ -2,7 +2,7 @@
 *     File Name           :     Player.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-05 06:53]
+*     Last Modified       :     [2019-01-05 18:13]
 *     Description         :     The Player class represents a player of the game.
 **********************************************************************************/
 
@@ -135,6 +135,10 @@ public class Player {
 		return true;
 	}
 	*/
+
+	public ArrayList<Town> getTownList () {
+		return townList;
+	}
 
 	public void addTownToPlayerList (Town town) {
 		townList.add(town);

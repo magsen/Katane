@@ -2,7 +2,7 @@
 *     File Name           :     TownMap.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-05 06:52]
+*     Last Modified       :     [2019-01-05 23:55]
 *     Description         :     The data structure to represent the Town map (Town set)
 **********************************************************************************/
 
@@ -94,6 +94,23 @@ public class TownMap extends ObjectMap {
 			}
 		}
 		return roadList;
+	}
+
+	/* After you put a Road, you have to update the adjacents Road List insite these objects */
+	public void updateAdjacentRoads (Coordinates coor, RoadMap roadSet, Road road) {
+		Town t;
+		for (Coordinates c : coor.roadToAdjacentTowns()) {
+			if (isTown(c)) {
+				t = getTown(c);
+				t.addAdjacentRoads(road);
+			}
+		}
+	}
+
+
+	public boolean isOwner (Coordinates coor, Player player) {
+		Town t = getTown(coor);
+		return t.isOwner(player);
 	}
 
 	// TEST

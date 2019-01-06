@@ -2,7 +2,7 @@
 *     File Name           :     Building
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-04 20:07]
+*     Last Modified       :     [2019-01-06 00:10]
 *     Description         :     The abstract class Building groups all the buildings
 **********************************************************************************/
 
@@ -41,5 +41,9 @@ public abstract class Building {
 
 	public boolean isOwner(Player player) {
 		return (this.player == player);
+	}
+
+	public Coordinates getCoordinates () {
+		return coordinates;
 	}
 }

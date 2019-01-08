@@ -2,7 +2,7 @@
 *     File Name           :     Katane.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2018-12-26 15:53]
+*     Last Modified       :     [2019-01-02 03:53]
 *     Description         :     Katane is the main class of the Model part of the Model/Control/View architechture
 **********************************************************************************/
 
@@ -58,6 +58,18 @@ public class Katane {
 	/* Set a World in the list */
 	public void setWorld(ArrayList<World> world) {
 		this.world = world;
+	}
+
+	public ArrayList<Player> getListPlayer () {
+		return player;
+	}
+
+	public Player getPlayer (int playerNumber) {
+		return player.get(playerNumber);
+	}
+
+	public BuildManagerWorker getBMW () {
+		return BMW;
 	}
 }
 

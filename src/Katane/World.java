@@ -1,14 +1,16 @@
 /*********************************************************************************
-*     File Name           :     Wool.java
-*     Created By          :     The LO43 Katane team
-*     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2018-12-26 18:31]
-*     Description         :     Wool is a type of Ressource
-**********************************************************************************/
+ *     File Name           :     World.java
+ *     Created By          :     The LO43 Katane team
+ *     Creation Date       :     [2018-09-14 13:32]
+ *     Last Modified       :     [2019-01-02 03:44]
+ *     Description         :     World is the class that gather the tiles, the buildings and the towns.
+ *     					It although includes all the informations board/tileSet-specific.
+ **********************************************************************************/
 
 package Katane;
 
 import java.util.HashMap;
+import java.util.Arrays;
 
 /* Class World
  * Attributes :
@@ -19,17 +21,17 @@ import java.util.HashMap;
  */
 public class World {
 
-	private HashMap<Object, Object> tile;
-	private HashMap<Object, Object> road;
-	private HashMap<Object, Object> town;
+	private TileMap tileSet;
+	private RoadMap roadSet;
+	private TownMap townSet;
 	private int longestRoadValue;
 
 	/* Constructor */
 	public World() {
 		System.out.println("-- World --");
-		this.tile = new HashMap<>();
-		this.road = new HashMap<>();
-		this.town = new HashMap<>();
+		this.tileSet = new TileMap();
+		this.roadSet = new RoadMap();
+		this.townSet = new TownMap();
 		this.longestRoadValue = 0;
 	}
 
@@ -47,5 +49,20 @@ public class World {
 		{
 			longestRoadValue = longestRoadValue;
 		}
+	}
+
+	/* Get the tile HashMap */
+	public TileMap getTileSet() {
+		return tileSet;
+	}
+
+	/* Get the tile HashMap */
+	public RoadMap getRoadSet() {
+		return roadSet;
+	}
+
+	/* Get the tile HashMap */
+	public TownMap getTownSet() {
+		return townSet;
 	}
 }

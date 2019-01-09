@@ -127,7 +127,7 @@ public class ConfirmTradePanel extends JPanel {
 		/*
 		 * These are the labels for the headline
 		 */
-		heading = new JLabel(current.getUsername() + Messages.getString("ConfirmTradePanel.AnfrageHandeln"));
+		heading = new JLabel(current.getUsername() + Messages.getString("ConfirmTradePanel.AnfrageHandeln")); // current means current player 
 		heading.setFont(font);
 		receive = new JLabel(Messages.getString("ConfirmTradePanel.DuBekommst")); 
 		receive.setFont(font);

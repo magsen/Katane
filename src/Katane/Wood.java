@@ -2,7 +2,7 @@
 *     File Name           :     Wood.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-05 02:32]
+*     Last Modified       :     [2019-01-10 00:36]
 *     Description         :     Wood is a type of Ressource
 **********************************************************************************/
 
@@ -23,5 +23,9 @@ public class Wood extends Ressource{
 	// TEST
 	public void print() {
 		System.out.println("I'm some Wood");
+
+	/* example */
+	public void hit() {
+		System.out.println("Wood");
 	}
 }

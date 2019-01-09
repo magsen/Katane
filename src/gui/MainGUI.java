@@ -480,9 +480,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		return robberPanel;
 	}
 
-	public ChatGUI getChatGUI() {
-		return chatFrame;
-	}
+
 
 	public PolygonMap getPolygonMap() {
 		return polygonMap;

@@ -19,7 +19,6 @@ public class TradeManager {
 	public TradeManager(Katane katane) {
 		this.katane = katane;
 	}
-<<<<<<< HEAD
 	
 	/* TRADE METHOD 
 	 * 

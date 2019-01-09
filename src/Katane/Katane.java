@@ -71,7 +71,7 @@ public class Katane {
 	public void setWorld(ArrayList<World> world) {
 		this.world = world;
 	}
-<<<<<<< HEAD
+
 
 
 
@@ -89,15 +89,7 @@ public class Katane {
 
 	public BuildManagerWorker getBMW () {
 		return BMW;
-=======
-	public Player getPlayerN(int index) {
-		for(Player player : this.player) {
-			if(player.getPlayerNumber()==index) {
-				return player;
-			}
-		}
-		return null;
->>>>>>> 357871ea59466bc34309209a81f664baa46c6c96
+
 	}
 
 	public Player getPlayerN(int index) {

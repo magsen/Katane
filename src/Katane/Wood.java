@@ -15,7 +15,6 @@ public class Wood extends Ressource{
 	public Wood() {
 		super();
 	}
-<<<<<<< HEAD
 
 	public Wood(int quantity) {
 		super(quantity);

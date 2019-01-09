@@ -68,7 +68,6 @@ public class Player {
 	public void setRessource(ArrayList<Ressource> ressource) {
 		this.ressource = ressource;
 	}
-<<<<<<< HEAD
 
 	public boolean isEnoughRessourceRoad () {
 		isEnoughRessource(0, 0, 1, 1, 0);
@@ -158,20 +157,9 @@ public class Player {
 			townList.remove(tOld);
 			townList.add(tNew);
 		}
-=======
-	
-	
-	public ArrayList<Ressource> getSpecificRessource( SamPredicate<Ressource> samPredicate) {
-		ArrayList<Ressource> list = new ArrayList<>();
 
-		 for (Ressource r : this.ressource) {
-			 if (samPredicate.test(r)) {
-				 list.add(r);
-			 }
-		 }
+	
 
-		 return list;
->>>>>>> 357871ea59466bc34309209a81f664baa46c6c96
 	}
 
 	public ArrayList<Ressource> getSpecificRessource( SamPredicate<Ressource> samPredicate) {

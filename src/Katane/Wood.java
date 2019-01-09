@@ -15,6 +15,7 @@ public class Wood extends Ressource{
 	public Wood() {
 		super();
 	}
+<<<<<<< HEAD
 
 	public Wood(int quantity) {
 		super(quantity);
@@ -23,5 +24,11 @@ public class Wood extends Ressource{
 	// TEST
 	public void print() {
 		System.out.println("I'm some Wood");
+=======
+	
+	/* example */
+	public void hit() {
+		System.out.println("Wood");
+>>>>>>> 357871ea59466bc34309209a81f664baa46c6c96
 	}
 }

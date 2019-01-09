@@ -85,4 +85,46 @@ public class TradeManager {
 	public void trade(int sP, int rP, int rQuantity[]){
 		this.trade(this.katane.getPlayerN(sP), this.katane.getPlayerN(rP) , rQuantity);
 	}
+	public void tradeB(Player Player, int rQuantity[]) {
+		ArrayList<Ressource> SR = Player.getRessource();
+		for(Ressource sr : SR) {
+					if(sr instanceof Grain) {
+						if(sr.quantity - rQuantity[0] < 0 ) {return;}
+					}
+					if(sr instanceof Ore) {
+						if(sr.quantity - rQuantity[1] < 0 ) {return;}
+					}
+					if(sr instanceof Brick) {
+						if(sr.quantity - rQuantity[2] < 0 ) {return;}
+					}
+					if(sr instanceof Wood) {
+						if(sr.quantity - rQuantity[3] < 0 ) {return;}
+					}
+					if(sr instanceof Wood) {
+						if(sr.quantity - rQuantity[4] < 0 ) {return;}
+					}
+				
+		}
+		for(Ressource sr : SR) {
+					if(sr instanceof Grain) {
+						sr.quantity -= rQuantity[0];
+					}
+					if(sr instanceof Ore) {
+						sr.quantity -= rQuantity[1];
+					}
+					if(sr instanceof Brick) {
+						sr.quantity -= rQuantity[2];
+					}
+					if(sr instanceof Wood) {
+						sr.quantity -= rQuantity[3];
+					}
+					if(sr instanceof Wood) {
+						sr.quantity -= rQuantity[4];
+					}
+					
+		}
+	}
+	public void tradeB(int Player, int rQuantity[]){
+		this.tradeB(this.katane.getPlayerN(Player) , rQuantity);
+	}
 }

@@ -48,6 +48,18 @@ public class Katane {
 		this.player.add(new Player(this,2));
 		this.player.add(new Player(this,3));
 		this.player.add(new Player(this,4));
+		/* Instanciation of GUI */ 
+		
+		
+		
+		/* example of trade */
+		int rQuantity[]= {0,0,0,0,0};
+		TM.trade(player.get(0), player.get(1) , rQuantity );
+		
+		/* example of lambda generic to get ressource */
+		for(Ressource ressource : this.player.get(0).getSpecificRessource((ressource)-> ressource instanceof Wood)){
+			((Wood) ressource).hit();
+		}
 	}
 
 	/* Get a World in the list */
@@ -58,6 +70,14 @@ public class Katane {
 	/* Set a World in the list */
 	public void setWorld(ArrayList<World> world) {
 		this.world = world;
+	}
+	public Player getPlayerN(int index) {
+		for(Player player : this.player) {
+			if(player.getPlayerNumber()==index) {
+				return player;
+			}
+		}
+		return null;
 	}
 }
 

@@ -15,4 +15,9 @@ public class Wood extends Ressource{
 	public Wood() {
 		super();
 	}
+	
+	/* example */
+	public void hit() {
+		System.out.println("Wood");
+	}
 }

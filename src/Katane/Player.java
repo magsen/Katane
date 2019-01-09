@@ -65,4 +65,17 @@ public class Player {
 	public void setRessource(ArrayList<Ressource> ressource) {
 		this.ressource = ressource;
 	}
+	
+	
+	public ArrayList<Ressource> getSpecificRessource( SamPredicate<Ressource> samPredicate) {
+		ArrayList<Ressource> list = new ArrayList<>();
+
+		 for (Ressource r : this.ressource) {
+			 if (samPredicate.test(r)) {
+				 list.add(r);
+			 }
+		 }
+
+		 return list;
+	}
 }

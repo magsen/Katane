@@ -11,7 +11,7 @@ import model.IslandOfCatan;//the state of the island.
 import model.Settler;//the state of the settler.
 import controller.Controller;
 
-/*  
+/*聽 
  * The class represents the menu with which to buy development cards and
  * @author YU Shijia
  */
@@ -53,7 +53,7 @@ public class CardMenu extends JPanel {
 	private ImagePanel inventionAmount;
 
 	/**
-	 * 垄断卡
+	 * 鍨勬柇鍗�
 	 */
 	private PlayerButton monopoly;
 
@@ -177,11 +177,11 @@ public class CardMenu extends JPanel {
 		backside = new PlayerButton(ImportImages.buyCardBtn, btnwidth, btnheight);
 		backside.setToolTipText("Draw a development card!");
 		backsideAmount = new ImagePanel(ImportImages.buttonInvert, sbtn, sbtn);
-		backsideAmount.addLabel(""+Constants.DEVCARDS_MAX, Color.WHITE);
+		backsideAmount.addLabel(""+Constants.DEVCARDS_MAX, Color.WHITE); //constant ： A class in which all constants are stored . DEVCARDS_MAX: max number of development cards
 		
 		exit = new PlayerButton(ImportImages.cancelBtn, sbtn, sbtn);
 		exitLabel = new JLabel("Leave the menu");
-		exitLabel.setFont(new Font("Times New Roman", Font.ITALIC, sbtn/2));//斜体字
+		exitLabel.setFont(new Font("Times New Roman", Font.ITALIC, sbtn/2));//鏂滀綋瀛�
 
 		Font f = new Font("Times New Roman", Font.ITALIC, (int)(sbtn * 0.7)); 
 		choose = new JLabel(Messages.getString("CardMenu.Ausspielen")); 
@@ -286,7 +286,7 @@ public class CardMenu extends JPanel {
 	}
 
 	/**
-	 * 将各个组件添加到 Cardmenu。 
+	 * 灏嗗悇涓粍浠舵坊鍔犲埌 Cardmenu銆� 
 	 */
 	public void addWidgets() {
 

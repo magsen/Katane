@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import networking.Message;
 import model.*;
 import controller.Controller;
 
@@ -722,31 +721,7 @@ public class TradingMenu extends JPanel implements ChangeListener,
 
 	}
 
-	/**
-	 * The method is responsible for the generation of the trade message 
-	 * that can be processed by the server or by the clients.
-	 * 
-	 * @return Trade message for servers and clients
-	 */
-	public Message getMessage() {
 
-		int[] offeredResources = new int[5];
-		for (int i = 0; i < offeredResources.length; i++) {
-			offeredResources[i] = (Integer) spinners[i].getValue();
-		}
-
-		int[] expectedResources = new int[5];
-		for (int i = 0; i < expectedResources.length; i++) {
-			expectedResources[i] = (Integer) spinners2[i].getValue();
-		}
-
-		String partner = (String) tradepartners.getSelectedItem();
-		if (partner.equals(Messages.getString("TradingMenu.Hafen"))) { //$NON-NLS-1$
-			return new Message(offeredResources, expectedResources);
-		} else {
-			return new Message(offeredResources, expectedResources, true);
-		}
-	}
 
 	/**
 	 * The method sets the values of all JSpinners to 0

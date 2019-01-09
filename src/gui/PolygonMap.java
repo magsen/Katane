@@ -8,7 +8,7 @@ import model.*;
 
 /**
  * The class graphically represents the entire playing field.
- * ¸ÃÀàÒÔÍ¼ĞÎ·½Ê½±íÊ¾Õû¸öµØÍ¼¡£
+ * è¯¥ç±»ä»¥å›¾å½¢æ–¹å¼è¡¨ç¤ºæ•´ä¸ªåœ°å›¾ã€‚
  * 
  * @author LIAO Haoyun
  * 
@@ -42,6 +42,9 @@ public class PolygonMap extends JLayeredPane {
 	private double hexagonWidth;
 	/**
 	 * Array that represents the entire game world.
+	 * Represents a box on the game board. This class contains
+Â  	 * Information about the adjacent nodes, their number, their resource,
+Â  	 * as well as whether or not the rider is on it.
 	 */
 	private Tile[][] informationMap;
 	/**
@@ -86,7 +89,7 @@ public class PolygonMap extends JLayeredPane {
 	private int widthTile;
 	/**
 	 * Width of a numbered chit.
-	 * ±àºÅchitµÄ¿í¶È¡£
+	 * ç¼–å·chitçš„å®½åº¦ã€‚
 	 */
 	private int widthChit;
 	/**
@@ -249,7 +252,7 @@ public class PolygonMap extends JLayeredPane {
 	 *            the y-coordinate of the mouse click
 	 * @return the clicked node
 	 */
-	public Node getClickedNode(int xCoord, int yCoord) {
+	public Node getClickedNode(int xCoord, int yCoord) {// store status of node
 		for (int i = 0; i < nodesActionAreas.length; i++) {
 			if (nodesActionAreas[i].contains(xCoord - x, yCoord - y))
 				return island.getNodes()[i];
@@ -434,7 +437,7 @@ public class PolygonMap extends JLayeredPane {
 		/*
 		 * Assignment of the buttons of the nodes, 
 		 * to the corresponding nodes in the hexagonmap
-		 * ½«½ÚµãµÄ°´Å¥·ÖÅä¸øhexagonmapÖĞµÄÏàÓ¦½Úµã
+		 * å°†èŠ‚ç‚¹çš„æŒ‰é’®åˆ†é…ç»™hexagonmapä¸­çš„ç›¸åº”èŠ‚ç‚¹
 		 */
 		for (int i = 0; i < informationMap.length; i++) {
 			for (int j = 0; j < informationMap[0].length; j++) {

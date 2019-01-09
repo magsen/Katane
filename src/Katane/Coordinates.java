@@ -2,7 +2,7 @@
 *     File Name           :     Coordinates.java
 *     Created By          :     The LO43 project Katane
 *     Creation Date       :     [2018-12-29 05:55]
-*     Last Modified       :     [2019-01-06 04:04]
+*     Last Modified       :     [2019-01-09 23:37]
 *     Description         :     A class that corresponds to the coordinates on the map
 **********************************************************************************/
 
@@ -119,13 +119,13 @@ public class Coordinates {
 		ArrayList<Coordinates> townCoordinatesList = new ArrayList<Coordinates>();
 		Coordinates coor;
 		if (y % 3 == 0) {
-			coor = new Coordinates(x+1, y - 2);
-			townCoordinatesList.add(coor);
-			coor = new Coordinates(x+1, y - 1);
-			townCoordinatesList.add(coor);
 			coor = new Coordinates(x, y - 1);
 			townCoordinatesList.add(coor);
 			coor = new Coordinates(x, y + 1);
+			townCoordinatesList.add(coor);
+			coor = new Coordinates(x+1, y - 1);
+			townCoordinatesList.add(coor);
+			coor = new Coordinates(x+1, y - 2);
 			townCoordinatesList.add(coor);
 		} else  {
 			if ( (y-1) % 3 == 0) {
@@ -133,18 +133,18 @@ public class Coordinates {
 				townCoordinatesList.add(coor);
 				coor = new Coordinates(x, y - 2);
 				townCoordinatesList.add(coor);
-				coor = new Coordinates(x, y + 1);
-				townCoordinatesList.add(coor);
 				coor = new Coordinates(x - 1, y + 2);
+				townCoordinatesList.add(coor);
+				coor = new Coordinates(x, y + 1);
 				townCoordinatesList.add(coor);
 			} else {
 				coor = new Coordinates(x, y - 1);
 				townCoordinatesList.add(coor);
 				coor = new Coordinates(x - 1, y + 1);
 				townCoordinatesList.add(coor);
-				coor = new Coordinates(x, y + 1);
-				townCoordinatesList.add(coor);
 				coor = new Coordinates(x, y + 2);
+				townCoordinatesList.add(coor);
+				coor = new Coordinates(x, y + 1);
 				townCoordinatesList.add(coor);
 			}
 		}

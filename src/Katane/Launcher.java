@@ -2,7 +2,7 @@
 *     File Name           :     Launcher.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-06 04:05]
+*     Last Modified       :     [2019-01-09 23:38]
 *     Description         :     The launcher (main class)
 **********************************************************************************/
 
@@ -27,8 +27,10 @@ public class Launcher {
 		Player P = katane.getPlayer(0);
 		World W = listeW.get(0);
 		TownMap townMap = W.getTownSet();
+		RoadMap roadMap = W.getRoadSet();
 		TileMap tileMap = W.getTileSet();
 		HashMap <Coordinates, Town> townSet = townMap.getTownSet();
+		HashMap <Coordinates, Road> roadSet = roadMap.getRoadSet();
 		HashMap<Coordinates, Tile> tileSet = tileMap.getTileSet();
 
 		P.isEnoughRessource(0, 0, 0, 0, 0);
@@ -56,9 +58,21 @@ public class Launcher {
 		bmw.buildDolorean(P, W, coor);
 		bmw.buildTimeTown(P, W, coor);
 		//coor.setCoordinates(2, 4);
-		//bmw.buildRoad(P, W, coor);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 3);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 4);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 5);
+		bmw.buildRoad(P, W, coor);
+
+		coor.setCoordinates(1, 2);
 
 		townSet.forEach( (c, t) -> {c.print();System.out.println(t.toString());});
 		(bmw.possibleRoadsBuild(P, W)).forEach( (c) -> c.print());
+		//System.out.println(bmw.explorePath(roadMap, P, coor));
+		System.out.println("-- Init ended --");
+		coor.setCoordinates(0, 6);
+		System.out.println((coor.roadToAdjacentRoads()).get(2));
 	}
 }

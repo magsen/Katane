@@ -2,7 +2,7 @@
 *     File Name           :     TradeManager.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2018-12-26 18:13]
+*     Last Modified       :     [2019-01-10 00:41]
 *     Description         :     A class that handles the trade between players
 **********************************************************************************/
 
@@ -19,6 +19,7 @@ public class TradeManager {
 	public TradeManager(Katane katane) {
 		this.katane = katane;
 	}
+<<<<<<< HEAD
 	
 	/* TRADE METHOD 
 	 * 

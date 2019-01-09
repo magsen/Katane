@@ -2,7 +2,7 @@
 *     File Name           :     RoadMap.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-06 00:25]
+*     Last Modified       :     [2019-01-07 18:06]
 *     Description         :     The data structure to represent the road map (road set)
 **********************************************************************************/
 
@@ -21,6 +21,10 @@ public class RoadMap extends ObjectMap {
 	/* Constructor */
 	public RoadMap () {
 		roadSet = new HashMap<Coordinates, Road>();
+	}
+
+	public HashMap<Coordinates, Road> getRoadSet() {
+		return roadSet;
 	}
 
 	/* Get the road at specified coordinates */

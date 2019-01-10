@@ -10,6 +10,8 @@ package Katane;
 
 import java.util.ArrayList;
 
+import gui.MainGUI;
+
 
 /* The class Katane
  *      Attributes :
@@ -32,6 +34,8 @@ public class Katane {
 	private boolean victory;
 	private Player currentPlayer;
 	private int currentPlayerIndex;
+	public MainGUI mainGUI;
+	
 	/* Constructor */
 	public Katane() {
 		System.out.println("-- Katane --");
@@ -57,7 +61,7 @@ public class Katane {
 		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
 		/* Instanciation of GUI */ 
 		
-		
+		/* this.mainGUI = new MainGUI(this); */
 		
 		
 		

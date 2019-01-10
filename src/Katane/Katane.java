@@ -57,31 +57,22 @@ public class Katane {
 		this.player.add(new Player(this,2));
 		this.player.add(new Player(this,3));
 		this.player.add(new Player(this,4));
-		this.currentPlayerIndex = 1;
+		this.currentPlayerIndex = 4;
 		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
 		/* Instanciation of GUI */ 
 		
 		/* this.mainGUI = new MainGUI(this); */
-	}
-	public void gameRoutine() {
-	/* GAME ROUTINE  example */
-		do {
-			startTurn();/* RPM */
-			/* TM */
-			/* BMW */
-			
-		} while (endTurn()); /* finish the current Turn and auto start a new one*/
 		
 		
 		
 		/* example of trade */
-		int rQuantity[]= {0,0,0,0,0};
-		TM.trade(player.get(0), player.get(1) , rQuantity );
+		//int rQuantity[]= {0,0,0,0,0};
+		//TM.trade(player.get(0), player.get(1) , rQuantity );
 		
 		/* example of lambda generic to get ressource */
-		for(Ressource ressource : this.player.get(0).getSpecificRessource((ressource)-> ressource instanceof Wood)){
-			((Wood) ressource).hit();
-		}
+		//for(Ressource ressource : this.player.get(0).getSpecificRessource((ressource)-> ressource instanceof Wood)){
+		//	((Wood) ressource).hit();
+		//}
 		
 	}
 
@@ -98,8 +89,6 @@ public class Katane {
 		if(this.currentPlayerIndex > 4) {this.currentPlayerIndex=1;}
 		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
 		RPM.attributesRessources();
-		dice1.roll();
-		dice2.roll();
 	}
 	/*
 	 * GameRoutine Class
@@ -108,14 +97,13 @@ public class Katane {
 	 * 
 	 * 
 	 */
-	public boolean endTurn() {
+	public void endTurn() {
 		/* Finish the game */
 		isThereVictory();
 		if(victory) {
 			victory();/* launche victory event */
-			return false;
 		}else {
-			return true;/* exit and start new turn (avoid recursive call) */
+			startTurn();/* exit and start new turn (avoid recursive call) */
 		}
 	}
 	public void isThereVictory() {

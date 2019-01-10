@@ -65,7 +65,7 @@ public class TownMap extends ObjectMap {
 		}
 		return false;
 	}
-
+	
 	/* Test whether or not there is a Dolorean at the specified coordinates, if there is, check the owner. */
 	public boolean isDoloreanOwner (Coordinates coor, Player player) {
 		Coordinates c;
@@ -105,6 +105,17 @@ public class TownMap extends ObjectMap {
 				t.addAdjacentRoads(road);
 			}
 		}
+	}
+	
+	public boolean isEnemyTownNear (Coordinates coor, Player p) {
+		for (Coordinates c : coor.townToAdjacentTowns()) {
+			if (isTown(c) == true) {
+				if (isOwner(c, p) == false) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 

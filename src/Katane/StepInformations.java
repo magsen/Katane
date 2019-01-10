@@ -12,12 +12,14 @@ package Katane;
 public class StepInformations {
 	public Coordinates coordinate;
 	public int length;
-	public boolean intersection;
+	public boolean everythingExplored;
+	public boolean wasThere;
 
 	public StepInformations (Coordinates c, int len) {
 		coordinate = new Coordinates(c);
 		length = len;
-		intersection = false;
+		everythingExplored = false;
+		wasThere = false;
 	}
 
 	public void print () {
@@ -25,6 +27,6 @@ public class StepInformations {
 	}
 
 	public String toString () {
-		return coordinate.toString() + ", " + length + ", " + intersection;
+		return coordinate.toString() + ", " + length + ", " +  ", " + everythingExplored;
 	}
 }

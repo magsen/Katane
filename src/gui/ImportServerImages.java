@@ -13,7 +13,7 @@ public class ImportServerImages {
 	
 	public static Image shutDownIcon;
 	
-	// Ö÷»ú°´Å¥ 
+	//
 	public static Image hostIcon;
 	
 	public static Image joinIcon;

@@ -25,6 +25,7 @@ public class World {
 	private RoadMap roadSet;
 	private TownMap townSet;
 	private int longestRoadValue;
+	private int longestRoadPlayer;
 
 	/* Constructor */
 	public World() {
@@ -33,6 +34,7 @@ public class World {
 		this.roadSet = new RoadMap();
 		this.townSet = new TownMap();
 		this.longestRoadValue = 0;
+		this.setLongestRoadPlayer(-1);
 	}
 
 	/* Get the legth of the longest road */
@@ -40,14 +42,15 @@ public class World {
 		return longestRoadValue;
 	}
 
-	/* Set the legth of the longest road */
-	public void setLongestRoadValue(int longestRoadValue) {
-		if(longestRoadValue<0) {
-			longestRoadValue = 0;
+	/* Set the length of the longest road, if it's changed, return true - false otherwise */
+	public boolean setLongestRoadValue(int longestRoadValue) {
+		if(this.longestRoadValue < longestRoadValue) {
+			this.longestRoadValue = longestRoadValue;
+			return true; 
 		}
 		else
 		{
-			longestRoadValue = longestRoadValue;
+			return false;
 		}
 	}
 
@@ -64,5 +67,13 @@ public class World {
 	/* Get the tile HashMap */
 	public TownMap getTownSet() {
 		return townSet;
+	}
+
+	public int getLongestRoadPlayer() {
+		return longestRoadPlayer;
+	}
+
+	public void setLongestRoadPlayer(int longestRoadPlayer) {
+		this.longestRoadPlayer = longestRoadPlayer;
 	}
 }

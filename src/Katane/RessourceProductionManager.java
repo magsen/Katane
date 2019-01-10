@@ -7,6 +7,8 @@
 **********************************************************************************/
 package Katane;
 
+import java.util.ArrayList;
+
 /* Handler of the attribution of the ressources to the players */
 public class RessourceProductionManager {
 
@@ -15,5 +17,23 @@ public class RessourceProductionManager {
 	/* Constructor */
 	public RessourceProductionManager(Katane katane) {
 		this.katane = katane;
+	}
+
+	public void attributesRessources () {
+		katane.rollDices();
+		int i = katane.getTotalDice();
+		ArrayList<Player> players = katane.getListPlayer();
+		for(Player p : players) {
+			for (Town t : p.getTownList()) {
+				for (Tile tile : t.getAdjacentTiles()) {
+					if (tile.getTileNumber() == i) {
+						p.incrementRessource(tile.getRessource());
+						if (t instanceof TimeTown) {
+							p.incrementRessource(tile.getRessource());
+						}
+					}
+				}
+			}
+		}
 	}
 }

@@ -18,7 +18,6 @@ public class PlayerChoosePanel extends JPanel {
 
 	/**
 	 * Panel in which the message is displayed.
-	 * 显示消息的面板。
 	 */
 	private JPanel upperPanel;
 
@@ -44,7 +43,6 @@ public class PlayerChoosePanel extends JPanel {
 
 	/**
 	 * The buttons of the opponents should represent as an array
-	 * 对手的按钮应该表示为数组
 	 */
 	private PlayerButton[] opponentBtns;
 
@@ -76,7 +74,6 @@ public class PlayerChoosePanel extends JPanel {
 
 	/**
 	 * Indicates whether it is a trade (depending on the menu looks different.
-	 * 表明它是否是交易（取决于菜单看起来不同。
 	 */
 	private boolean trading;
 
@@ -91,15 +88,13 @@ public class PlayerChoosePanel extends JPanel {
 	private PlayerButton cancelBtn;
 
 	/**
-	 * Constructor for the <code>PlayerChoosePanel</code>.
-	 * <code> PlayerChoosePanel </ code>的构造函数。
+	 * Constructor for the PlayerChoosePanel.
+	 * PlayerChoosePanel
 	 * 
 	 * @param controller
 	 *            Controller for the action items
-	 *            操作项的控制器
 	 * @param playerIds
-	 *            <code>ArrayList</code> for the player IDs to be displayed
-	 *            要显示的玩家ID的<code>ArrayList</code>
+	 *            ArrayList for the player IDs to be displayed
 	 */
 	// public PlayerChoosePanel(Controller controller, int width, int height,
 	// ArrayList<Integer> playerIds, boolean trading) {
@@ -131,7 +126,7 @@ public class PlayerChoosePanel extends JPanel {
 	}
 
 	/**
-	 * Initialize <code>PlayerChoosePanel</code>.
+	 * Initialize PlayerChoosePanel.
 	 */
 	public void init() {
 		createWidgets();
@@ -140,8 +135,7 @@ public class PlayerChoosePanel extends JPanel {
 	}
 
 	/**
-	 * Creates the components of <code>PlayerChoosePanels</code>.
-	 * 创建<code> PlayerChoosePanels </ code>的组件。
+	 * Creates the components of PlayerChoosePanels.
 	 */
 	public void createWidgets() {
 
@@ -177,7 +171,7 @@ public class PlayerChoosePanel extends JPanel {
 			namePanels[i].addLabel(opponents[i].getUsername(),
 					opponents[i].getColor());
 			namePanels[i].getLabel().setFont(
-					new Font("Times New Roman", Font.BOLD, //$NON-NLS-1$
+					new Font("Times New Roman", Font.BOLD,
 							(int) (lblHeight * 0.38)));
 			namePanels[i].getLabel().setVerticalTextPosition(JLabel.CENTER);
 			namePanels[i].getLabel()
@@ -203,11 +197,10 @@ public class PlayerChoosePanel extends JPanel {
 	}
 
 	/**
-	 * Does the interaction with the <code>Controller</code> in addition.
-	 * 是否与<code> Controller </ code>进行交互。
+	 * Does the interaction with the Controller in addition.
 	 */
 	public void setupInteraction() {
-		if (trading) {//判断是否进行交易
+		if (trading) {
 			for (int i = 0; i < opponents.length; i++) {
 				opponentBtns[i].addActionListener(controller);
 				opponentBtns[i]
@@ -226,7 +219,6 @@ public class PlayerChoosePanel extends JPanel {
 
 	/**
 	 * Does the components belong to the<code>PlayerChoosePanel</code> in addition.
-	 * 此外，组件属于<code> PlayerChoosePanel </ code>。
 	 */
 	public void addWidgets() {
 		add(choosePanel);

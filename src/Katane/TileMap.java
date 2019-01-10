@@ -28,7 +28,7 @@ public class TileMap extends ObjectMap {
 		return tileSet;
 	}
 
-	/* Get the road at specified coordinates */
+	/* Get the tile at specified coordinates */
 	public Tile getTile (Coordinates coor) {
 		Coordinates c;
 		for ( Map.Entry<Coordinates, Tile> entry : tileSet.entrySet()) {
@@ -37,25 +37,50 @@ public class TileMap extends ObjectMap {
 				return entry.getValue();
 			}
 		}
-		return null;
+		return null; //Not found
 	}
-
+	/* is there a tile at specified coordinates */
+	public boolean isTile (Coordinates coor) {
+		Coordinates c;
+		for ( Map.Entry<Coordinates, Tile> entry : tileSet.entrySet()) {
+			c = entry.getKey();
+			if (c.equals(coor)) {
+				return true;
+			}
+		}
+		return false; //Not found
+	}
+	
+	public ArrayList<Tile> generateAdjacentTilesFromTownCoordinate (Coordinates coor) {
+		ArrayList<Tile> tileList = new ArrayList<Tile>();
+		for (Coordinates c : coor.townToAdjacentTiles()) {
+			if (isTile(c)) {
+				tileList.add(getTile(c));
+			}
+		}
+		// IF THERE IS A tileList WITH A LENGTH < 2, IT's OUT OF THE MAP !
+		return tileList;
+	}
 	public void addTownToTilesTownList (Coordinates coor, Town town) {
 		ArrayList<Coordinates> adjTiles = coor.townToAdjacentTiles();
 		Tile t = null;
 		for (Coordinates c : adjTiles) {
-			t = getTile(c);
+			if (isTile(c)) {
+				t = getTile(c);
+				t.addToTownList(town);
+			}
 		}
-		t.addToTownList(town);
 	}
 
 	public void updateTownToTilesTownList (Coordinates coor, Town tOld, Town tNew) {
 		ArrayList<Coordinates> adjTiles = coor.townToAdjacentTiles();
 		Tile t = null;
 		for (Coordinates c : adjTiles) {
-			t = getTile(c);
+			if (isTile(c)) {
+				t = getTile(c);
+				t.updateTownToTownList(tOld, tNew);
+			}
 		}
-		t.updateTownToTownList(tOld, tNew);
 	}
 
 	/* Test whether or not there is a road at the specified coordinates */

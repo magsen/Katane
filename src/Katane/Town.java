@@ -13,10 +13,20 @@ import java.util.ArrayList;
 /* Class Town */
 public abstract class Town extends Building {
 
+	private ArrayList<Tile> adjacentTiles;
 	/* Constructor - Owned by a Player and is on a Tile (tile list) */
 	public Town(Player player, Coordinates coor) {
 		super(player, coor);
+		adjacentTiles = new ArrayList<Tile>();
 		//must verify that you can build before add
 		//this.tile.addBuilding(this);
+	}
+	
+	public ArrayList<Tile> getAdjacentTiles() {
+		return adjacentTiles;
+	}
+	
+	public void setAdjacentTiles(ArrayList<Tile> adjTiles) {
+		adjacentTiles = adjTiles;
 	}
 }

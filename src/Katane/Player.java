@@ -2,7 +2,7 @@
 *     File Name           :     Player.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-10 00:35]
+*     Last Modified       :     [2019-01-10 05:41]
 *     Description         :     The Player class represents a player of the game.
 **********************************************************************************/
 
@@ -32,11 +32,11 @@ public class Player {
 		System.out.println("-- Player "+i+" --");
 		this.townList = new ArrayList<Town>();
 		this.ressource = new ArrayList<Ressource>();
-		this.ressource.add(new Wood());
-		this.ressource.add(new Wool());
-		this.ressource.add(new Brick());
-		this.ressource.add(new Ore());
-		this.ressource.add(new Grain());
+		this.ressource.add(new Wood(3));
+		this.ressource.add(new Wool(2));
+		this.ressource.add(new Brick(0)); // L'ordre de jacques
+		this.ressource.add(new Ore(3));
+		this.ressource.add(new Grain(2));
 	}
 
 	/* Get the number of a player */
@@ -70,18 +70,27 @@ public class Player {
 	}
 
 	public boolean isEnoughRessourceRoad () {
-		isEnoughRessource(0, 0, 1, 1, 0);
-		return true;
+		return isEnoughRessource(0, 0, 1, 1, 0);
 	}
 
 	public boolean isEnoughRessourceDolorean () {
-		isEnoughRessource(0, 1, 1, 1, 1);
-		return true;
+		return isEnoughRessource(0, 1, 1, 1, 1);
 	}
 
 	public boolean isEnoughRessourceTimeTown () {
-		isEnoughRessource(3, 2, 0, 0, 0);
-		return true;
+		return isEnoughRessource(3, 2, 0, 0, 0);
+	}
+	
+	public void consumeRessourceRoad () {
+		incrementRessource(0, 0, -1, -1, 0);
+	}
+
+	public void consumeRessourceDolorean () {
+		incrementRessource(0, -1, -1, -1, -1);
+	}
+
+	public void consumeRessourceTimeTown () {
+		incrementRessource(-3, -2, 0, 0, 0);
 	}
 
 	public boolean isEnoughRessource (int brick, int grain, int ore, int wood, int wool) {
@@ -120,21 +129,45 @@ public class Player {
 		return true;
 	}
 
-	/*
-	public boolean isEnoughRessource (Ressource... ressourceARGV) {
+	/* Suppress the specified ressources, do no check if there is enough */
+	public void incrementRessource (int brick, int grain, int ore, int wood, int wool) {
+		for ( Ressource r : ressource ) {
+			if (r instanceof Brick) {
+				r.incrementQuantity(brick);
+			} else {
+				if (r instanceof Grain) {
+					r.incrementQuantity(grain);
+				} else {
+					if (r instanceof Ore) {
+						r.incrementQuantity(ore);
+					} else {
+						if (r instanceof Wood) {
+							r.incrementQuantity(wood);
+						} else {
+							if (r instanceof Wool) {
+								r.incrementQuantity(wool);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	
+	public boolean incrementRessource (Ressource... ressourceARGV) {
 		for ( Ressource rARGV : ressourceARGV ) {
 			for ( Ressource r : ressource ) {
 				if (rARGV.getClass() == r.getClass()) {
-					if (rARGV.getQuantity() > r.getQuantity()) {
-						System.out.println("-- Pwah assé de reçoursse --");
-						return false;
-					}
+					r.incrementQuantity(rARGV.getQuantity());
 				}
 			}
 		}
 		return true;
 	}
-	*/
+	
+	
+
 
 	public ArrayList<Town> getTownList () {
 		return townList;
@@ -173,28 +206,14 @@ public class Player {
 
 		 return list;
 	}
-	/* Suppress the specified ressources, do no check if there is enough */
-	public void removesRessource (int brick, int grain, int ore, int wood, int wool) {
-		for ( Ressource r : ressource ) {
-			if (r instanceof Brick) {
-				r.incrementQuantity(-brick);
-			} else {
-				if (r instanceof Grain) {
-					r.incrementQuantity(-grain);
-				} else {
-					if (r instanceof Ore) {
-						r.incrementQuantity(-ore);
-					} else {
-						if (r instanceof Wood) {
-							r.incrementQuantity(-wood);
-						} else {
-							if (r instanceof Wool) {
-								r.incrementQuantity(-wool);}
 
-						}
-					}
-				}
-			}
+	// TEST
+	public void printRessources () {
+		String str = new String("");
+		for (Ressource r : ressource) {
+			str += r.getQuantity() + ", ";
+		}
+		System.out.println(str);
 		}
 	}
 }

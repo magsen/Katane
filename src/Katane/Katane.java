@@ -2,7 +2,7 @@
 *     File Name           :     Katane.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-10 00:32]
+*     Last Modified       :     [2019-01-10 05:36]
 *     Description         :     Katane is the main class of the Model part of the Model/Control/View architechture
 **********************************************************************************/
 
@@ -160,8 +160,10 @@ public class Katane {
 
 	public BuildManagerWorker getBMW () {
 		return BMW;
-
 	}
+
+	public RessourceProductionManager getRPM () {
+		return RPM;
 
 	public Player getPlayerN(int index) {
 		for(Player player : this.player) {
@@ -173,7 +175,11 @@ public class Katane {
 	}
 	public void victory() {
 		/* victory event*/
-		
+	}
+
+	public void rollDices() {
+		dice1.roll();
+		dice2.roll();
 	}
 	public int getTotalDice() {
 		return dice1.getResult() + dice2.getResult();

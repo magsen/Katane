@@ -2,7 +2,7 @@
 *     File Name           :     Katane.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-10 05:36]
+*     Last Modified       :     [2019-01-10 06:02]
 *     Description         :     Katane is the main class of the Model part of the Model/Control/View architechture
 **********************************************************************************/
 
@@ -164,6 +164,7 @@ public class Katane {
 
 	public RessourceProductionManager getRPM () {
 		return RPM;
+	}
 
 	public Player getPlayerN(int index) {
 		for(Player player : this.player) {

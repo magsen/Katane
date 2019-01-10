@@ -2,7 +2,7 @@
 *     File Name           :     Player.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-10 05:41]
+*     Last Modified       :     [2019-01-10 06:04]
 *     Description         :     The Player class represents a player of the game.
 **********************************************************************************/
 
@@ -214,6 +214,5 @@ public class Player {
 			str += r.getQuantity() + ", ";
 		}
 		System.out.println(str);
-		}
 	}
 }

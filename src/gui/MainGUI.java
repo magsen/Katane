@@ -212,8 +212,8 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		importImages = new ImportImages();
 		importImages.loadPics();
 		
-		importServerImages = new ImportServerImages();
-		importServerImages.loadServerPics();
+		//importServerImages = new ImportServerImages();
+		//importServerImages.loadServerPics();
 		
 		//playerImage = katane.getClient().getSettler().getAvatarNumber();
 		playerImage = katane.getCurrentPlayer().getPlayerNumber();
@@ -268,8 +268,10 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 				ImportImages.avatarArray[playerImage], menuFrameHeight * 2,
 				menuFrameHeight * 2);
 			
+			
+			/* INSTANCIATION OF WORLD HUI */
 		//chatFrame = new ChatGUI(katane, chatFrameWidth, chatFrameHeight);
-		polygonMap = new PolygonMap(world.get(0),  polygonMapPos, 0, radius);
+		//polygonMap = new PolygonMap(world.get(0),  polygonMapPos, 0, radius);
 		/* unique world*/
 
 		contentPanel.setOpaque(false);
@@ -313,13 +315,16 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		tradePanel.setBounds((int) ((width / 3) * 1.10), (height / 6),
 				(int) (width / 2.5), (int) ((height / 5) * 3.2));
 		tradePanel.setVisible(false);
-
+		
+		/*
 		cardMenu = new CardMenu(katane, (int) (width / 2),
 				(int) ((height / 5) * 4));
 		cardMenu.setBounds((int) ((width / 3.5)), (height / 8),
 				(int) (width / 2), (int) ((height / 5) * 5));
 		cardMenu.setVisible(false);
-
+		*/
+		
+		
 		buildingcosts = new PlayerButton(ImportImages.buildingcostsmenuBtn,
 				radius, radius);
 		buildingcosts.addMouseListener(new MouseAdapter(){

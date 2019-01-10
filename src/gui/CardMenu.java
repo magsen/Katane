@@ -4,12 +4,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;//It is used to receive mouse events, making it easy to create listener objects.
 import java.awt.event.MouseEvent;//Mouse events and mouse movement events.
 import java.util.ArrayList;//Provides a resizable array and implements the List interface.
-import model.Constants;//A class in which all constants are stored.
 import javax.swing.*;
 
-import model.IslandOfCatan;//the state of the island.
-import model.Settler;//the state of the settler.
-import Katane.Katane;
+import Katane.*;
 
 /*聽 
  * The class represents the menu with which to buy development cards and
@@ -109,12 +106,12 @@ public class CardMenu extends JPanel {
 	/**
 	 * The model of the island
 	 */
-	private IslandOfCatan island;
+	private World island;
 
 	/**
 	 * The Current Settler
 	 */
-	private Settler settler;
+	private Player settler;
 
 	/**
 	 * Creates an instance of CardMenus Here you can opt for the
@@ -126,8 +123,8 @@ public class CardMenu extends JPanel {
 		this.height = (int) (height*0.9);
 		this.setPreferredSize(new Dimension(width, height));
 		this.setOpaque(false);
-		this.island = katane.getIsland();
-		this.settler = island.getCurrentPlayer();
+		this.island = katane.getWorld().get(0);
+		this.settler = katane.getCurrentPlayer();
 
 		init();
 	}
@@ -177,7 +174,7 @@ public class CardMenu extends JPanel {
 		backside = new PlayerButton(ImportImages.buyCardBtn, btnwidth, btnheight);
 		backside.setToolTipText("Draw a development card!");
 		backsideAmount = new ImagePanel(ImportImages.buttonInvert, sbtn, sbtn);
-		backsideAmount.addLabel(""+Constants.DEVCARDS_MAX, Color.WHITE); //constant ： A class in which all constants are stored . DEVCARDS_MAX: max number of development cards
+		backsideAmount.addLabel(""+ 20 /*Constants.DEVCARDS_MAX */ , Color.WHITE); //constant ： A class in which all constants are stored . DEVCARDS_MAX: max number of development cards
 		
 		exit = new PlayerButton(ImportImages.cancelBtn, sbtn, sbtn);
 		exitLabel = new JLabel("Leave the menu");
@@ -196,9 +193,10 @@ public class CardMenu extends JPanel {
 	 *  Adds the CardMenu interaction with the Katane.
 	 */
 	public void setupInteraction() {
-		addMouseListener(katane);
+		//addMouseListener(katane);
 
-		knight.addActionListener(katane);
+		knight.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		knight.setActionCommand("card.knight"); 
 		knight.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){ // Invoked when the mouse enters a component
@@ -214,7 +212,8 @@ public class CardMenu extends JPanel {
 				}
 			}
 		});
-		invention.addActionListener(katane);
+		invention.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		invention.setActionCommand("card.invention");
 		invention.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -228,7 +227,8 @@ public class CardMenu extends JPanel {
 				}
 			}
 		});
-		monopoly.addActionListener(katane);
+		monopoly.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		monopoly.setActionCommand("card.monopoly"); 
 		monopoly.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -242,7 +242,8 @@ public class CardMenu extends JPanel {
 				}
 			}
 		});
-		streets.addActionListener(katane);
+		streets.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		streets.setActionCommand("card.streets"); 
 		streets.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -256,9 +257,11 @@ public class CardMenu extends JPanel {
 				}
 			}
 		});
-		victory.addActionListener(katane);
+		victory.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		victory.setActionCommand("card.victory"); 
-		backside.addActionListener(katane);
+		backside.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		backside.setActionCommand("card.draw");
 		backside.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -423,7 +426,7 @@ public class CardMenu extends JPanel {
 	 * Updating the map menu
 	 */
 	public void update() {
-		settler = island.getCurrentPlayer();
+		settler = katane.getCurrentPlayer();
 		dev = settler.getDevelopmentCards();
 		invention.setEnabled(dev.contains(Constants.GETRESOURCES));//Enables (or disables) the button.
 		/*boolean java.util.ArrayList.contains(Object o) : 

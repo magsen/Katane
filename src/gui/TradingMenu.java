@@ -5,8 +5,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import model.*;
-import Katane.Katane;
+import Katane.*;
 
 /**
  * The class provides the frontend for the trading function. 
@@ -244,7 +243,7 @@ public class TradingMenu extends JPanel implements ChangeListener,
 	/**
 	 * The player currently on the move
 	 */
-	private Settler current;
+	private Player current;
 
 	/**
 	 * Contains whether it is a banking trade
@@ -308,7 +307,7 @@ public class TradingMenu extends JPanel implements ChangeListener,
 		this.height = height;
 		this.setPreferredSize(new Dimension(width, height));
 		this.setOpaque(false);
-		this.current = katane.getIsland().getCurrentPlayer();
+		this.current = katane.getCurrentPlayer();
 		this.size = width/10;
 		// current rate (bank trading) - depending on the order of the order: 
 		//wool, ore, brick, lumber, grain by default, 
@@ -340,7 +339,6 @@ public class TradingMenu extends JPanel implements ChangeListener,
 		 * Here is the background (still: scroll added)
 		 */
 		bgpanel = new ImagePanel(ImportImages.chatBg, width, height);
-
 		/**
 		 * Here the JSpinners are initialized for the player. It will: 
 		 * - The initial value is set to 0 
@@ -350,31 +348,36 @@ public class TradingMenu extends JPanel implements ChangeListener,
 		 * so that no letters or weird Entering numbers Afterwards, 
 		 * the maximum number of digits is set to a maximum of 2 (at most 99).
 		 */
-		woolnum = new SpinnerNumberModel(0, 0, current.getWool(), 1);
+		//for(Ressource ressource : this.player.get(0).getSpecificRessource((ressource)-> ressource instanceof Wood)){
+			//	((Wood) ressource).hit();
+			//}
+		
+		
+		woolnum = new SpinnerNumberModel(0, 0, current.getSpecificRessource((ressource)-> ressource instanceof Wool).get(0).getQuantity(), 1);
 		woolspinner = new JSpinner(woolnum);
 		((JSpinner.DefaultEditor) woolspinner.getEditor()).getTextField()
 				.setEditable(false);
 		((JSpinner.DefaultEditor) woolspinner.getEditor()).getTextField()
 				.setColumns(2);
-		orenum = new SpinnerNumberModel(0, 0, current.getOre(), 1);
+		orenum = new SpinnerNumberModel(0, 0, current.getSpecificRessource((ressource)-> ressource instanceof Ore).get(0).getQuantity(), 1);
 		orespinner = new JSpinner(orenum);
 		((JSpinner.DefaultEditor) orespinner.getEditor()).getTextField()
 				.setEditable(false);
 		((JSpinner.DefaultEditor) orespinner.getEditor()).getTextField()
 				.setColumns(2);
-		bricknum = new SpinnerNumberModel(0, 0, current.getBrick(), 1);
+		bricknum = new SpinnerNumberModel(0, 0, current.getSpecificRessource((ressource)-> ressource instanceof Brick).get(0).getQuantity(), 1);
 		brickspinner = new JSpinner(bricknum);
 		((JSpinner.DefaultEditor) brickspinner.getEditor()).getTextField()
 				.setEditable(false);
 		((JSpinner.DefaultEditor) brickspinner.getEditor()).getTextField()
 				.setColumns(2);
-		lumbernum = new SpinnerNumberModel(0, 0, current.getLumber(), 1);
+		lumbernum = new SpinnerNumberModel(0, 0, current.getSpecificRessource((ressource)-> ressource instanceof Wood).get(0).getQuantity(), 1);
 		lumberspinner = new JSpinner(lumbernum);
 		((JSpinner.DefaultEditor) lumberspinner.getEditor()).getTextField()
 				.setEditable(false);
 		((JSpinner.DefaultEditor) lumberspinner.getEditor()).getTextField()
 				.setColumns(2);
-		grainnum = new SpinnerNumberModel(0, 0, current.getGrain(), 1);
+		grainnum = new SpinnerNumberModel(0, 0, current.getSpecificRessource((ressource)-> ressource instanceof Grain).get(0).getQuantity(), 1);
 		grainspinner = new JSpinner(grainnum);
 		((JSpinner.DefaultEditor) grainspinner.getEditor()).getTextField()
 				.setEditable(false);
@@ -482,9 +485,10 @@ public class TradingMenu extends JPanel implements ChangeListener,
 	 * Adds the interaction with the <code>Katane</code>.
 	 */
 	public void setupInteraction() {
-		addMouseListener(katane);
+		//addMouseListener(katane);
 
-		trade.addActionListener(katane);
+		trade.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		trade.setActionCommand("deal.trade"); //$NON-NLS-1$
 		trade.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -745,8 +749,10 @@ public class TradingMenu extends JPanel implements ChangeListener,
 		killAllChangeListener();
 		reset();
 		int[] playerRes = getResources();
-		current = katane.getIsland().getCurrentPlayer();
+		current = katane.getCurrentPlayer();
+		/*
 		harbors = current.getHarbors();
+		
 		if (banktrade) {
 			if (harbors.contains(Constants.HARBOR)) {
 				// if there is 3 to 1 port, set the rate to 3 to 1
@@ -795,6 +801,7 @@ public class TradingMenu extends JPanel implements ChangeListener,
 
 			}
 		}
+		*/
 
 		// is updated independently of Bank or PlayerTrade a player 
 		//can only specify the resources that he really 
@@ -977,9 +984,12 @@ public class TradingMenu extends JPanel implements ChangeListener,
 	 * @return Array of raw materials (wool, ore, loam, wood, wheat)
 	 */
 	public int[] getResources() {
-		Settler c = katane.getIsland().getCurrentPlayer();
-		return new int[] { c.getWool(), c.getOre(), c.getBrick(),
-				c.getLumber(), c.getGrain() };
+		Player c = katane.getCurrentPlayer();
+		return new int[] { 	c.getSpecificRessource((ressource)-> ressource instanceof Wool).get(0).getQuantity(), 
+							c.getSpecificRessource((ressource)-> ressource instanceof Ore).get(0).getQuantity(), 
+							c.getSpecificRessource((ressource)-> ressource instanceof Brick).get(0).getQuantity(),
+							c.getSpecificRessource((ressource)-> ressource instanceof Wood).get(0).getQuantity(), 
+							c.getSpecificRessource((ressource)-> ressource instanceof Grain).get(0).getQuantity() };
 
 	}
 	

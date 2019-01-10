@@ -3,6 +3,9 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.*;
+
+import javax.swing.ImageIcon;
+
 import Katane.Katane;
 
 /**
@@ -103,7 +106,8 @@ public class SettlerFrame extends PlayerFrame {
 	 */
 	public void setupInteraction() {
 		bCard.setActionCommand("menu.card"); //$NON-NLS-1$
-		bCard.addActionListener(katane);
+		bCard.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		bCard.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.cardBtnActive);
@@ -113,7 +117,8 @@ public class SettlerFrame extends PlayerFrame {
 			}
 		});
 		bTrade.setActionCommand("menu.trade"); //$NON-NLS-1$
-		bTrade.addActionListener(katane);
+		bTrade.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		bTrade.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.tradeBtnActive);
@@ -123,7 +128,8 @@ public class SettlerFrame extends PlayerFrame {
 			}
 		});
 		bRoll.setActionCommand("menu.roll"); //$NON-NLS-1$
-		bRoll.addActionListener(katane);
+		bRoll.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		bRoll.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.rollBtnActive);
@@ -133,7 +139,8 @@ public class SettlerFrame extends PlayerFrame {
 			}
 		});
 		bNext.setActionCommand("menu.next"); //$NON-NLS-1$
-		bNext.addActionListener(katane);
+		bNext.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 		bNext.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.nextBtnActive);

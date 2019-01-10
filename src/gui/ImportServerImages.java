@@ -61,10 +61,10 @@ public class ImportServerImages {
 	public static Image quitKey;
 	
 	public void loadServerPics() {
-		joinEnglish = new ImageIcon(getClass().getResource("graphics/info/buttonAmerican.png")).getImage();
+		/*joinEnglish = new ImageIcon(getClass().getResource("graphics/info/buttonAmerican.png")).getImage();
 		joinIcon = new ImageIcon(getClass().getResource(
 				"graphics/info/join.png")).getImage();
-		
+		*/
 		denyBtn = new ImageIcon(getClass().getResource(
 				"graphics/buttonPics/cancelBtn.png")).getImage();
 		

@@ -265,19 +265,19 @@ public class ResourcePanel extends ImagePanel {
 	 */
 	public void setupInteraction() {
 		grainBtn.setActionCommand("resP.Grain"); //$NON-NLS-1$
-		grainBtn.addActionListener(katane);
+		//grainBtn.addActionListener(katane);
 		oreBtn.setActionCommand("resP.Ore"); //$NON-NLS-1$
-		oreBtn.addActionListener(katane);
+		//oreBtn.addActionListener(katane);
 		woolBtn.setActionCommand("resP.Wool"); //$NON-NLS-1$
-		woolBtn.addActionListener(katane);
+		//woolBtn.addActionListener(katane);
 		lumberBtn.setActionCommand("resP.Lumber"); //$NON-NLS-1$
-		lumberBtn.addActionListener(katane);
+		//lumberBtn.addActionListener(katane);
 		brickBtn.setActionCommand("resP.Brick"); //$NON-NLS-1$
-		brickBtn.addActionListener(katane);
+		//brickBtn.addActionListener(katane);
 		confirmBtn.setActionCommand("resP.confirm"); //$NON-NLS-1$
-		confirmBtn.addActionListener(katane);
+		//confirmBtn.addActionListener(katane);
 		cancelBtn.setActionCommand("resP.cancel"); //$NON-NLS-1$
-		cancelBtn.addActionListener(katane);
+		//cancelBtn.addActionListener(katane);
 	}
 
 	/**

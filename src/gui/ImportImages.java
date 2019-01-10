@@ -377,7 +377,7 @@ public class ImportImages {
 		
 		robber = new ImageIcon(getClass().getResource("graphics/buildings/raeuber.png")).getImage();
 		
-		english = new ImageIcon(getClass().getResource("graphics/other/english.png")).getImage();
+		//english = new ImageIcon(getClass().getResource("graphics/other/english.png")).getImage();
 		
 		playerBlue = new ImageIcon(getClass().getResource("graphics/oppInfo/Spieler_Blau.png")).getImage(); 
 		playerRed = new ImageIcon(getClass().getResource("graphics/oppInfo/Spieler_Rot.png")).getImage(); 
@@ -504,7 +504,7 @@ public class ImportImages {
 
 		cityYellow = new ImageIcon(getClass().getResource(
 				"graphics/buildings/city_yellow.png")).getImage(); 
-
+/*
 		kerriganAvatar = new ImageIcon(getClass().getResource(
 				"graphics/avatars/kerrigan.png")).getImage(); 
 
@@ -524,7 +524,7 @@ public class ImportImages {
 		orcAvatar = new ImageIcon(getClass().getResource("graphics/avatars/orc.png")).getImage();
 		
 		undeadAvatar = new ImageIcon(getClass().getResource("graphics/avatars/undead.png")).getImage();
-
+*/
 		tradeBtn = new ImageIcon(getClass().getResource(
 				"graphics/info/buttonTrade.png")).getImage(); 
 		tradeBtnActive = new ImageIcon(getClass().getResource(

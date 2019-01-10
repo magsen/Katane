@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -59,7 +61,8 @@ public class BuildPanelRoad extends JPanel {
 
 	private void setupInteraction() {
 		bRoad.setActionCommand("road.road"); 
-		bRoad.addActionListener(katane);
+		bRoad.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
 	}
 
 	private void addWidgets() {

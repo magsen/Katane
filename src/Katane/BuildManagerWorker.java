@@ -42,6 +42,7 @@ public class BuildManagerWorker {
 				roadSet.addRoadToMap(coordinates, road);
 				roadSet.updateAdjacentRoads(coordinates, road);
 				townSet.updateAdjacentRoads(coordinates, roadSet, road);
+				player.consumeRessourceRoad();
 				return true;
 			}
 		}
@@ -56,16 +57,23 @@ public class BuildManagerWorker {
 			System.out.println("Error while creating a Dolorean: not enough ressources");
 			return false;
 		} else {
-			if (townSet.isTown(coordinates) == true) {
+			if (townSet.isTown(coordinates) == true ) {
 				System.out.println("Error while creating a Dolorean: There is already a town there");
 				return false;
 			} else {
-				Town town = new Dolorean(player, coordinates);
-				town.setAdjacentRoads(townSet.generateAdjacentRoads(coordinates, roadSet)); // Set the road nead
-				townSet.addTownToMap(coordinates, town);
-				player.addTownToPlayerList(town);
-				tileSet.addTownToTilesTownList(coordinates, town);
-				return true;
+				if (townSet.isEnemyTownNear(coordinates, player) == true) {
+					System.out.println("Error while creating a Dolorean: There is a enemy town near");
+					return false;
+				} else {
+					Town town = new Dolorean(player, coordinates);
+					town.setAdjacentRoads(townSet.generateAdjacentRoads(coordinates, roadSet)); // Set the road near
+					town.setAdjacentTiles(tileSet.generateAdjacentTilesFromTownCoordinate(coordinates));
+					townSet.addTownToMap(coordinates, town); // Add the town to the map
+					player.addTownToPlayerList(town); // Add link from player to city
+					tileSet.addTownToTilesTownList(coordinates, town); //Add link from tiles to city
+					player.consumeRessourceDolorean(); // Removes the ressources
+					return true;
+				}
 			}
 		}
 	}
@@ -83,9 +91,11 @@ public class BuildManagerWorker {
 				Town oldDolorean = townSet.getTown(coordinates);
 				Town town = new TimeTown(player, coordinates);
 				town.setAdjacentRoads(townSet.generateAdjacentRoads(coordinates, roadSet)); // Set the road nead
+				town.setAdjacentTiles(tileSet.generateAdjacentTilesFromTownCoordinate(coordinates));
 				townSet.replaceTownToMap(coordinates, town);
 				player.replaceTownToPlayerList(oldDolorean, town);
 				tileSet.updateTownToTilesTownList(coordinates, oldDolorean, town);
+				player.consumeRessourceTimeTown();
 				return true;
 			} else {
 				System.out.println("There is already a TimeTown there or is owned by the another player");

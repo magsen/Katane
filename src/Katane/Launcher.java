@@ -24,7 +24,7 @@ public class Launcher {
 
 	public static void test (Katane katane) {
 		ArrayList<World> listeW = katane.getWorld();
-		Player P = katane.getPlayer(0);
+		Player P = katane.getPlayer(0), P2 = katane.getPlayer(1);
 		World W = listeW.get(0);
 		TownMap townMap = W.getTownSet();
 		RoadMap roadMap = W.getRoadSet();
@@ -57,6 +57,8 @@ public class Launcher {
 		coor.setCoordinates(1, 2);
 		bmw.buildDolorean(P, W, coor);
 		bmw.buildTimeTown(P, W, coor);
+		coor.setCoordinates(1, 3);
+		bmw.buildDolorean(P2, W, coor);
 		//coor.setCoordinates(2, 4);
 		bmw.buildRoad(P, W, coor);
 		coor.setCoordinates(1, 3);
@@ -74,5 +76,12 @@ public class Launcher {
 		System.out.println("-- Init ended --");
 		coor.setCoordinates(0, 6);
 		System.out.println((coor.roadToAdjacentRoads()).get(2));
+		
+		RessourceProductionManager rpm = katane.getRPM();
+		for (int i = 0; i < 20; i++) {
+			rpm.attributesRessources();
+			bmw.buildDolorean(P, W, coor);
+			bmw.buildTimeTown(P, W, coor);
+		}
 	}
 }

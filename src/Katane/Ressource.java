@@ -36,4 +36,7 @@ public abstract class Ressource {
 	public void print () {
 		System.out.println("I'm some ressource");
 	}
+    public void incrementQuantity (int quantity) {
+        this.quantity += quantity;
+    }
 }

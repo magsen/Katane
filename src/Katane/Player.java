@@ -173,4 +173,28 @@ public class Player {
 
 		 return list;
 	}
+	/* Suppress the specified ressources, do no check if there is enough */
+	public void removesRessource (int brick, int grain, int ore, int wood, int wool) {
+		for ( Ressource r : ressource ) {
+			if (r instanceof Brick) {
+				r.incrementQuantity(-brick);
+			} else {
+				if (r instanceof Grain) {
+					r.incrementQuantity(-grain);
+				} else {
+					if (r instanceof Ore) {
+						r.incrementQuantity(-ore);
+					} else {
+						if (r instanceof Wood) {
+							r.incrementQuantity(-wood);
+						} else {
+							if (r instanceof Wool) {
+								r.incrementQuantity(-wool);}
+
+						}
+					}
+				}
+			}
+		}
+	}
 }

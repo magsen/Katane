@@ -24,11 +24,14 @@ public class Katane {
 
 	private ArrayList<World> world;
 	private ArrayList<Player> player;
-	private Dice dice;
+	private Dice dice1;
+	private Dice dice2;
 	private RessourceProductionManager RPM;
 	private TradeManager TM;
 	private BuildManagerWorker BMW;
-
+	private boolean victory;
+	private Player currentPlayer;
+	private int currentPlayerIndex;
 	/* Constructor */
 	public Katane() {
 		System.out.println("-- Katane --");
@@ -37,7 +40,9 @@ public class Katane {
 
 	/* Instanciation of classes */
 	private void instanciate() {
-		this.dice = new Dice(6);
+		this.dice1 = new Dice(6);
+		this.dice2 = new Dice(6);
+		this.victory = false;
 		this.RPM = new RessourceProductionManager(this);
 		this.TM = new TradeManager(this);
 		this.BMW = new BuildManagerWorker(this);
@@ -48,7 +53,26 @@ public class Katane {
 		this.player.add(new Player(this,2));
 		this.player.add(new Player(this,3));
 		this.player.add(new Player(this,4));
+		this.currentPlayerIndex = 1;
+		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
 		/* Instanciation of GUI */ 
+		
+		
+		
+		
+		
+		/* GAME ROUTINE  example */
+			
+			startTurn();/* RPM */
+			/* TM */
+			/* BMW */
+			
+			endTurn();/* finish the current Turn and auto start a new one*/
+			
+			
+			
+			
+		
 		
 		
 		
@@ -60,6 +84,49 @@ public class Katane {
 		for(Ressource ressource : this.player.get(0).getSpecificRessource((ressource)-> ressource instanceof Wood)){
 			((Wood) ressource).hit();
 		}
+		
+		this.victory();
+	}
+
+	
+	/*
+	 * GameRoutine Class
+	 * StartTheCurrent Turn
+	 * This method is call automaticaly at the end of a turn
+	 * 
+	 * Link to RessourceProductionManager
+	 */
+	public void startTurn() {
+		this.currentPlayerIndex += 1;
+		if(this.currentPlayerIndex > 4) {this.currentPlayerIndex=1;}
+		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
+		/* RPM */
+		dice1.roll();
+		dice2.roll();
+	}
+	/*
+	 * GameRoutine Class
+	 * EndTheCurrent Turn
+	 * This method end the turn and auto-call a new turn if there is no victory
+	 * 
+	 * 
+	 */
+	public void endTurn() {
+		/* Finish the game */
+		isThereVictory();
+		if(victory) {
+			victory();/* launche victory event */
+		}else {
+			startTurn();/* start new turn */
+		}
+	}
+	public void isThereVictory() {
+		for(Player player : player) {
+			if(player.getVictoryPoint()>=10) {
+				victory = true;
+			}
+		}
+		
 	}
 
 	/* Get a World in the list */
@@ -100,5 +167,12 @@ public class Katane {
 		}
 		return null;
 	}
-}
+	public void victory() {
+		/* victory event*/
+		
+	}
+	public int getTotalDice() {
+		return dice1.getResult() + dice2.getResult();
+	}
 
+}

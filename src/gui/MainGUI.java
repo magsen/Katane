@@ -5,8 +5,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-import model.IslandOfCatan;
-import controller.Controller;
+import Katane.Katane;
+import Katane.Player;
+import Katane.World;
 
 /**
  * Contains all visual components of the game.
@@ -49,9 +50,9 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	private Dimension screenSize;
 
 	/**
-	 * The island from the model 
+	 * The world from the model 
 	 */
-	private IslandOfCatan island;
+	private ArrayList<World> world;
 
 	/**
 	 * X coordinate of the point where the first hexagon is drawn.
@@ -66,7 +67,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	 */
 	private int radius;
 
-	private Controller controller;
+	private Katane katane;
 
 	/**
 	 * Besonderes Panel, auf dem man die GUI-Elemente bequemer und
@@ -154,9 +155,9 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	 */
 	private PlayerButton buildButton;
 	
-	public MainGUI(Controller controller) {
-		this.island = controller.getIsland();
-		this.controller = controller;
+	public MainGUI(Katane katane) {
+		this.katane = katane;
+		this.world = katane.getWorld();
 		init();
 		g = super.getGraphics();
 	}
@@ -214,8 +215,10 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		importServerImages = new ImportServerImages();
 		importServerImages.loadServerPics();
 		
-		playerImage = controller.getClient().getSettler().getAvatarNumber();
-
+		//playerImage = katane.getClient().getSettler().getAvatarNumber();
+		playerImage = katane.getCurrentPlayer().getPlayerNumber();
+		
+		
 		createWidgets();
 		setupInteraction();
 		addWidgets();
@@ -246,9 +249,11 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		@SuppressWarnings("unused")
 		int opponentsFrameHeight = (int) (height * 0.15);
 
+		/*
 		int chatFrameWidth = (int) (width * 0.28);
 		int chatFrameHeight = (int) (height * 0.50);
-
+		*/
+		
 		@SuppressWarnings("unused")
 		int menuFrameWidth = (int) (width * (3.0 / 8.0));
 		int menuFrameHeight = (int) (height * (1.5 / 8.0));
@@ -259,30 +264,33 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		opponentsPanel = new JPanel();
 		opponentsPanel.setOpaque(false);
 		
-			playerFrame = new SettlerFrame(controller,
+			playerFrame = new SettlerFrame(katane,
 				ImportImages.avatarArray[playerImage], menuFrameHeight * 2,
 				menuFrameHeight * 2);
 			
-		chatFrame = new ChatGUI(controller, chatFrameWidth, chatFrameHeight);
-		polygonMap = new PolygonMap(island,  polygonMapPos, 0, radius);
+		//chatFrame = new ChatGUI(katane, chatFrameWidth, chatFrameHeight);
+		polygonMap = new PolygonMap(world.get(0),  polygonMapPos, 0, radius);
+		/* unique world*/
 
 		contentPanel.setOpaque(false);
 
-		opponentFrames = new OpponentFrame[island.getSettlers().length - 1];
+		//opponentFrames = new OpponentFrame[world.getSettlers().length - 1];
+		opponentFrames = new OpponentFrame[3];
 		int c = 0;
 
-		for (int i = 0; i < island.getSettlers().length; i++) {
-
-			if (controller.getClient().getID() == i) {
-				playerFrame.addNameLbl(controller.getClient().getUsername(),
-						island.getSettler(i).getColor());
-				playerFrame.addColorLbl(island.getSettler(i).getColor());
+		//for (int i = 0; i < world.getSettlers().length; i++) {
+			
+		for (Player player : katane.getListPlayer()) {
+			if (player.getPlayerNumber() == katane.getCurrentPlayerIndex()) {
+				playerFrame.addNameLbl(katane.getCurrentPlayer().getPlayerNumber()+"",
+						katane.getCurrentPlayer().getColor());
+				playerFrame.addColorLbl(katane.getCurrentPlayer().getColor());
 				playerFrame.repaint();
 			} else {
 				opponentFrames[c] = new OpponentFrame(
-						ImportImages.avatarArray[island.getSettler(i).getAvatarNumber()], opponentsFrameWidth,
+						ImportImages.avatarArray[player.getPlayerNumber()], opponentsFrameWidth,
 						opponentsFrameWidth);
-				opponentFrames[c].setOpponent(island.getSettlers()[i]);
+				opponentFrames[c].setOpponent(player);
 				c++;
 			}
 		}
@@ -291,7 +299,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		buildButton.setBounds(150, 150, width / 10, width / 10);
 		buildButton.setVisible(false);
 
-		buildPanelRoad = new BuildPanelRoad(controller, width / 10, width / 10);
+		buildPanelRoad = new BuildPanelRoad(katane, width / 10, width / 10);
 		buildPanelRoad.setBounds(150, 150, width / 10, width / 10);
 		buildPanelRoad.setVisible(false);
 
@@ -300,13 +308,13 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 				(int) ((height / 10) * 7.25), width / 10, height / 10);
 		rollDicePanel.setVisible(false);
 
-		tradePanel = new TradingMenu(controller, (int) (width / 2.5),
+		tradePanel = new TradingMenu(katane, (int) (width / 2.5),
 				(int) ((height / 5) * 3.2));
 		tradePanel.setBounds((int) ((width / 3) * 1.10), (height / 6),
 				(int) (width / 2.5), (int) ((height / 5) * 3.2));
 		tradePanel.setVisible(false);
 
-		cardMenu = new CardMenu(controller, (int) (width / 2),
+		cardMenu = new CardMenu(katane, (int) (width / 2),
 				(int) ((height / 5) * 4));
 		cardMenu.setBounds((int) ((width / 3.5)), (height / 8),
 				(int) (width / 2), (int) ((height / 5) * 5));
@@ -332,11 +340,11 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 				(height / 6), (int) (width / 2.5), (int) ((height / 5) * 4));
 		buildingCostsMenuPanel.setVisible(false);
 
-		resourcePanel = new ResourcePanel(controller, (int) (width * 0.3), (int) (height * 0.65));
+		resourcePanel = new ResourcePanel(katane, (int) (width * 0.3), (int) (height * 0.65));
 		resourcePanel.setBounds((int) ((width / 3) * 1.10), (height / 6),
 				(int) (width * 0.3), (int) (height * 0.65));
 
-		supplyPanel = new SupplyPanel(controller, (int) (width * 0.1),
+		supplyPanel = new SupplyPanel(katane, (int) (width * 0.1),
 				(int) (height * 0.35));
 		supplyPanel.setVisible(true);
 
@@ -353,13 +361,13 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	private void setupInteraction() {
 
 		buildingcosts.setActionCommand("menu.buildingcosts"); 
-		buildingcosts.addActionListener(controller);
+		//buildingcosts.addActionListener(katane);
 		
 		buildButton.setActionCommand("node.settlement");
-		buildButton.addActionListener(controller);
+		//buildButton.addActionListener(katane);
 
-		polygonMap.addMouseListener(controller);
-		this.addMouseListener(controller);
+		//polygonMap.addMouseListener(katane);
+		//this.addMouseListener(katane);
 	}
 
 	private void addWidgets() {
@@ -381,6 +389,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		gbc.insets = new Insets(5, 5, 5, 0);
 		contentPanel.add(opponentsPanel, gbc);
 
+		/*
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 3;
@@ -388,6 +397,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		gbc.anchor = GridBagConstraints.LAST_LINE_START;
 		gbc.insets = new Insets(5, 5, 40, 5);
 		contentPanel.add(chatFrame, gbc);
+	*/
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 3;
@@ -441,7 +451,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	 *            are the IDs of the Settlers
 	 */
 	public void showRobberPanel(ArrayList<Integer> playerIds) {
-		robberPanel = new PlayerChoosePanel(controller, playerIds, false);
+		robberPanel = new PlayerChoosePanel(katane, playerIds, false);
 		robberPanel.setBounds((int) ((width / 3) * 1.10), (height / 6),
 				robberPanel.getWidth(), robberPanel.getHeight());
 		robberPanel.setVisible(true);
@@ -452,7 +462,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	 * Here you can choose which player you want to trade with.
 	 */
 	public void showTradeesPanel() {
-		tradeePanel = new TradeChoosePanel(controller);
+		tradeePanel = new TradeChoosePanel(katane);
 		tradeePanel.setBounds((int) ((width / 3) * 1.10), (height / 6),
 				tradeePanel.getWidth(), tradeePanel.getHeight());
 		tradeePanel.setVisible(true);
@@ -468,7 +478,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	 *            (= expected Resources)
 	 */
 	public void showConfirmTradePanel(int[] offR, int[] expR) {
-		confirmTradePanel = new ConfirmTradePanel(controller,
+		confirmTradePanel = new ConfirmTradePanel(katane,
 				(int) (width / 2.5), (int) ((height / 5) * 3.2), offR, expR);
 		confirmTradePanel.setBounds((int) ((width / 3) * 1.10), (height / 6),
 				(int) (width / 2.5), (int) ((height / 5) * 3.2));

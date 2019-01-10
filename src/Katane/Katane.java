@@ -8,6 +8,7 @@
 
 package Katane;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import gui.MainGUI;
@@ -53,15 +54,15 @@ public class Katane {
 		this.world = new ArrayList<>();
 		this.world.add(new World());
 		this.player = new ArrayList<>();
-		this.player.add(new Player(this,1));
-		this.player.add(new Player(this,2));
-		this.player.add(new Player(this,3));
-		this.player.add(new Player(this,4));
+		this.player.add(new Player(this,1,Color.YELLOW));
+		this.player.add(new Player(this,2,Color.BLUE));
+		this.player.add(new Player(this,3,Color.RED));
+		this.player.add(new Player(this,4,Color.GREEN));
 		this.currentPlayerIndex = 4;
 		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
 		/* Instanciation of GUI */ 
 		
-		/* this.mainGUI = new MainGUI(this); */
+		this.mainGUI = new MainGUI(this);
 		
 		
 		
@@ -136,7 +137,10 @@ public class Katane {
 	public Player getCurrentPlayer () {
 		return currentPlayer;
 	}
-
+	public Integer getCurrentPlayerIndex () {
+		return currentPlayerIndex;
+	}
+	
 	public BuildManagerWorker getBMW () {
 		return BMW;
 	}

@@ -6,12 +6,12 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import model.*;
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * The class provides the frontend for the trading function. 
  * The Klaase partially updates itself. 
- * (Not via the <code>Controller</code>
+ * (Not via the <code>Katane</code>
  * 
  * @author LIAO Haoyun
  */
@@ -237,9 +237,9 @@ public class TradingMenu extends JPanel implements ChangeListener,
 	private int height;
 
 	/**
-	 * The well-known controller
+	 * The well-known katane
 	 */
-	private Controller controller;
+	private Katane katane;
 
 	/**
 	 * The player currently on the move
@@ -295,20 +295,20 @@ public class TradingMenu extends JPanel implements ChangeListener,
 	 * The constructor creates an object of the TradingMenus, 
 	 * which is the frontend for bank, port and player trading.
 	 * 
-	 * @param controller
-	 *            is the controller
+	 * @param katane
+	 *            is the katane
 	 * @param width
 	 *            is the width of the panel
 	 * @param height
 	 *            is the height of the panel
 	 */
-	public TradingMenu(Controller controller, int width, int height) {
-		this.controller = controller;
+	public TradingMenu(Katane katane, int width, int height) {
+		this.katane = katane;
 		this.width = width;
 		this.height = height;
 		this.setPreferredSize(new Dimension(width, height));
 		this.setOpaque(false);
-		this.current = controller.getIsland().getCurrentPlayer();
+		this.current = katane.getIsland().getCurrentPlayer();
 		this.size = width/10;
 		// current rate (bank trading) - depending on the order of the order: 
 		//wool, ore, brick, lumber, grain by default, 
@@ -479,12 +479,12 @@ public class TradingMenu extends JPanel implements ChangeListener,
 	}
 
 	/**
-	 * Adds the interaction with the <code>Controller</code>.
+	 * Adds the interaction with the <code>Katane</code>.
 	 */
 	public void setupInteraction() {
-		addMouseListener(controller);
+		addMouseListener(katane);
 
-		trade.addActionListener(controller);
+		trade.addActionListener(katane);
 		trade.setActionCommand("deal.trade"); //$NON-NLS-1$
 		trade.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -745,7 +745,7 @@ public class TradingMenu extends JPanel implements ChangeListener,
 		killAllChangeListener();
 		reset();
 		int[] playerRes = getResources();
-		current = controller.getIsland().getCurrentPlayer();
+		current = katane.getIsland().getCurrentPlayer();
 		harbors = current.getHarbors();
 		if (banktrade) {
 			if (harbors.contains(Constants.HARBOR)) {
@@ -977,7 +977,7 @@ public class TradingMenu extends JPanel implements ChangeListener,
 	 * @return Array of raw materials (wool, ore, loam, wood, wheat)
 	 */
 	public int[] getResources() {
-		Settler c = controller.getIsland().getCurrentPlayer();
+		Settler c = katane.getIsland().getCurrentPlayer();
 		return new int[] { c.getWool(), c.getOre(), c.getBrick(),
 				c.getLumber(), c.getGrain() };
 

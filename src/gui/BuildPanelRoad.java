@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * The class is the "menu" called when building a street
@@ -21,7 +21,7 @@ public class BuildPanelRoad extends JPanel {
 
 	private int height;
 
-	private Controller controller;
+	private Katane katane;
 	
 	/*
 	* A button for a street
@@ -30,15 +30,15 @@ public class BuildPanelRoad extends JPanel {
 
 	/**
 	* Creates a new Road Construction Menu
-	* @param controller
-	* is the good old controller
+	* @param katane
+	* is the good old katane
 	* @param width
 	* is the width of the panel
 	* @param height
 	* is the height of the panel
 	*/
-	public BuildPanelRoad(Controller controller, int width, int height) {
-		this.controller = controller;
+	public BuildPanelRoad(Katane katane, int width, int height) {
+		this.katane = katane;
 		this.width = width;
 		this.height = height;
 
@@ -59,7 +59,7 @@ public class BuildPanelRoad extends JPanel {
 
 	private void setupInteraction() {
 		bRoad.setActionCommand("road.road"); 
-		bRoad.addActionListener(controller);
+		bRoad.addActionListener(katane);
 	}
 
 	private void addWidgets() {

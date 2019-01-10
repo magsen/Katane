@@ -8,6 +8,7 @@
 
 package Katane;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -24,11 +25,13 @@ public class Player {
 	private int victoryPoint;
 	private ArrayList<Ressource> ressource;
 	private ArrayList<Town> townList;
+	private Color color;
 
 	/* Constructor */
-	public Player(Katane katane, int i) {
+	public Player(Katane katane, int i, Color color) {
 		this.katane = katane;
 		this.setPlayerNumber(i);
+		this.setColor(color);
 		System.out.println("-- Player "+i+" --");
 		this.townList = new ArrayList<Town>();
 		this.ressource = new ArrayList<Ressource>();
@@ -214,5 +217,13 @@ public class Player {
 			str += r.getQuantity() + ", ";
 		}
 		System.out.println(str);
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 }

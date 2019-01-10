@@ -3,7 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import model.*;
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * The class creates the GUI element Supply Panel, 
@@ -71,9 +71,9 @@ public class SupplyPanel extends JPanel {
 	private ImagePanel army;
 
 	/**
-	 * The good old controller
+	 * The good old katane
 	 */
-	private Controller controller;
+	private Katane katane;
 
 	/**
 	 * The height of the panel
@@ -88,15 +88,15 @@ public class SupplyPanel extends JPanel {
 	/**
 	 * The constructor creates a new supply panel
 	 * 
-	 * @param controller
-	 *            is the controller
+	 * @param katane
+	 *            is the katane
 	 * @param width
 	 *            is the width of the panel
 	 * @param height
 	 *            is the height of the panel
 	 */
-	public SupplyPanel(Controller controller, int width, int height) {
-		this.controller = controller;
+	public SupplyPanel(Katane katane, int width, int height) {
+		this.katane = katane;
 		this.height = height;
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(width, height));
@@ -251,7 +251,7 @@ public class SupplyPanel extends JPanel {
 	 * Updates the display of the SupplyPanel.
 	 */
 	public void update() {
-		Settler settler = controller.getClient().getSettler();
+		Settler settler = katane.getClient().getSettler();
 		wool.setText("" + settler.getWool()); //$NON-NLS-1$
 		ore.setText("" + settler.getOre()); //$NON-NLS-1$
 		brick.setText("" + settler.getBrick()); //$NON-NLS-1$

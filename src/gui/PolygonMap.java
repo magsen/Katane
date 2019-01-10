@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.util.*;
 import javax.swing.*;
-import model.*;
+import Katane.*;
 
 /**
  * The class graphically represents the entire playing field.
@@ -18,7 +18,7 @@ public class PolygonMap extends JLayeredPane {
 	/**
 	 * The model of the Spielfelds.
 	 */
-	private IslandOfCatan island;
+	private World world;
 	/**
 	 * The X coordinate to which the Starthexagon is placed.
 	 */
@@ -177,8 +177,8 @@ public class PolygonMap extends JLayeredPane {
 	/**
 	 * Constructor of hexagon playfield.
 	 * 
-	 * @param island
-	 *            The model data of the island.
+	 * @param world
+	 *            The model data of the world.
 	 * @param x
 	 *            X coordinate of the point where the first hexagon is drawn.
 	 * @param y
@@ -186,8 +186,8 @@ public class PolygonMap extends JLayeredPane {
 	 * @param radius
 	 *            Half width of a hexagon.
 	 */
-	public PolygonMap(IslandOfCatan island, final int x, final int y, int radius) {
-		this.island = island;
+	public PolygonMap(World world, final int x, final int y, int radius) {
+		this.world = world;
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
@@ -195,12 +195,12 @@ public class PolygonMap extends JLayeredPane {
 		streets = new Vector<Integer>();
 		filledRects = new Vector<Integer>();
 		filledRectsOwner = new Vector<Integer>();
-		settlementNodes = new int[island.getNodes().length];
-		cityNodes = new int[island.getNodes().length];
+		settlementNodes = new int[world.getNodes().length];
+		cityNodes = new int[world.getNodes().length];
 		hexagonLength = 2 * radius;
 		hexagonWidth = 2 * radius * Math.sin(Math.PI * (1.0 / 3.0));
-		roadActionAreas = new Polygon[island.getRoads().length];
-		nodesActionAreas = new Ellipse2D[island.getNodes().length];
+		roadActionAreas = new Polygon[world.getRoads().length];
+		nodesActionAreas = new Ellipse2D[world.getNodes().length];
 		hexagonMap1D = new Hexagon[hexagonMap[0].length * hexagonMap.length];
 		informationMap1D = new Tile[hexagonMap[0].length * hexagonMap.length];
 		init();
@@ -231,7 +231,7 @@ public class PolygonMap extends JLayeredPane {
 	}
 
 	/**
-	 * Initializes the 1-D-array that holds the tiles from the island.
+	 * Initializes the 1-D-array that holds the tiles from the world.
 	 */
 	public void initInformationMap1D() {
 		int k = 0;
@@ -255,7 +255,7 @@ public class PolygonMap extends JLayeredPane {
 	public Node getClickedNode(int xCoord, int yCoord) {// store status of node
 		for (int i = 0; i < nodesActionAreas.length; i++) {
 			if (nodesActionAreas[i].contains(xCoord - x, yCoord - y))
-				return island.getNodes()[i];
+				return world.getNodes()[i];
 		}
 		return null;
 	}
@@ -272,7 +272,7 @@ public class PolygonMap extends JLayeredPane {
 	public Road getClickedRoad(int xCoord, int yCoord) {
 		for (int i = 0; i < roadActionAreas.length; i++) {
 			if (roadActionAreas[i].contains(xCoord - x, yCoord - y))
-				return island.getRoads()[i];
+				return world.getRoads()[i];
 		}
 		return null;
 	}
@@ -394,7 +394,7 @@ public class PolygonMap extends JLayeredPane {
 	}
 
 	/**
-	 * Initializes the PolygonMap and thus the visible island.
+	 * Initializes the PolygonMap and thus the visible world.
 	 */
 	public void init() {
 		int width = (int) Toolkit.getDefaultToolkit().getScreenSize()
@@ -432,7 +432,7 @@ public class PolygonMap extends JLayeredPane {
 		heightChit = widthChit;
 		widthIcon = (int) (hexagonMap[0][0].getBounds().getWidth() * 1.0 / 2.0);
 		heightIcon = (int) (hexagonMap[0][0].getBounds().getHeight() * 1.0 / 2.0);
-		informationMap = island.getTiles();
+		informationMap = world.getTiles();
 		
 		/*
 		 * Assignment of the buttons of the nodes, 
@@ -456,10 +456,10 @@ public class PolygonMap extends JLayeredPane {
 		/*
 		 * Initialization of the RoadActionAreas
 		 */
-		Road[] islandRoads = island.getRoads();
-		for (int i = 0; i < islandRoads.length; i++) {
-			int startNodeIndex = islandRoads[i].getStart().getIndex();
-			int endNodeIndex = islandRoads[i].getEnd().getIndex();
+		Road[] worldRoads = world.getRoads();
+		for (int i = 0; i < worldRoads.length; i++) {
+			int startNodeIndex = worldRoads[i].getStart().getIndex();
+			int endNodeIndex = worldRoads[i].getEnd().getIndex();
 			double startX = nodesActionAreas[startNodeIndex].getCenterX();
 			double startY = nodesActionAreas[startNodeIndex].getCenterY();
 			double endX = nodesActionAreas[endNodeIndex].getCenterX();
@@ -469,18 +469,18 @@ public class PolygonMap extends JLayeredPane {
 
 			if (startY > endY) {
 				newY = startY - (startY - endY) / 2.0;
-				island.getRoads()[i].setDirection(Constants.ROAD_UP);
+				world.getRoads()[i].setDirection(Constants.ROAD_UP);
 			}
 			if (startY < endY) {
 				newY = endY - (endY - startY) / 2.0;
-				island.getRoads()[i].setDirection(Constants.ROAD_DOWN);
+				world.getRoads()[i].setDirection(Constants.ROAD_DOWN);
 			}
 			if (endX - startX > 3.0) {
 				newX = endX - (endX - startX) / 2.0;
 			}
 			if (endX - startX < 3.0) {
 				newX = startX - (startX - endX) / 2.0;
-				island.getRoads()[i].setDirection(Constants.ROAD_VERT);
+				world.getRoads()[i].setDirection(Constants.ROAD_VERT);
 			}
 
 			for (int j = 0; j < informationMap.length; j++) {
@@ -612,7 +612,7 @@ public class PolygonMap extends JLayeredPane {
 									- heightChit / 2, widthChit, heightChit,
 							this);
 				}
-				if (island.getRobberTile() == informationMap[i][j]
+				if (world.getRobberTile() == informationMap[i][j]
 						&& informationMap[i][j].getResource() != Constants.WATER
 						&& informationMap[i][j].getResource() != Constants.WOOLHARBOR
 						&& informationMap[i][j].getResource() != Constants.BRICKHARBOR
@@ -667,22 +667,22 @@ public class PolygonMap extends JLayeredPane {
 				.getX(), (int) hexagonMap[6][3].getBounds().getY(), widthTile,
 				heightTile, this);
 		graphic.setColor(new Color(139, 69, 19));
-		Road[] islandRoads = island.getRoads();		
+		Road[] worldRoads = world.getRoads();		
 		 /* Drawing the street */
-		for (int i = 0; i < islandRoads.length; i++) {
+		for (int i = 0; i < worldRoads.length; i++) {
 			Image roadImage = null;
-			int roadOwner = islandRoads[i].getOwner();
+			int roadOwner = worldRoads[i].getOwner();
 			double x_Start = 0;
 			double y_Start = 0;
 			double height = 0;
 			double width = 0;
 			if (roadOwner != Constants.NOBODY) {
-				Color playerColor = island.getSettler(roadOwner).getColor();
-				switch (islandRoads[i].getDirection()) {
+				Color playerColor = world.getSettler(roadOwner).getColor();
+				switch (worldRoads[i].getDirection()) {
 				case Constants.ROAD_DOWN:
-					x_Start = nodesActionAreas[islandRoads[i].getStart()
+					x_Start = nodesActionAreas[worldRoads[i].getStart()
 							.getIndex()].getCenterX();
-					y_Start = nodesActionAreas[islandRoads[i].getStart()
+					y_Start = nodesActionAreas[worldRoads[i].getStart()
 							.getIndex()].getCenterY();
 					height = imageRoadHeight_NotVert;
 					width = imageRoadWidth_NotVert;
@@ -702,9 +702,9 @@ public class PolygonMap extends JLayeredPane {
 					break;
 
 				case Constants.ROAD_UP:
-					x_Start = nodesActionAreas[islandRoads[i].getStart()
+					x_Start = nodesActionAreas[worldRoads[i].getStart()
 							.getIndex()].getCenterX();
-					y_Start = nodesActionAreas[islandRoads[i].getEnd()
+					y_Start = nodesActionAreas[worldRoads[i].getEnd()
 							.getIndex()].getCenterY();
 					height = imageRoadHeight_NotVert;
 					width = imageRoadWidth_NotVert;
@@ -726,9 +726,9 @@ public class PolygonMap extends JLayeredPane {
 				case Constants.ROAD_VERT:
 					height = imageRoadHeight_Vert + nodeHeight;
 					width = imageRoadWidth_Vert / 2;
-					x_Start = nodesActionAreas[islandRoads[i].getStart()
+					x_Start = nodesActionAreas[worldRoads[i].getStart()
 							.getIndex()].getX() + width / 2;
-					y_Start = nodesActionAreas[islandRoads[i].getStart()
+					y_Start = nodesActionAreas[worldRoads[i].getStart()
 							.getIndex()].getY() + nodeHeight / 2;
 					if (playerColor.equals(Color.RED)) {
 						roadImage = ImportImages.red_road_vert;
@@ -783,18 +783,18 @@ public class PolygonMap extends JLayeredPane {
 		/* Draw the existing buildings */
 		for (int i = 0; i < informationMap[0].length; i++) {
 			for (int j = 0; j < informationMap.length; j++) {
-				for (int k = 0; k < island.getNodes().length; k++) {
+				for (int k = 0; k < world.getNodes().length; k++) {
 					Image city = null;
 					Image settlement = null;
 
-					if (island.getNodes()[k].getBuilding() == Constants.CITY) {
-						if (island.getNodes()[k].getOwnerID() == 0) {
+					if (world.getNodes()[k].getBuilding() == Constants.CITY) {
+						if (world.getNodes()[k].getOwnerID() == 0) {
 							city = ImportImages.cityBlue;
-						} else if (island.getNodes()[k].getOwnerID() == 1) {
+						} else if (world.getNodes()[k].getOwnerID() == 1) {
 							city = ImportImages.cityGreen;
-						} else if (island.getNodes()[k].getOwnerID() == 2) {
+						} else if (world.getNodes()[k].getOwnerID() == 2) {
 							city = ImportImages.cityRed;
-						} else if (island.getNodes()[k].getOwnerID() == 3) {
+						} else if (world.getNodes()[k].getOwnerID() == 3) {
 							city = ImportImages.cityYellow;
 						}
 						if (city != null) {
@@ -810,14 +810,14 @@ public class PolygonMap extends JLayeredPane {
 						}
 					}
 
-					else if (island.getNodes()[k].getBuilding() == Constants.SETTLEMENT) {
-						if (island.getNodes()[k].getOwnerID() == 0) {
+					else if (world.getNodes()[k].getBuilding() == Constants.SETTLEMENT) {
+						if (world.getNodes()[k].getOwnerID() == 0) {
 							settlement = ImportImages.settlementBlue;
-						} else if (island.getNodes()[k].getOwnerID() == 1) {
+						} else if (world.getNodes()[k].getOwnerID() == 1) {
 							settlement = ImportImages.settlementGreen;
-						} else if (island.getNodes()[k].getOwnerID() == 2) {
+						} else if (world.getNodes()[k].getOwnerID() == 2) {
 							settlement = ImportImages.settlementRed;
-						} else if (island.getNodes()[k].getOwnerID() == 3) {
+						} else if (world.getNodes()[k].getOwnerID() == 3) {
 							settlement = ImportImages.settlementYellow;
 						}
 						if (settlement != null) {
@@ -838,7 +838,7 @@ public class PolygonMap extends JLayeredPane {
 		/* Draw the settlement preview */
 		if (isShowSettlementNodes()) {
 			Image settlement = null;
-			for (int i = 0; i < island.getNodes().length; i++) {
+			for (int i = 0; i < world.getNodes().length; i++) {
 				if (currentPlayerID == 0) {
 					settlement = ImportImages.settlementBlue;
 				} else if (currentPlayerID == 1) {
@@ -868,7 +868,7 @@ public class PolygonMap extends JLayeredPane {
 		/* Draw the progress report */
 		if (isShowCityNodes()) {
 			Image city = null;
-			for (int i = 0; i < island.getNodes().length; i++) {
+			for (int i = 0; i < world.getNodes().length; i++) {
 				if (currentPlayerID == 0) {
 					city = ImportImages.cityBlue;
 				} else if (currentPlayerID == 1) {

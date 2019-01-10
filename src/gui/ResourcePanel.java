@@ -3,7 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import model.Constants;
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * Display and selection menu for raw materials (e.g. monopoly card).
@@ -23,9 +23,9 @@ public class ResourcePanel extends ImagePanel {
 	 */
 	private int height;
 	/**
-	 * <code> Controller </code> for the action elements of the <code> ResourcePanel </code>.
+	 * <code> Katane </code> for the action elements of the <code> ResourcePanel </code>.
 	 */
-	private Controller controller;
+	private Katane katane;
 	/**
 	 * Contains the <code>PlayerButtons</code> of the <code>ResourcePanel</code>.
 	 */
@@ -144,16 +144,16 @@ public class ResourcePanel extends ImagePanel {
 	 * The constructor creates a new ResourcePanel 
 	 * that allows it to interact with the resources (for example, the ruler)
 	 * 
-	 * @param controller
-	 *            <code>Controller</code>
+	 * @param katane
+	 *            <code>Katane</code>
 	 * @param width
 	 *            Width of the <code>ResourcePanels</code>
 	 * @param height
 	 *            Heigh of the <code>ResourcePanels</code>
 	 */
-	public ResourcePanel(Controller controller, int width, int height) {
+	public ResourcePanel(Katane katane, int width, int height) {
 		super(ImportImages.chatBg, width, height);
-		this.controller = controller;
+		this.katane = katane;
 		this.width = width;
 		this.height = height;
 		this.firstResource = ""; //$NON-NLS-1$
@@ -261,23 +261,23 @@ public class ResourcePanel extends ImagePanel {
 
 	/**
 	 * Adds the <code>ResourcePanel</code> 
-	 * interaction with the <code>Controller</code>.
+	 * interaction with the <code>Katane</code>.
 	 */
 	public void setupInteraction() {
 		grainBtn.setActionCommand("resP.Grain"); //$NON-NLS-1$
-		grainBtn.addActionListener(controller);
+		grainBtn.addActionListener(katane);
 		oreBtn.setActionCommand("resP.Ore"); //$NON-NLS-1$
-		oreBtn.addActionListener(controller);
+		oreBtn.addActionListener(katane);
 		woolBtn.setActionCommand("resP.Wool"); //$NON-NLS-1$
-		woolBtn.addActionListener(controller);
+		woolBtn.addActionListener(katane);
 		lumberBtn.setActionCommand("resP.Lumber"); //$NON-NLS-1$
-		lumberBtn.addActionListener(controller);
+		lumberBtn.addActionListener(katane);
 		brickBtn.setActionCommand("resP.Brick"); //$NON-NLS-1$
-		brickBtn.addActionListener(controller);
+		brickBtn.addActionListener(katane);
 		confirmBtn.setActionCommand("resP.confirm"); //$NON-NLS-1$
-		confirmBtn.addActionListener(controller);
+		confirmBtn.addActionListener(katane);
 		cancelBtn.setActionCommand("resP.cancel"); //$NON-NLS-1$
-		cancelBtn.addActionListener(controller);
+		cancelBtn.addActionListener(katane);
 	}
 
 	/**

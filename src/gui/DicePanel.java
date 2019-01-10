@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * GUI element that displays the numbers of the dice
@@ -19,7 +19,7 @@ public class DicePanel extends JPanel {
 	
 	private PlayerLabel diceTwo;
 	
-	private Controller controller;
+	private Katane katane;
 	
 	private int width;
 
@@ -45,7 +45,7 @@ public class DicePanel extends JPanel {
 				+ ".png")).getImage(), width / 3, width / 3); 
 		diceTwo = new PlayerLabel(new ImageIcon(getClass().getResource("graphics/dice/dice" + dice2 
 				+ ".png")).getImage(), width / 3, width / 3); 
-		addMouseListener(controller);
+		addMouseListener(katane);
 		setLayout(new FlowLayout());
 		add(diceOne);
 		add(diceTwo);

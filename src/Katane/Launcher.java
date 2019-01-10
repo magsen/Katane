@@ -19,7 +19,7 @@ public class Launcher {
 		System.out.println("-- Launching the game --");
 		@SuppressWarnings("unused")
 		Katane katane = new Katane();
-		//katane.gameRoutine(); // UNCOMMENT this
+		katane.startTurn(); // UNCOMMENT this
 		test(katane);
 	}
 

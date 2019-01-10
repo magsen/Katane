@@ -1,7 +1,7 @@
 package gui;
 
 import java.awt.*;
-import model.Settler;
+import Katane.Player;
 
 /**
  * Display of the opponent.
@@ -33,7 +33,7 @@ public class OpponentFrame extends PlayerFrame { //Player and status display of 
 	/*
 	 * The settler for the OpponentFrame.
 	 */
-	private Settler opponent;
+	private Player opponent;
 
 	/*
 	 * Produces a Gui representation of the opponent
@@ -89,14 +89,17 @@ public class OpponentFrame extends PlayerFrame { //Player and status display of 
 	/*
 	 * The method makes it possible to take the opponent (settler) from the model as the basis for the GUI.
 	 */
-	public void setOpponent(Settler opponent) {
+	public void setOpponent(Player opponent) {
 		this.opponent = opponent;
-		armyPanel.addLabel("" + this.opponent.getArmyCount());
-		roadsPanel.addLabel("" + this.opponent.getLongestRoadLength()); 
-		cardsPanel.addLabel("" + this.opponent.getAmountOfDevCards()); 
-		resourcesPanel.addLabel("" + this.opponent.getAmountOfResources()); 
-		victoryPointsPanel.addLabel("" + this.opponent.getScore()); 
-		addNameLbl(this.opponent.getUsername(), opponent.getColor());
+		//armyPanel.addLabel("" + this.opponent.getArmyCount());
+		//roadsPanel.addLabel("" + this.opponent.getLongestRoadLength()); 
+		//cardsPanel.addLabel("" + this.opponent.getAmountOfDevCards()); 
+		
+		/* to be add */
+		//resourcesPanel.addLabel("" + this.opponent.getAmountOfResources()); 
+		
+		victoryPointsPanel.addLabel("" + this.opponent.getVictoryPoint()); 
+		addNameLbl(this.opponent.getPlayerNumber()+"", opponent.getColor());
 		addColorLbl(opponent.getColor());
 	}
 
@@ -104,15 +107,18 @@ public class OpponentFrame extends PlayerFrame { //Player and status display of 
 	 * Updates the display values.
 	 */
 	public void update() {
-		armyPanel.setText("" + opponent.getArmyCount()); 
-		roadsPanel.setText("" + opponent.getLongestRoadLength()); 
-		cardsPanel.setText("" + opponent.getAmountOfDevCards());
-		resourcesPanel.setText("" + opponent.getAmountOfResources());
-		victoryPointsPanel.setText("" + opponent.getTempScore()); 
+		//armyPanel.setText("" + opponent.getArmyCount()); 
+		//roadsPanel.setText("" + opponent.getLongestRoadLength()); 
+		//cardsPanel.setText("" + opponent.getAmountOfDevCards());
+		
+		/* to be add */
+		//resourcesPanel.setText("" + opponent.getAmountOfResources());
+		
+		victoryPointsPanel.setText("" + opponent.getVictoryPoint()); 
 	}
 
 	
-	public Settler getOpponent() {
+	public Player getOpponent() {
 		return opponent;
 	}
 }

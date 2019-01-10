@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 import model.Settler;
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * Display of individual players.
@@ -28,9 +28,9 @@ public class PlayerChoosePanel extends JPanel {
 	private JPanel choosePanel;
 
 	/**
-	 * controller
+	 * katane
 	 */
-	private Controller controller;
+	private Katane katane;
 
 	/**
 	 * The width of the panel.
@@ -94,22 +94,22 @@ public class PlayerChoosePanel extends JPanel {
 	 * Constructor for the <code>PlayerChoosePanel</code>.
 	 * <code> PlayerChoosePanel </ code>的构造函数。
 	 * 
-	 * @param controller
-	 *            Controller for the action items
+	 * @param katane
+	 *            Katane for the action items
 	 *            操作项的控制器
 	 * @param playerIds
 	 *            <code>ArrayList</code> for the player IDs to be displayed
 	 *            要显示的玩家ID的<code>ArrayList</code>
 	 */
-	// public PlayerChoosePanel(Controller controller, int width, int height,
+	// public PlayerChoosePanel(Katane katane, int width, int height,
 	// ArrayList<Integer> playerIds, boolean trading) {
-	public PlayerChoosePanel(Controller controller,
+	public PlayerChoosePanel(Katane katane,
 			ArrayList<Integer> playerIds, boolean trading) {
-		this.controller = controller;
+		this.katane = katane;
 		this.playerIds = playerIds;
 		this.trading = trading;
 		arraySize = (trading) ? playerIds.size() + 1 : playerIds.size();
-		height = (int) (controller.getMainGUI().getHeight() * 0.25);
+		height = (int) (katane.getMainGUI().getHeight() * 0.25);
 		width = height * arraySize;
 		// this.width = width;
 		// this.height = height;
@@ -120,7 +120,7 @@ public class PlayerChoosePanel extends JPanel {
 		namePanels = new ImagePanel[playerIds.size()];
 
 		for (int i = 0; i < opponents.length; i++) {
-			opponents[i] = controller.getIsland().getSettler(playerIds.get(i));
+			opponents[i] = katane.getIsland().getSettler(playerIds.get(i));
 		}
 
 		init();
@@ -203,21 +203,21 @@ public class PlayerChoosePanel extends JPanel {
 	}
 
 	/**
-	 * Does the interaction with the <code>Controller</code> in addition.
-	 * 是否与<code> Controller </ code>进行交互。
+	 * Does the interaction with the <code>Katane</code> in addition.
+	 * 是否与<code> Katane </ code>进行交互。
 	 */
 	public void setupInteraction() {
 		if (trading) {//判断是否进行交易
 			for (int i = 0; i < opponents.length; i++) {
-				opponentBtns[i].addActionListener(controller);
+				opponentBtns[i].addActionListener(katane);
 				opponentBtns[i]
 						.setActionCommand("chos." + opponents[i].getID()); 
 			}
-			cancelBtn.addActionListener(controller);
+			cancelBtn.addActionListener(katane);
 			cancelBtn.setActionCommand("chos.-1"); 
 		} else {
 			for (int i = 0; i < opponents.length; i++) {
-				opponentBtns[i].addActionListener(controller);
+				opponentBtns[i].addActionListener(katane);
 				opponentBtns[i]
 						.setActionCommand("robb." + opponents[i].getID()); 
 			}

@@ -3,7 +3,7 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.*;
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * The class is the information menu of your own player on the GUI 
@@ -16,9 +16,9 @@ import controller.Controller;
 public class SettlerFrame extends PlayerFrame {
 
 	/**
-	 * The obligatory controller
+	 * The obligatory katane
 	 */
-	private Controller controller;
+	private Katane katane;
 
 	/**
 	 * A button to the map menu
@@ -44,8 +44,8 @@ public class SettlerFrame extends PlayerFrame {
 	 * The constructor creates a new settler frame, 
 	 * which acts as the linchpin of the GUI
 	 * 
-	 * @param controller
-	 *            is the controller
+	 * @param katane
+	 *            is the katane
 	 * @param img
 	 *            is the display image of the player
 	 * @param width
@@ -53,8 +53,8 @@ public class SettlerFrame extends PlayerFrame {
 	 * @param height
 	 *            is the height of the panel
 	 */
-	public SettlerFrame(Controller controller, Image img, int width, int height) {
-		this.controller = controller;
+	public SettlerFrame(Katane katane, Image img, int width, int height) {
+		this.katane = katane;
 		setWidth(width);
 		setHeight(height);
 		setPreferredSize(new Dimension(width, height));
@@ -98,12 +98,12 @@ public class SettlerFrame extends PlayerFrame {
 	}
 
 	/**
-	 * Adds the interaction with the <code>Controller</code> 
+	 * Adds the interaction with the <code>Katane</code> 
 	 * to the <code>SettlerFrame</code>.
 	 */
 	public void setupInteraction() {
 		bCard.setActionCommand("menu.card"); //$NON-NLS-1$
-		bCard.addActionListener(controller);
+		bCard.addActionListener(katane);
 		bCard.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.cardBtnActive);
@@ -113,7 +113,7 @@ public class SettlerFrame extends PlayerFrame {
 			}
 		});
 		bTrade.setActionCommand("menu.trade"); //$NON-NLS-1$
-		bTrade.addActionListener(controller);
+		bTrade.addActionListener(katane);
 		bTrade.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.tradeBtnActive);
@@ -123,7 +123,7 @@ public class SettlerFrame extends PlayerFrame {
 			}
 		});
 		bRoll.setActionCommand("menu.roll"); //$NON-NLS-1$
-		bRoll.addActionListener(controller);
+		bRoll.addActionListener(katane);
 		bRoll.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.rollBtnActive);
@@ -133,7 +133,7 @@ public class SettlerFrame extends PlayerFrame {
 			}
 		});
 		bNext.setActionCommand("menu.next"); //$NON-NLS-1$
-		bNext.addActionListener(controller);
+		bNext.addActionListener(katane);
 		bNext.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.nextBtnActive);

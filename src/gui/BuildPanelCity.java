@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.*;
 import javax.swing.*;
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * The class is the panel that appears when looking at a node
@@ -19,15 +19,15 @@ public class BuildPanelCity extends JPanel {
 
 	private int height;
 
-	private Controller controller;
+	private Katane katane;
 
 	//A button for a settlement
 	
 	private PlayerButton bSettlement;
 
 	// Creates a new object of the "Construction Menu"
-	public BuildPanelCity(Controller controller, int width, int height) {
-		this.controller = controller;
+	public BuildPanelCity(Katane katane, int width, int height) {
+		this.katane = katane;
 		this.width = width;
 		this.height = height;
 
@@ -48,7 +48,7 @@ public class BuildPanelCity extends JPanel {
 
 	private void setupInteraction() {
 		bSettlement.setActionCommand("node.city");
-		bSettlement.addActionListener(controller);
+		bSettlement.addActionListener(katane);
 	}
 
 	private void addWidgets() {

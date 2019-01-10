@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import model.IslandOfCatan;//the state of the island.
 import model.Settler;//the state of the settler.
-import controller.Controller;
+import Katane.Katane;
 
 /*聽 
  * The class represents the menu with which to buy development cards and
@@ -104,7 +104,7 @@ public class CardMenu extends JPanel {
 
 	private int height;
 
-	private Controller controller;
+	private Katane katane;
 
 	/**
 	 * The model of the island
@@ -120,13 +120,13 @@ public class CardMenu extends JPanel {
 	 * Creates an instance of CardMenus Here you can opt for the
      * Decide play or for the purchase of a development map
 	 */
-	public CardMenu(Controller controller, int width, int height) {
-		this.controller = controller;
+	public CardMenu(Katane katane, int width, int height) {
+		this.katane = katane;
 		this.width = (int) (width*0.9);
 		this.height = (int) (height*0.9);
 		this.setPreferredSize(new Dimension(width, height));
 		this.setOpaque(false);
-		this.island = controller.getIsland();
+		this.island = katane.getIsland();
 		this.settler = island.getCurrentPlayer();
 
 		init();
@@ -193,12 +193,12 @@ public class CardMenu extends JPanel {
 	}
 
 	/**
-	 *  Adds the CardMenu interaction with the Controller.
+	 *  Adds the CardMenu interaction with the Katane.
 	 */
 	public void setupInteraction() {
-		addMouseListener(controller);
+		addMouseListener(katane);
 
-		knight.addActionListener(controller);
+		knight.addActionListener(katane);
 		knight.setActionCommand("card.knight"); 
 		knight.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){ // Invoked when the mouse enters a component
@@ -214,7 +214,7 @@ public class CardMenu extends JPanel {
 				}
 			}
 		});
-		invention.addActionListener(controller);
+		invention.addActionListener(katane);
 		invention.setActionCommand("card.invention");
 		invention.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -228,7 +228,7 @@ public class CardMenu extends JPanel {
 				}
 			}
 		});
-		monopoly.addActionListener(controller);
+		monopoly.addActionListener(katane);
 		monopoly.setActionCommand("card.monopoly"); 
 		monopoly.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -242,7 +242,7 @@ public class CardMenu extends JPanel {
 				}
 			}
 		});
-		streets.addActionListener(controller);
+		streets.addActionListener(katane);
 		streets.setActionCommand("card.streets"); 
 		streets.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -256,9 +256,9 @@ public class CardMenu extends JPanel {
 				}
 			}
 		});
-		victory.addActionListener(controller);
+		victory.addActionListener(katane);
 		victory.setActionCommand("card.victory"); 
-		backside.addActionListener(controller);
+		backside.addActionListener(katane);
 		backside.setActionCommand("card.draw");
 		backside.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
@@ -439,7 +439,7 @@ public class CardMenu extends JPanel {
 		victory.setEnabled(dev.contains(Constants.VICTORYPOINTS));
 		victoryAmount.getLabel().setText(settler.getAmountOfDevCard(Constants.VICTORYPOINTS) + "");
 		backside.setEnabled(settler.getWool() >= 1 && settler.getOre() >= 1 && settler.getGrain() >= 1);
-		backsideAmount.getLabel().setText((Constants.DEVCARDS_MAX - controller.getIsland().getDrawnDevCard())+ "");
+		backsideAmount.getLabel().setText((Constants.DEVCARDS_MAX - katane.getIsland().getDrawnDevCard())+ "");
 	}
 	
 	public CardMenu getThis(){

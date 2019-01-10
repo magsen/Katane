@@ -3,7 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import model.*;
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * The class provides the frontend for accepting the trade function
@@ -62,7 +62,7 @@ public class ConfirmTradePanel extends JPanel {
 
 	private int height;
 
-	private Controller controller;
+	private Katane katane;
 	
 	/*
 	 * The settler who is currently at the turn
@@ -78,16 +78,16 @@ public class ConfirmTradePanel extends JPanel {
 	 * @param offR are the raw materials offered
 	 * @param expR are the expected rust materials
 	 */
-	public ConfirmTradePanel(Controller controller, int width, int height,
+	public ConfirmTradePanel(Katane katane, int width, int height,
 			int[] offR, int[] expR) {
-		this.controller = controller;
+		this.katane = katane;
 		this.offR = offR;
 		this.expR = expR;
 		this.width = width;
 		this.height = height;
 		this.setPreferredSize(new Dimension(width, height));
 		this.setOpaque(false);
-		this.current = controller.getIsland().getCurrentPlayer();
+		this.current = katane.getIsland().getCurrentPlayer();
 		font = new Font("Times New Roman", Font.ITALIC, 20); 
 
 		init();
@@ -216,13 +216,13 @@ public class ConfirmTradePanel extends JPanel {
 
 	/*
 	 * The method sets the Action, Change, and MouseListeners for the
-	 * Interaction with the TradingMenu The TradeButton is handled by the controller
+	 * Interaction with the TradingMenu The TradeButton is handled by the katane
 	 * intercepted, the other internal elements are processed internally
 	 */
 	public void setupInteraction() {
-		confirm.addActionListener(controller);
+		confirm.addActionListener(katane);
 		confirm.setActionCommand("conf.confirm"); 
-		cancel.addActionListener(controller);
+		cancel.addActionListener(katane);
 		cancel.setActionCommand("conf.cancel"); 
 	}
 

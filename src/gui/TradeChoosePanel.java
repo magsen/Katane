@@ -3,7 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import model.Settler;
-import controller.Controller;
+import Katane.Katane;
 
 /**
  * This allows the trading player to choose a trading partner
@@ -16,9 +16,9 @@ import controller.Controller;
 public class TradeChoosePanel extends JPanel{
 
 	/**
-	 * The good old one <code>Controller</code>
+	 * The good old one <code>Katane</code>
 	 */
-	private Controller controller;
+	private Katane katane;
 	/**
 	 * Width of the panel
 	 */
@@ -83,13 +83,13 @@ public class TradeChoosePanel extends JPanel{
 	/**
 	 * This constructor creates a new lookout window for the trading partners
 	 * 
-	 * @param controller
+	 * @param katane
 	 */
-	public TradeChoosePanel(Controller controller) {
-		width = (int) (controller.getMainGUI().getWidth() * 0.3);
-		height = (int) (controller.getMainGUI().getHeight() * 0.15);
+	public TradeChoosePanel(Katane katane) {
+		width = (int) (katane.getMainGUI().getWidth() * 0.3);
+		height = (int) (katane.getMainGUI().getHeight() * 0.15);
 
-		this.controller = controller;
+		this.katane = katane;
 		initOpponents();
 		
 		tempWidth = (int) (width * 0.75);
@@ -108,10 +108,10 @@ public class TradeChoosePanel extends JPanel{
 	 * Initializes the opponents, for the ads.
 	 */
 	private void initOpponents() {
-		opponents = new Settler[controller.getClient().getIsland().getSettlers().length - 1];
+		opponents = new Settler[katane.getClient().getIsland().getSettlers().length - 1];
 		for(int i = 0, count = 0; i < opponents.length + 1; i++) {
-			if(!(controller.getClient().getIsland().getSettlers()[i].getID() == controller.getClient().getID())) {
-				opponents[count] = controller.getClient().getIsland().getSettlers()[i];
+			if(!(katane.getClient().getIsland().getSettlers()[i].getID() == katane.getClient().getID())) {
+				opponents[count] = katane.getClient().getIsland().getSettlers()[i];
 				count++;
 			}
 		}
@@ -182,15 +182,15 @@ public class TradeChoosePanel extends JPanel{
 	}
 	
 	/**
-	 * Adds the <code>TradeChoosePanel</code> interaction with the <code>Controller</code>.
+	 * Adds the <code>TradeChoosePanel</code> interaction with the <code>Katane</code>.
 	 */
 	private void setupInteraction() {
 		for(int i = 0; i < opponents.length; i++) {
-			buttons[i].addActionListener(controller);
+			buttons[i].addActionListener(katane);
 			buttons[i].setActionCommand("chos." + opponents[i].getID()); //$NON-NLS-1$
 		}
 		
-		cancelBtn.addActionListener(controller);
+		cancelBtn.addActionListener(katane);
 		cancelBtn.setActionCommand("chos.-1"); //$NON-NLS-1$
 	}
 	

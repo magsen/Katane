@@ -20,6 +20,7 @@ public class Launcher {
 		@SuppressWarnings("unused")
 		Katane katane = new Katane();
 		katane.startTurn(); // UNCOMMENT this
+		katane.getMainGUI().getSupplyPanel().update();
 		//test(katane);
 	}
 

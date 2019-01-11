@@ -1,3 +1,4 @@
+
 package gui;
 
 import java.awt.*;
@@ -578,3 +579,4 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 
 
 }
+

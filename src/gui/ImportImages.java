@@ -1,3 +1,4 @@
+
 package gui;
 
 import java.awt.Image;
@@ -685,3 +686,4 @@ public class ImportImages {
 		avatarArray = new Image[] {daemonAvatar, kerriganAvatar,tossAvatar,zergAvatar,artasAvatar,daemonAvatar,humanAvatar,nightelfAvatar,orcAvatar,undeadAvatar,daemonAvatar};
 	}
 }
+

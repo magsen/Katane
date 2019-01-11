@@ -2,13 +2,12 @@
 *     File Name           :     Player.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-11 01:24]
+*     Last Modified       :     [2019-01-06 03:32]
 *     Description         :     The Player class represents a player of the game.
 **********************************************************************************/
 
 package Katane;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -25,21 +24,19 @@ public class Player {
 	private int victoryPoint;
 	private ArrayList<Ressource> ressource;
 	private ArrayList<Town> townList;
-	private Color color;
 
 	/* Constructor */
-	public Player(Katane katane, int i, Color color) {
+	public Player(Katane katane, int i) {
 		this.katane = katane;
 		this.setPlayerNumber(i);
-		this.setColor(color);
 		System.out.println("-- Player "+i+" --");
 		this.townList = new ArrayList<Town>();
 		this.ressource = new ArrayList<Ressource>();
-		this.ressource.add(new Brick(0));
-		this.ressource.add(new Grain(2));
-		this.ressource.add(new Ore(3));
-		this.ressource.add(new Wood(3));
-		this.ressource.add(new Wool(2));
+		this.ressource.add(new Wood());
+		this.ressource.add(new Wool());
+		this.ressource.add(new Brick());
+		this.ressource.add(new Ore());
+		this.ressource.add(new Grain());
 	}
 
 	/* Get the number of a player */
@@ -71,29 +68,21 @@ public class Player {
 	public void setRessource(ArrayList<Ressource> ressource) {
 		this.ressource = ressource;
 	}
+<<<<<<< HEAD
 
 	public boolean isEnoughRessourceRoad () {
-		return isEnoughRessource(0, 0, 1, 1, 0);
+		isEnoughRessource(0, 0, 1, 1, 0);
+		return true;
 	}
 
 	public boolean isEnoughRessourceDolorean () {
-		return isEnoughRessource(0, 1, 1, 1, 1);
+		isEnoughRessource(0, 1, 1, 1, 1);
+		return true;
 	}
 
 	public boolean isEnoughRessourceTimeTown () {
-		return isEnoughRessource(3, 2, 0, 0, 0);
-	}
-	
-	public void consumeRessourceRoad () {
-		incrementRessource(0, 0, -1, -1, 0);
-	}
-
-	public void consumeRessourceDolorean () {
-		incrementRessource(0, -1, -1, -1, -1);
-	}
-
-	public void consumeRessourceTimeTown () {
-		incrementRessource(-3, -2, 0, 0, 0);
+		isEnoughRessource(3, 2, 0, 0, 0);
+		return true;
 	}
 
 	public boolean isEnoughRessource (int brick, int grain, int ore, int wood, int wool) {
@@ -132,45 +121,21 @@ public class Player {
 		return true;
 	}
 
-	/* Suppress the specified ressources, do no check if there is enough */
-	public void incrementRessource (int brick, int grain, int ore, int wood, int wool) {
-		for ( Ressource r : ressource ) {
-			if (r instanceof Brick) {
-				r.incrementQuantity(brick);
-			} else {
-				if (r instanceof Grain) {
-					r.incrementQuantity(grain);
-				} else {
-					if (r instanceof Ore) {
-						r.incrementQuantity(ore);
-					} else {
-						if (r instanceof Wood) {
-							r.incrementQuantity(wood);
-						} else {
-							if (r instanceof Wool) {
-								r.incrementQuantity(wool);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	
-	public boolean incrementRessource (Ressource... ressourceARGV) {
+	/*
+	public boolean isEnoughRessource (Ressource... ressourceARGV) {
 		for ( Ressource rARGV : ressourceARGV ) {
 			for ( Ressource r : ressource ) {
 				if (rARGV.getClass() == r.getClass()) {
-					r.incrementQuantity(rARGV.getQuantity());
+					if (rARGV.getQuantity() > r.getQuantity()) {
+						System.out.println("-- Pwah assé de reçoursse --");
+						return false;
+					}
 				}
 			}
 		}
 		return true;
 	}
-
-
-
+	*/
 
 	public ArrayList<Town> getTownList () {
 		return townList;
@@ -193,11 +158,9 @@ public class Player {
 			townList.remove(tOld);
 			townList.add(tNew);
 		}
-
+=======
 	
-
-	}
-
+	
 	public ArrayList<Ressource> getSpecificRessource( SamPredicate<Ressource> samPredicate) {
 		ArrayList<Ressource> list = new ArrayList<>();
 
@@ -208,22 +171,6 @@ public class Player {
 		 }
 
 		 return list;
-	}
-
-	// TEST
-	public void printRessources () {
-		String str = new String("");
-		for (Ressource r : ressource) {
-			str += r.getQuantity() + ", ";
-		}
-		System.out.println(str);
-	}
-
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color color) {
-		this.color = color;
+>>>>>>> 06e1f3f6cd22ddfb7309228980f64e7414246987
 	}
 }

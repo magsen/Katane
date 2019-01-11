@@ -109,3 +109,4 @@ public class ImportServerImages {
 		quitKey = new ImageIcon(getClass().getResource("graphics/info/schlieb.png")).getImage();
 	}
 }
+

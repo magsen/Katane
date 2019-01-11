@@ -12,9 +12,9 @@ import Katane.Wood;
 import Katane.Wool;
 
 /**
- * The class creates the GUI element Supply Panel, 
+ * The class creates the GUI element Supply Panel,
  * where the available resources of the player are displayed and updated at any time.
- * 该类创建GUI元素“供应面板”，随时显示和更新播放器的可用资源。
+ *
  * @author LIAO Haoyun
  */
 

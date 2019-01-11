@@ -256,3 +256,4 @@ public class PlayerChoosePanel extends JPanel {
 		return height;
 	}
 }
+

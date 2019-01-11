@@ -2,7 +2,7 @@
 *     File Name           :     Launcher.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-09 23:38]
+*     Last Modified       :     [2019-01-11 01:21]
 *     Description         :     The launcher (main class)
 **********************************************************************************/
 
@@ -20,7 +20,7 @@ public class Launcher {
 		@SuppressWarnings("unused")
 		Katane katane = new Katane();
 		katane.startTurn(); // UNCOMMENT this
-		test(katane);
+		//test(katane);
 	}
 
 	public static void test (Katane katane) {
@@ -52,9 +52,8 @@ public class Launcher {
 		*/
 		/* example of trade */
 		TradeManager tm = katane.getTM();
-		int rQuantity[]= {0,2,-3,3,-2};
+		int rQuantity[]= {0,-2,-3,-3,-2};
 		tm.trade(P, P2 , rQuantity );
-/*
 		BuildManagerWorker bmw = katane.getBMW();
 		bmw.buildDolorean(P, W, coor);
 		bmw.buildDolorean(P, W, coor);
@@ -66,19 +65,109 @@ public class Launcher {
 		coor.setCoordinates(1, 3);
 		bmw.buildDolorean(P2, W, coor);
 		//coor.setCoordinates(2, 4);
+		//10
+		
+		
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 2);
 		bmw.buildRoad(P, W, coor);
 		coor.setCoordinates(1, 3);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, 1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, -1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 0);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 1);
 		bmw.buildRoad(P, W, coor);
 		coor.setCoordinates(1, 4);
 		bmw.buildRoad(P, W, coor);
 		coor.setCoordinates(1, 5);
 		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 6);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 7);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 8);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 9);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 7);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 5);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 6);
+		bmw.buildRoad(P, W, coor);
 
-		coor.setCoordinates(1, 2);
+		/*
+		//11
+		coor.setCoordinates(2, 4);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, 3);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(3, 1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(3, -1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, 0);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(3, -2); //branch
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, -1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, 0);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, -1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 0);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, -1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 6); // loop
+		bmw.buildRoad(P, W, coor);
+		
+		coor.setCoordinates(1, 2); // loop
+
+		//14
+
+		coor.setCoordinates(1, 3);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, 1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, 2);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(3, -2);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(3, -4);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, -3);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(2, -2);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, -2);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(1, -4);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, -3);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, -2);
+		bmw.buildRoad(P, W, coor);
+		
+		coor.setCoordinates(0, 1);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 2);
+		bmw.buildRoad(P, W, coor);
+		coor.setCoordinates(0, 3);
+		bmw.buildRoad(P, W, coor);
+		*/
+		coor.setCoordinates(1,1);
+
 
 		townSet.forEach( (c, t) -> {c.print();System.out.println(t.toString());});
 		(bmw.possibleRoadsBuild(P, W)).forEach( (c) -> c.print());
-		//System.out.println(bmw.explorePath(roadMap, P, coor));
+		// System.out.println(bmw.explorePath(roadMap, P, coor, new Coordinates(0, 3)));
+		System.out.println(bmw.getLongestRoad(roadMap, P, coor));
 		System.out.println("-- Init ended --");
 		coor.setCoordinates(0, 6);
 		System.out.println((coor.roadToAdjacentRoads()).get(2));
@@ -89,6 +178,5 @@ public class Launcher {
 			bmw.buildDolorean(P, W, coor);
 			bmw.buildTimeTown(P, W, coor);
 		}
-		*/
 	}
 }

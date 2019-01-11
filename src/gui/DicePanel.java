@@ -1,3 +1,4 @@
+
 package gui;
 
 import java.awt.*;
@@ -51,3 +52,4 @@ public class DicePanel extends JPanel {
 		add(diceTwo);
 	}
 }
+

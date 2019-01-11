@@ -27,8 +27,8 @@ public class Katane {
 
 	private ArrayList<World> world;
 	private ArrayList<Player> player;
-	private Dice dice1;
-	private Dice dice2;
+	public Dice dice1;
+	public Dice dice2;
 	private RessourceProductionManager RPM;
 	private TradeManager TM;
 	private BuildManagerWorker BMW;

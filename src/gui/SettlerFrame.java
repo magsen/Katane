@@ -135,7 +135,16 @@ public class SettlerFrame extends PlayerFrame {
 		});
 		bRoll.setActionCommand("menu.roll"); //$NON-NLS-1$
 		bRoll.addActionListener(new ActionListener() {public void
-			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/ 
+			
+			katane.getMainGUI().getDicePanel().setVisible(true);
+			katane.getMainGUI().getDicePanel().setPips(katane.dice1.getResult(),katane.dice2.getResult());
+			
+			
+			
+		}});
 		bRoll.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.rollBtnActive);
@@ -146,14 +155,18 @@ public class SettlerFrame extends PlayerFrame {
 		});
 		bNext.setActionCommand("menu.next"); //$NON-NLS-1$
 		bNext.addActionListener(new ActionListener() {public void
-			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/
 			
 			
 			
 			katane.endTurn();
+			katane.getMainGUI().getDicePanel().setVisible(false);
 			katane.getMainGUI().contentPanel.setVisible(false);
 			katane.getMainGUI().init();
 			katane.getMainGUI().getSupplyPanel().update();
+			
 			
 			
 		}});

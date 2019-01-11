@@ -3,7 +3,6 @@ package gui;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
-import model.Settler;
 import Katane.Katane;
 
 /**

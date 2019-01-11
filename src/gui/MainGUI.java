@@ -391,7 +391,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		/*NEED TO BE EDIT*/ 
 		
 		
-			System.out.println("lll");
+			System.out.println("BuildMenu");
 		
 		
 		}});

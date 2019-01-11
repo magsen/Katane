@@ -39,17 +39,8 @@ public class TileMap extends ObjectMap {
 		}
 		return null; //Not found
 	}
-	/* is there a tile at specified coordinates */
-	public boolean isTile (Coordinates coor) {
-		Coordinates c;
-		for ( Map.Entry<Coordinates, Tile> entry : tileSet.entrySet()) {
-			c = entry.getKey();
-			if (c.equals(coor)) {
-				return true;
-			}
-		}
-		return false; //Not found
-	}
+
+
 	
 	public ArrayList<Tile> generateAdjacentTilesFromTownCoordinate (Coordinates coor) {
 		ArrayList<Tile> tileList = new ArrayList<Tile>();

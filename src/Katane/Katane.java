@@ -58,7 +58,7 @@ public class Katane {
 		this.player.add(new Player(this,2,Color.BLUE));
 		this.player.add(new Player(this,3,Color.RED));
 		this.player.add(new Player(this,4,Color.GREEN));
-		this.currentPlayerIndex = 4;
+		this.currentPlayerIndex = 1;
 		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
 		/* Instanciation of GUI */ 
 		
@@ -88,6 +88,10 @@ public class Katane {
 	public void startTurn() {
 		this.currentPlayerIndex += 1;
 		if(this.currentPlayerIndex > 4) {this.currentPlayerIndex=1;}
+		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
+		RPM.attributesRessources();
+	}
+	public void firstTurn() {
 		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
 		RPM.attributesRessources();
 	}

@@ -131,7 +131,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	/**
 	 *  if you want to choose which player you want to trade with
 	 */
-	private TradeChoosePanel tradeePanel;
+	TradeChoosePanel tradeePanel;
 
 	private Graphics g;
 	
@@ -243,7 +243,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		graphic.fill(polygon);
 	}
 
-	private void createWidgets() {
+	void createWidgets() {
 
 		int opponentsFrameWidth = (int) (width * 0.12);
 		@SuppressWarnings("unused")
@@ -264,7 +264,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		opponentsPanel = new JPanel();
 		opponentsPanel.setOpaque(false);
 		
-			playerFrame = new SettlerFrame(katane,
+			playerFrame = new SettlerFrame(this, katane,
 				ImportImages.avatarArray[playerImage], menuFrameHeight * 2,
 				menuFrameHeight * 2);
 			
@@ -273,7 +273,9 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		//chatFrame = new ChatGUI(katane, chatFrameWidth, chatFrameHeight);
 		//polygonMap = new PolygonMap(world.get(0),  polygonMapPos, 0, radius);
 		/* unique world*/
-
+			/* POLYGONFLAG */
+			
+			
 		contentPanel.setOpaque(false);
 
 		//opponentFrames = new OpponentFrame[world.getSettlers().length - 1];
@@ -354,10 +356,11 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		supplyPanel.setVisible(true);
 
 		contentPanel.setBounds(0, 0, width, height);
-		polygonMap.setBounds(0, 0, width, height);
+		/* POLYGONFLAG */
+		//polygonMap.setBounds(0, 0, width, height);
 
 		contentPanel.setOpaque(false);
-		polygonMap.setOpaque(false);
+		//polygonMap.setOpaque(false);
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setPreferredSize(new Dimension(width, height));
@@ -428,14 +431,17 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		gbc.insets = new Insets(5, 5, 35, 20);
 		contentPanel.add(playerFrame, gbc);
 		
-		layeredPane.add(polygonMap, new Integer(1));
+		
+		
+		/* POLYGONFLAG */
+		//layeredPane.add(polygonMap, new Integer(1));
 		layeredPane.add(contentPanel, new Integer(2));
 		layeredPane.add(buildButton, new Integer(3));
 		layeredPane.add(buildPanelRoad, new Integer(3));
 		layeredPane.add(rollDicePanel, new Integer(4));
 		layeredPane.add(tradePanel, new Integer(5));
 		layeredPane.add(resourcePanel, new Integer(5));
-		layeredPane.add(cardMenu, new Integer(5));
+		//layeredPane.add(cardMenu, new Integer(5));
 		layeredPane.add(buildingCostsMenuPanel, new Integer(5));
 	
 

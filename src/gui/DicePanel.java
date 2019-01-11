@@ -45,7 +45,7 @@ public class DicePanel extends JPanel {
 				+ ".png")).getImage(), width / 3, width / 3); 
 		diceTwo = new PlayerLabel(new ImageIcon(getClass().getResource("graphics/dice/dice" + dice2 
 				+ ".png")).getImage(), width / 3, width / 3); 
-		addMouseListener(katane);
+		//addMouseListener(katane);
 		setLayout(new FlowLayout());
 		add(diceOne);
 		add(diceTwo);

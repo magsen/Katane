@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import gui.MainGUI;
+import gui.TradeChoosePanel;
 
 
 /* The class Katane
@@ -100,6 +101,7 @@ public class Katane {
 	 */
 	public void endTurn() {
 		/* Finish the game */
+		System.out.println("-- End of a Turn --");
 		isThereVictory();
 		if(victory) {
 			victory();/* launche victory event */
@@ -171,6 +173,10 @@ public class Katane {
 	}
 	public int getTotalDice() {
 		return dice1.getResult() + dice2.getResult();
+	}
+
+	public MainGUI getMainGUI() {
+		return this.mainGUI;
 	}
 
 }

@@ -1,9 +1,11 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
-import model.Settler;
-import Katane.Katane;
+import Katane.*;
 
 /**
  * This allows the trading player to choose a trading partner
@@ -30,7 +32,7 @@ public class TradeChoosePanel extends JPanel{
 	/**
 	 * Contains the enemy settlers
 	 */
-	private Settler[] opponents;
+	private Player[] opponents;
 	/**
 	 * Represents the top part of the GUI
 	 */
@@ -107,13 +109,23 @@ public class TradeChoosePanel extends JPanel{
 	/**
 	 * Initializes the opponents, for the ads.
 	 */
-	private void initOpponents() {
-		opponents = new Settler[katane.getClient().getIsland().getSettlers().length - 1];
-		for(int i = 0, count = 0; i < opponents.length + 1; i++) {
-			if(!(katane.getClient().getIsland().getSettlers()[i].getID() == katane.getClient().getID())) {
-				opponents[count] = katane.getClient().getIsland().getSettlers()[i];
+	/*private void initOpponents() {
+		opponents = new Player[3];
+		for(int i = 0, count = 0; i < 3; i++) {
+			if(!(katane.getPlayerN(i+1).getPlayerNumber() == katane.getCurrentPlayer().getPlayerNumber())) {
+				opponents[count] = katane.getPlayerN(i+1);
 				count++;
 			}
+		}
+	}*/
+	private void initOpponents() {
+		opponents = new Player[3];
+		int i = 0;
+		for(Player player : katane.getListPlayer()) {
+			if(player.getPlayerNumber() != katane.getCurrentPlayerIndex()) {
+			opponents[i] = player;i++;
+			}
+			
 		}
 	}
 	
@@ -163,7 +175,9 @@ public class TradeChoosePanel extends JPanel{
 					frameSize / 2);
 			namePanels[i].setBounds(0, (int) (frameSize * 0.63), frameSize,
 					frameSize / 2);
-			namePanels[i].addLabel(opponents[i].getUsername(),
+			
+			
+			namePanels[i].addLabel(opponents[i].getPlayerNumber()+"",
 					opponents[i].getColor());
 			namePanels[i].getLabel().setFont(new Font("Times New Roman", Font.BOLD, (int) (frameSize / 2 * 0.38))); //$NON-NLS-1$
 			namePanels[i].getLabel().setVerticalTextPosition(JLabel.CENTER);
@@ -186,11 +200,17 @@ public class TradeChoosePanel extends JPanel{
 	 */
 	private void setupInteraction() {
 		for(int i = 0; i < opponents.length; i++) {
-			buttons[i].addActionListener(katane);
-			buttons[i].setActionCommand("chos." + opponents[i].getID()); //$NON-NLS-1$
+			buttons[i].addActionListener(new ActionListener() {public void
+actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ 
+				System.out.println("l");
+			}});
+			buttons[i].setActionCommand("chos." + opponents[i].getPlayerNumber()); //$NON-NLS-1$
 		}
 		
-		cancelBtn.addActionListener(katane);
+		cancelBtn.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ 
+			katane.getMainGUI().tradeePanel.setVisible(false);
+		}});
 		cancelBtn.setActionCommand("chos.-1"); //$NON-NLS-1$
 	}
 	
@@ -228,7 +248,7 @@ public class TradeChoosePanel extends JPanel{
 	 */
 	public void switchStatus(int playerID, boolean isAccepted) {
 		for(int i = 0; i < opponents.length; i++) {
-			if(opponents[i].getID() == playerID) {
+			if(opponents[i].getPlayerNumber() == playerID) {
 				if(isAccepted) {
 					status[i].setNewIcon(ImportImages.statusAcc);
 					buttons[i].setVisible(true);

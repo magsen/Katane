@@ -43,6 +43,8 @@ public class SettlerFrame extends PlayerFrame {
 	 */
 	private PlayerButton bNext;
 
+	public MainGUI mainGUI;
+
 	/**
 	 * The constructor creates a new settler frame, 
 	 * which acts as the linchpin of the GUI
@@ -56,7 +58,8 @@ public class SettlerFrame extends PlayerFrame {
 	 * @param height
 	 *            is the height of the panel
 	 */
-	public SettlerFrame(Katane katane, Image img, int width, int height) {
+	public SettlerFrame(MainGUI mainGUI, Katane katane, Image img, int width, int height) {
+		this.mainGUI = mainGUI;
 		this.katane = katane;
 		setWidth(width);
 		setHeight(height);
@@ -118,7 +121,10 @@ public class SettlerFrame extends PlayerFrame {
 		});
 		bTrade.setActionCommand("menu.trade"); //$NON-NLS-1$
 		bTrade.addActionListener(new ActionListener() {public void
-			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ 
+			mainGUI.showTradeesPanel();
+			
+		}});
 		bTrade.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.tradeBtnActive);
@@ -140,7 +146,19 @@ public class SettlerFrame extends PlayerFrame {
 		});
 		bNext.setActionCommand("menu.next"); //$NON-NLS-1$
 		bNext.addActionListener(new ActionListener() {public void
-			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
+			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/
+			
+			
+			
+			katane.endTurn();
+			//katane.getMainGUI().getPlayerFrame().setVisible(false);
+			katane.getMainGUI().setVisible(false);
+			katane.getMainGUI().init();
+			katane.getMainGUI().getSupplyPanel().update();
+			
+			
+			
+		}});
 		bNext.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.nextBtnActive);

@@ -3,7 +3,13 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import model.*;
+import Katane.Brick;
+import Katane.Grain;
 import Katane.Katane;
+import Katane.Ore;
+import Katane.Player;
+import Katane.Wood;
+import Katane.Wool;
 
 /**
  * The class creates the GUI element Supply Panel, 
@@ -251,16 +257,17 @@ public class SupplyPanel extends JPanel {
 	 * Updates the display of the SupplyPanel.
 	 */
 	public void update() {
-		Settler settler = katane.getClient().getSettler();
-		wool.setText("" + settler.getWool()); //$NON-NLS-1$
-		ore.setText("" + settler.getOre()); //$NON-NLS-1$
-		brick.setText("" + settler.getBrick()); //$NON-NLS-1$
-		lumber.setText("" + settler.getLumber()); //$NON-NLS-1$
-		grain.setText("" + settler.getGrain()); //$NON-NLS-1$
+		Player settler = katane.getCurrentPlayer();
+		wool.setText("" + settler.getSpecificRessource((ressource)-> ressource instanceof Wool).get(0).getQuantity()); //$NON-NLS-1$
+		ore.setText("" + settler.getSpecificRessource((ressource)-> ressource instanceof Ore).get(0).getQuantity()); //$NON-NLS-1$
+		brick.setText("" + settler.getSpecificRessource((ressource)-> ressource instanceof Brick).get(0).getQuantity()); //$NON-NLS-1$
+		lumber.setText("" + settler.getSpecificRessource((ressource)-> ressource instanceof Wood).get(0).getQuantity()); //$NON-NLS-1$
+		grain.setText("" + settler.getSpecificRessource((ressource)-> ressource instanceof Grain).get(0).getQuantity()); //$NON-NLS-1$
 		victoryPoints.setText("" //$NON-NLS-1$
-				+ (settler.getTempScore() + settler
-						.getAmountOfDevCard(Constants.VICTORYPOINTS)));
-		cards.setText("" //$NON-NLS-1$
+				+ (settler.getVictoryPoint()) );//+ settler
+					//	.getAmountOfDevCard(Constants.VICTORYPOINTS)));
+	/*	
+	cards.setText("" //$NON-NLS-1$
 				+ (settler.getAmountOfDevCards() + settler
 						.getAmountOfTempDevCards()));
 		road.setText("" + (Constants.ROADS_MAX - settler.getRoadCount())); //$NON-NLS-1$
@@ -268,5 +275,13 @@ public class SupplyPanel extends JPanel {
 				+ (Constants.SETTLEMENTS_MAX - settler.getSettlementCount()));
 		city.setText("" + (Constants.CITIES_MAX - settler.getCityCount())); //$NON-NLS-1$
 		army.setText("" + settler.getArmyCount()); //$NON-NLS-1$
+		*/
 	}
+	/*
+	c.getSpecificRessource((ressource)-> ressource instanceof Wool).get(0).getQuantity(), 
+	c.getSpecificRessource((ressource)-> ressource instanceof Ore).get(0).getQuantity(),
+	c.getSpecificRessource((ressource)-> ressource instanceof Brick).get(0).getQuantity(),
+	c.getSpecificRessource((ressource)-> ressource instanceof Wood).get(0).getQuantity(), 
+	c.getSpecificRessource((ressource)-> ressource instanceof Grain).get(0).getQuantity() };
+	 */
 }

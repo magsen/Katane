@@ -115,7 +115,7 @@ public class SettlerFrame extends PlayerFrame {
 			/*NEED TO BE EDIT*/ 
 			
 			
-			katane.getMainGUI().buildingCostsMenuPanel.setVisible(true);
+			katane.getMainGUI().getTradingMenu().setVisible(true);
 			
 			
 		}});
@@ -177,6 +177,7 @@ public class SettlerFrame extends PlayerFrame {
 			katane.getMainGUI().contentPanel.setVisible(false);
 			katane.getMainGUI().init();
 			katane.getMainGUI().getSupplyPanel().update();
+			
 			
 			
 			

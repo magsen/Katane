@@ -378,9 +378,9 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 			
 			/*NEED TO BE EDIT*/ 
 			
-			
-			
-			
+			buildingCostsMenuPanel.setVisible(true);
+			getBuildButton().setVisible(true);
+			//getBuildPanelRoad().setVisible(true);
 			
 		}});
 		
@@ -391,10 +391,11 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		/*NEED TO BE EDIT*/ 
 		
 		
-		
+			System.out.println("lll");
 		
 		
 		}});
+
 		
 		
 		

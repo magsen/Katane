@@ -195,12 +195,12 @@ public class PolygonMap extends JLayeredPane {
 		streets = new Vector<Integer>();
 		filledRects = new Vector<Integer>();
 		filledRectsOwner = new Vector<Integer>();
-		settlementNodes = new int[world.getNodes().length];
-		cityNodes = new int[world.getNodes().length];
+		settlementNodes = new int[0*world.getNodes().length];  //uncomment it !
+		cityNodes = new int[0*world.getNodes().length];
 		hexagonLength = 2 * radius;
 		hexagonWidth = 2 * radius * Math.sin(Math.PI * (1.0 / 3.0));
-		roadActionAreas = new Polygon[world.getRoads().length];
-		nodesActionAreas = new Ellipse2D[world.getNodes().length];
+		roadActionAreas = new Polygon[0*world.getRoads().length];
+		nodesActionAreas = new Ellipse2D[0*world.getNodes().length];
 		hexagonMap1D = new Hexagon[hexagonMap[0].length * hexagonMap.length];
 		informationMap1D = new Tile[hexagonMap[0].length * hexagonMap.length];
 		init();
@@ -252,6 +252,7 @@ public class PolygonMap extends JLayeredPane {
 	 *            the y-coordinate of the mouse click
 	 * @return the clicked node
 	 */
+	/*
 	public Node getClickedNode(int xCoord, int yCoord) {// store status of node
 		for (int i = 0; i < nodesActionAreas.length; i++) {
 			if (nodesActionAreas[i].contains(xCoord - x, yCoord - y))
@@ -259,6 +260,7 @@ public class PolygonMap extends JLayeredPane {
 		}
 		return null;
 	}
+	*/
 
 	/**
 	 * Returns the clicked street.
@@ -269,6 +271,7 @@ public class PolygonMap extends JLayeredPane {
 	 *            the Y coordinate of the mouse click
 	 * @return
 	 */
+	
 	public Road getClickedRoad(int xCoord, int yCoord) {
 		for (int i = 0; i < roadActionAreas.length; i++) {
 			if (roadActionAreas[i].contains(xCoord - x, yCoord - y))
@@ -276,6 +279,7 @@ public class PolygonMap extends JLayeredPane {
 		}
 		return null;
 	}
+	
 
 	/**
 	 * Returns the index in the array 
@@ -401,7 +405,7 @@ public class PolygonMap extends JLayeredPane {
 				.getWidth();
 		int height = (int) Toolkit.getDefaultToolkit().getScreenSize()
 				.getHeight();
-		/* Filling the hexagon array with the associated hexagons */
+		// Filling the hexagon array with the associated hexagons
 		int xx =  (width / 10) * 3 + this.x;
 		int xxx = (int)(hexagonWidth / 2.0);
 		for (int i = 0; i < hexagonMap.length; i++) {
@@ -425,41 +429,45 @@ public class PolygonMap extends JLayeredPane {
 		imageRoadWidth_Vert = hexagonMap[0][0].getImageRoadWidth_Vert();
 		imageRoadHeight_Vert = hexagonMap[0][0].getImageRoadHeight_Vert();
 
-		/* Dynamic scaling of graphic components */
+		// Dynamic scaling of graphic components 
 		widthTile = (int) hexagonMap[0][0].getBounds().getWidth();
 		heightTile = (int) hexagonMap[0][0].getBounds().getHeight();
 		widthChit = (int) (hexagonMap[0][0].getBounds().getWidth() * 1.0 / 3.0);
 		heightChit = widthChit;
 		widthIcon = (int) (hexagonMap[0][0].getBounds().getWidth() * 1.0 / 2.0);
 		heightIcon = (int) (hexagonMap[0][0].getBounds().getHeight() * 1.0 / 2.0);
-		informationMap = world.getTiles();
+		informationMap = (world.getTileSet()).tileSetToArray2DHC();
+		//informationMap = world.getTileSet().getTiles();
+		// TAG: 1 TILE
 		
-		/*
-		 * Assignment of the buttons of the nodes, 
-		 * to the corresponding nodes in the hexagonmap
-		 * 将节点的按钮分配给hexagonmap中的相应节点
-		 */
-		for (int i = 0; i < informationMap.length; i++) {
-			for (int j = 0; j < informationMap[0].length; j++) {
-				for (int k = 0; k < informationMap[i][j].getNodes().length; k++) {
-					if (nodesActionAreas[informationMap[i][j].getNodeOfIndex(k)
-							.getIndex()] == null) {
-						nodesActionAreas[informationMap[i][j].getNodeOfIndex(k)
-								.getIndex()] = hexagonMap[i][j]
-								.getNodeCircleOfIndex(k);
+		
+		 // Assignment of the buttons of the nodes, 
+		 // to the corresponding nodes in the hexagonmap
+		 // 将节点的按钮分配给hexagonmap中的相应节点
+		 
+		
+		for (int i = 0; i < 0*informationMap.length; i++) {////////
+			for (int j = 0; j < 0*informationMap[0].length; j++) {////////////
+				if (informationMap[i][j] != null) {
+					System.out.println(i + y);
+					for (int k = 0; k < informationMap[i][j].getNodes().length; k++) {
+						if (informationMap[i][j] != null && nodesActionAreas[world.getNodeInArray(informationMap[i][j].getNodeOfIndex(k))] == null) {
+							nodesActionAreas[world.getNodeInArray(informationMap[i][j].getNodeOfIndex(k))] = hexagonMap[i][j].getNodeCircleOfIndex(k);
+						}
 					}
 				}
 			}
 		}
+		
 
-		nodeHeight = nodesActionAreas[0].getHeight();
-		/*
-		 * Initialization of the RoadActionAreas
-		 */
+		nodeHeight = 5; //nodesActionAreas[0].getHeight(); //HIHI
+		//
+		 // Initialization of the RoadActionAreas
+		 //
 		Road[] worldRoads = world.getRoads();
-		for (int i = 0; i < worldRoads.length; i++) {
-			int startNodeIndex = worldRoads[i].getStart().getIndex();
-			int endNodeIndex = worldRoads[i].getEnd().getIndex();
+		for (int i = 0; i < 0*worldRoads.length; i++) {/////////////
+			int startNodeIndex = world.getNodeIndex(world.getTownSet().getTown(worldRoads[i].getStart())); // On veut récupérer les 2 villes au début et aux extrémités de la route
+			int endNodeIndex = world.getNodeIndex(world.getTownSet().getTown(worldRoads[i].getEnd()));
 			double startX = nodesActionAreas[startNodeIndex].getCenterX();
 			double startY = nodesActionAreas[startNodeIndex].getCenterY();
 			double endX = nodesActionAreas[endNodeIndex].getCenterX();
@@ -469,18 +477,18 @@ public class PolygonMap extends JLayeredPane {
 
 			if (startY > endY) {
 				newY = startY - (startY - endY) / 2.0;
-				world.getRoads()[i].setDirection(Constants.ROAD_UP);
+				//worldRoads[i].setDirection(Constants.ROAD_UP);
 			}
 			if (startY < endY) {
 				newY = endY - (endY - startY) / 2.0;
-				world.getRoads()[i].setDirection(Constants.ROAD_DOWN);
+				//worldRoads[i].setDirection(Constants.ROAD_DOWN);
 			}
 			if (endX - startX > 3.0) {
 				newX = endX - (endX - startX) / 2.0;
 			}
 			if (endX - startX < 3.0) {
 				newX = startX - (startX - endX) / 2.0;
-				world.getRoads()[i].setDirection(Constants.ROAD_VERT);
+				//worldRoads[i].setDirection(Constants.ROAD_VERT);
 			}
 
 			for (int j = 0; j < informationMap.length; j++) {
@@ -498,6 +506,7 @@ public class PolygonMap extends JLayeredPane {
 		}
 		initInformationMap1D();
 		initHexagonMap1D();
+		
 	}
 	/**
 	 * Draws all relevant elements of the PolygonMap.
@@ -508,13 +517,43 @@ public class PolygonMap extends JLayeredPane {
 		graphic.setStroke(new BasicStroke(2f));
 		graphic.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		/* Draw the tiles with hides and raw materials */
+		// Draw the tiles with hides and raw materials 
 		for (int i = 0; i < informationMap.length; i++) {
 			for (int j = 0; j < informationMap[0].length; j++) {
 				Image img = null;
-				Image img2 = null;
+				Image img2 = ImportImages.lumberBtn;
 				Image img3 = null;
-				switch (informationMap[i][j].getResource()) {
+				
+				// removes
+				if (informationMap[i][j].isDesert()) {
+					img = ImportImages.desert;
+				} else {
+					if (informationMap[i][j].isWater()) {
+					img = null;
+					} else {
+						img2 = null;
+						if (informationMap[i][j].getRessource() instanceof Brick) {
+							img = ImportImages.brick;
+						} else {
+							if (informationMap[i][j].getRessource() instanceof Grain) {
+								img = ImportImages.grain;
+							} else {
+								if (informationMap[i][j].getRessource() instanceof Ore) {
+									img = ImportImages.ore;
+								} else {
+									if (informationMap[i][j].getRessource() instanceof Wood) {
+										img = ImportImages.lumber;
+									} else {
+										img = ImportImages.wool;
+									}
+								}
+							}
+						}
+					}
+				}
+
+				/*
+				switch (informationMap[i][j].getRessource()) {
 				case Constants.BRICK:
 					img = ImportImages.brick;
 					break;
@@ -554,7 +593,7 @@ public class PolygonMap extends JLayeredPane {
 
 				default:
 					break;
-				}
+				}*/
 
 				if (img != null) {
 					g.drawImage(img, (int) hexagonMap[i][j].getBounds().getX(),
@@ -562,15 +601,17 @@ public class PolygonMap extends JLayeredPane {
 							widthTile, heightTile, this);
 				}
 				if (img2 != null) {
-					g.drawImage(
+					if (informationMap[i][j].isBrigand()) {
+						g.drawImage(
 							img2,
 							(int) (hexagonMap[i][j].getBounds().getCenterX() - heightIcon / 3.2),
 							(int) (hexagonMap[i][j].getBounds().getCenterY() - widthIcon / 3.2),
 							(int) (widthIcon * 0.7), (int) (widthIcon * 0.7),
 							this);
+					}
 				}
-				/* Draw the individual numbers on the tiles */
-				switch (informationMap[i][j].getChitNumber()) {
+				// Draw the individual numbers on the tiles 
+				switch (informationMap[i][j].getTileNumber()) {
 				case 2:
 					img3 = ImportImages.chit02;
 					break;
@@ -612,14 +653,15 @@ public class PolygonMap extends JLayeredPane {
 									- heightChit / 2, widthChit, heightChit,
 							this);
 				}
-				if (world.getRobberTile() == informationMap[i][j]
-						&& informationMap[i][j].getResource() != Constants.WATER
-						&& informationMap[i][j].getResource() != Constants.WOOLHARBOR
-						&& informationMap[i][j].getResource() != Constants.BRICKHARBOR
-						&& informationMap[i][j].getResource() != Constants.OREHARBOR
-						&& informationMap[i][j].getResource() != Constants.LUMBERHARBOR
-						&& informationMap[i][j].getResource() != Constants.GRAINHARBOR
-						&& informationMap[i][j].getResource() != Constants.HARBOR) {
+				if (true) {//world.getRobberTile() == informationMap[i][j]
+						/*
+						&& informationMap[i][j].getRessource() != Constants.WATER
+						&& informationMap[i][j].getRessource() != Constants.WOOLHARBOR
+						&& informationMap[i][j].getRessource() != Constants.BRICKHARBOR
+						&& informationMap[i][j].getRessource() != Constants.OREHARBOR
+						&& informationMap[i][j].getRessource() != Constants.LUMBERHARBOR
+						&& informationMap[i][j].getRessource() != Constants.GRAINHARBOR
+						&& informationMap[i][j].getRessource() != Constants.HARBOR*/
 					Image img1 = ImportImages.robber;
 					g.drawImage(img1, (int) hexagonMap[i][j]
 							.getTileActionArea().getBounds().getCenterX()
@@ -638,7 +680,7 @@ public class PolygonMap extends JLayeredPane {
 		harborTypeNW = ImportImages.harbor3;
 		harborTypeNO = ImportImages.harbor4;
 		harborTypeO = ImportImages.harbor5;
-		/* Drawing the different port types (alignments) */
+		// Drawing the different port types (alignments) 
 		graphic.drawImage(harborTypeSO, (int) hexagonMap[0][1].getBounds()
 				.getX(), (int) hexagonMap[0][1].getBounds().getY(), widthTile,
 				heightTile, this);
@@ -668,10 +710,11 @@ public class PolygonMap extends JLayeredPane {
 				heightTile, this);
 		graphic.setColor(new Color(139, 69, 19));
 		Road[] worldRoads = world.getRoads();		
-		 /* Drawing the street */
-		for (int i = 0; i < worldRoads.length; i++) {
+		 // Drawing the street
+		/*
+		for (int i = 0; i < 0*worldRoads.length; i++) {
 			Image roadImage = null;
-			int roadOwner = worldRoads[i].getOwner();
+			int roadOwner = worldRoads[i].getOwnerNumber();
 			double x_Start = 0;
 			double y_Start = 0;
 			double height = 0;
@@ -754,12 +797,12 @@ public class PolygonMap extends JLayeredPane {
 							(int) width, (int) height, this);
 				}
 			}
-		}
-		/* Draw the road preview */
+		}*/
+		// Draw the road preview 
 		if (isShowStreets()) {
 			graphic.setComposite(AlphaComposite.getInstance(
 					AlphaComposite.SRC_OVER, 0.4f));
-			for (int i = 0; i < streets.size(); i++) {
+			for (int i = 0; i < 0 * streets.size(); i++) { //////
 
 				if (currentPlayerID == 0) {
 
@@ -780,21 +823,21 @@ public class PolygonMap extends JLayeredPane {
 
 			}
 		}
-		/* Draw the existing buildings */
+		// Draw the existing buildings 
 		for (int i = 0; i < informationMap[0].length; i++) {
 			for (int j = 0; j < informationMap.length; j++) {
 				for (int k = 0; k < world.getNodes().length; k++) {
 					Image city = null;
 					Image settlement = null;
 
-					if (world.getNodes()[k].getBuilding() == Constants.CITY) {
-						if (world.getNodes()[k].getOwnerID() == 0) {
+					if (world.getNodes()[k] instanceof TimeTown) { // Constants.CITY) {
+						if (world.getNodes()[k].getOwnerNumber() == 0) {
 							city = ImportImages.cityBlue;
-						} else if (world.getNodes()[k].getOwnerID() == 1) {
+						} else if (world.getNodes()[k].getOwnerNumber() == 1) {
 							city = ImportImages.cityGreen;
-						} else if (world.getNodes()[k].getOwnerID() == 2) {
+						} else if (world.getNodes()[k].getOwnerNumber() == 2) {
 							city = ImportImages.cityRed;
-						} else if (world.getNodes()[k].getOwnerID() == 3) {
+						} else if (world.getNodes()[k].getOwnerNumber() == 3) {
 							city = ImportImages.cityYellow;
 						}
 						if (city != null) {
@@ -810,32 +853,32 @@ public class PolygonMap extends JLayeredPane {
 						}
 					}
 
-					else if (world.getNodes()[k].getBuilding() == Constants.SETTLEMENT) {
-						if (world.getNodes()[k].getOwnerID() == 0) {
+					else if (world.getNodes()[k] instanceof Dolorean) { //  == Constants.SETTLEMENT) {
+						if (world.getNodes()[k].getOwnerNumber() == 0) {
 							settlement = ImportImages.settlementBlue;
-						} else if (world.getNodes()[k].getOwnerID() == 1) {
+						} else if (world.getNodes()[k].getOwnerNumber() == 1) {
 							settlement = ImportImages.settlementGreen;
-						} else if (world.getNodes()[k].getOwnerID() == 2) {
+						} else if (world.getNodes()[k].getOwnerNumber() == 2) {
 							settlement = ImportImages.settlementRed;
-						} else if (world.getNodes()[k].getOwnerID() == 3) {
+						} else if (world.getNodes()[k].getOwnerNumber() == 3) {
 							settlement = ImportImages.settlementYellow;
 						}
 						if (settlement != null) {
 							int height = (int) (nodeHeight * 2.0 / 3.0);
-							g.drawImage(settlement,
+							/*g.drawImage(settlement,
 									(int) getNodesActionAreaOfIndex(k)
 											.getBounds().getCenterX()
 											- (height),
 									(int) getNodesActionAreaOfIndex(k)
 											.getBounds().getCenterY()
 											- (height), (height * 2),
-									(height * 2), this);
+									(height * 2), this); */
 						}
 					}
 				}
 			}
 		}
-		/* Draw the settlement preview */
+		// Draw the settlement preview 
 		if (isShowSettlementNodes()) {
 			Image settlement = null;
 			for (int i = 0; i < world.getNodes().length; i++) {
@@ -865,7 +908,7 @@ public class PolygonMap extends JLayeredPane {
 				}
 			}
 		}
-		/* Draw the progress report */
+		// Draw the progress report
 		if (isShowCityNodes()) {
 			Image city = null;
 			for (int i = 0; i < world.getNodes().length; i++) {

@@ -9,6 +9,7 @@ import javax.swing.*;
 import Katane.Katane;
 import Katane.Player;
 import Katane.World;
+import Katane.*; //uncomment
 
 /**
  * Contains all visual components of the game.
@@ -272,7 +273,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 			
 			/* INSTANCIATION OF WORLD HUI */
 		//chatFrame = new ChatGUI(katane, chatFrameWidth, chatFrameHeight);
-		//polygonMap = new PolygonMap(world.get(0),  polygonMapPos, 0, radius);
+		polygonMap = new PolygonMap(world.get(0),  polygonMapPos, 0, radius);
 		/* unique world*/
 			/* POLYGONFLAG */
 			
@@ -358,7 +359,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 
 		contentPanel.setBounds(0, 0, width, height);
 		/* POLYGONFLAG */
-		//polygonMap.setBounds(0, 0, width, height);
+		polygonMap.setBounds(0, 0, width, height);
 
 		contentPanel.setOpaque(false);
 		//polygonMap.setOpaque(false);
@@ -435,7 +436,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		
 		
 		/* POLYGONFLAG */
-		//layeredPane.add(polygonMap, new Integer(1));
+		layeredPane.add(polygonMap, new Integer(1));
 		layeredPane.add(contentPanel, new Integer(2));
 		layeredPane.add(buildButton, new Integer(3));
 		layeredPane.add(buildPanelRoad, new Integer(3));

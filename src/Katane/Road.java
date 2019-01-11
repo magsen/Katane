@@ -62,4 +62,12 @@ public class Road extends Building{
 	public void addAdjacentRoad(Road road) {
 		adjacentRoads.add(road);
 	}
+	
+	//gui::
+	public Coordinates getStart() {
+		return coordinates.roadToAdjacentTowns().get(0);
+	}
+	public Coordinates getEnd () {
+		return coordinates.roadToAdjacentTowns().get(1);
+	}
 }

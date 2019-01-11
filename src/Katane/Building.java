@@ -42,6 +42,10 @@ public abstract class Building {
 	public boolean isOwner(Player player) {
 		return (this.player == player);
 	}
+	
+	public int getOwnerNumber () {
+		return player.getPlayerNumber();
+	}
 
 	public Coordinates getCoordinates () {
 		return coordinates;

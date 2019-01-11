@@ -16,15 +16,35 @@ public class Tile {
 	private ArrayList<Town> townList;
 	private Ressource ressource;
 	private int tileNumber;
+	private boolean isDesert, isWater;
+	private boolean brigand;
 
 	/* Constructor */
 	public Tile() {
 		System.out.println("-- Tile --");
 		townList = new ArrayList<Town>();
 		ressource = generateRandomRessource(); // random from 0 to 4
+		isDesert = false;
+		isWater = false;
+		brigand = false;
 		do {
 			tileNumber = (int) (12 * Math.random() + 1); // random from 1 to 12
+			tileNumber = (int) (12 * Math.random() + 1); // random from 1 to 12
 		} while (tileNumber == 7);
+	}
+	
+	public Tile (boolean b) {
+		super();
+		if (b == true) {
+			ressource = new Brick(0);
+			isWater = true;
+		}
+	}
+	
+	public Tile (int i) {
+		super();
+		ressource = new Brick(0);
+		isDesert = true;
 	}
 
 	/* Add a the town to the list of adjacent towns */
@@ -34,6 +54,14 @@ public class Tile {
 	
 	public int getTileNumber() {
 		return tileNumber;
+	}
+	
+	public boolean isDesert () {
+		return isDesert;
+	}
+	
+	public boolean isWater () {
+		return isWater;
 	}
 	
 	public Ressource getRessource() {
@@ -89,6 +117,38 @@ public class Tile {
 	// TEST
 	public void print() {
 		System.out.println("Tile" + ressource.toString());
+	}
+	
+	//gui::
+	public Town[] getNodes () {
+		int i = 0;
+		for (Town t : townList) {
+			i = i+1;
+		}
+		Town[] list = new Town[i];
+		i = 0;
+		for (Town t : townList) {
+			list[i] = t;
+			i = i + 1;
+		}
+		return list;
+	}
+	
+	//gui::
+	public Town getNodeOfIndex (int x) {
+		return getNodes()[x];
+	}
+	
+	public int getChitNumber() {
+		return 2;
+	}
+
+	public boolean isBrigand() {
+		return brigand;
+	}
+
+	public void setBrigand(boolean brigand) {
+		this.brigand = brigand;
 	}
 }
 

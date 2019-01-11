@@ -10,6 +10,7 @@
 package Katane;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /* Class World
@@ -75,5 +76,77 @@ public class World {
 
 	public void setLongestRoadPlayer(int longestRoadPlayer) {
 		this.longestRoadPlayer = longestRoadPlayer;
+	}
+	
+	//gui::
+	public Road[] getRoads () {
+		ArrayList<Road> roadList = new ArrayList<Road>();
+		int i = 0;
+		for (Road r : (roadSet.getRoadSet()).values()) {
+			i = i + 1;
+			roadList.add(r);
+		}
+		Road[] list = new Road[i];
+		i = 0;
+		for (Road r : roadList) {
+			list[i] = r;
+			i = i + 1;
+		}
+		return list;
+	}
+	
+	//gui::
+	public Town[] getNodes () {
+		ArrayList<Town> townList = new ArrayList<Town>();
+		int i = 0;
+		for (Town t : (townSet.getTownSet()).values()) {
+			i = i + 1;
+			townList.add(t);
+		}
+		Town[] list = new Town[i];
+		i = 0;
+		for (Town town : townList) {
+			list[i] = town;
+			i = i + 1;
+		}
+		return list;
+	}
+	
+	//gui::
+	public int getNodeInArray(Town town) {
+		int i = 0;
+		for (Town t : getNodes()) {
+			if (t == town) {
+				return i;
+			}
+			i = i + 1;
+		}
+		return i;
+	}
+	
+	public int getRoadInArray(Road road) {
+		int i = 0;
+		for (Road r : getRoads()) {
+			if (r == road) {
+				return i;
+			}
+			i = i + 1;
+		}
+		return i;
+	}
+	
+	public int getNodeIndex (Town town) {
+		int i = 0;
+		if (town != null) {
+			for (Town t : getNodes()) {
+				if (t == town) {
+					return i;
+				}
+				i = i + 1;
+			}
+		} else {
+			System.out.println("Erreur : Node non existant");
+		}
+		return -1;
 	}
 }

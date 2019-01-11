@@ -19,6 +19,7 @@ public class Launcher {
 		System.out.println("-- Launching the game --");
 		@SuppressWarnings("unused")
 		Katane katane = new Katane();
+		test(katane);
 		katane.startTurn(); // UNCOMMENT this
 		katane.getMainGUI().getSupplyPanel().update();
 		//test(katane);
@@ -162,7 +163,7 @@ public class Launcher {
 		coor.setCoordinates(0, 3);
 		bmw.buildRoad(P, W, coor);
 		*/
-		coor.setCoordinates(1,1);
+		coor.setCoordinates(1,3);
 
 
 		townSet.forEach( (c, t) -> {c.print();System.out.println(t.toString());});

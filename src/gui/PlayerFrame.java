@@ -113,11 +113,11 @@ public class PlayerFrame extends JPanel {
 				panelHeight);
 		myTurnPanel.setVisible(false);
 
-		/*
+		
 		avatarPanel = new ImagePanel(img, panelWidth, panelHeight);
 		avatarPanel.setBounds(panelDistance, buttonHeight / 2, panelWidth,
 				panelHeight);
-		*/
+		
 
 		lblRoad = new PlayerLabel(ImportImages.roadLbl, labelWidth, labelHeight);
 		lblArmy = new PlayerLabel(ImportImages.armyLbl, labelWidth, labelHeight);
@@ -165,7 +165,7 @@ public class PlayerFrame extends JPanel {
 		bgPane.add(lblRoad, new Integer(3));
 		bgPane.add(lblArmy, new Integer(3));
 		bgPane.add(myTurnPanel, new Integer(1));
-		//bgPane.add(avatarPanel, new Integer(0));
+		bgPane.add(avatarPanel, new Integer(0));
 
 		add(bgPane);
 	}

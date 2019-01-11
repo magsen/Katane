@@ -100,7 +100,7 @@ public class Katane {
 	 */
 	public void endTurn() {
 		/* Finish the game */
-		System.out.println("-- End of a Turn --");
+		System.out.println("-- End of a Turn -- Player " +  this.currentPlayerIndex);
 		isThereVictory();
 		if(victory) {
 			victory();/* launche victory event */

@@ -151,11 +151,9 @@ public class SettlerFrame extends PlayerFrame {
 			
 			
 			katane.endTurn();
-			//katane.getMainGUI().getPlayerFrame().setVisible(false);
-			katane.getMainGUI().setVisible(false);
+			katane.getMainGUI().contentPanel.setVisible(false);
 			katane.getMainGUI().init();
 			katane.getMainGUI().getSupplyPanel().update();
-			
 			
 			
 		}});

@@ -27,7 +27,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	/*
 	 * The playermenu - object of class SettlerFrame.
 	 */
-	private SettlerFrame playerFrame;
+	SettlerFrame playerFrame;
 
 	private OpponentFrame[] opponentFrames;
 
@@ -89,7 +89,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	/**
 	 * Main panel to which all GUI elements are added
 	 */
-	private JPanel contentPanel;
+	JPanel contentPanel;
 	
 	/**
 	 * Specifies the x-coordinate of the PolygonMap

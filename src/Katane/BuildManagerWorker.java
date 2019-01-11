@@ -2,7 +2,7 @@
 *     File Name           :     BuildManagerWorker.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-10 00:14]
+*     Last Modified       :     [2019-01-11 01:06]
 *     Description         :     The BuildManagerWorker handles the creation of the towns
 *     					The BuildManagerWorker is often called BMW.
 **********************************************************************************/
@@ -43,10 +43,22 @@ public class BuildManagerWorker {
 				roadSet.updateAdjacentRoads(coordinates, road);
 				townSet.updateAdjacentRoads(coordinates, roadSet, road);
 				player.consumeRessourceRoad();
-				// update player longest road !
+				if (world.setLongestRoadValue(getLongestRoad (roadSet, player, coordinates))) {
+					changePlayerLongestRoad(world, player);
+				}
 				return true;
 			}
 		}
+	}
+
+	private void changePlayerLongestRoad (World w, Player newP) {
+
+		if (w.getLongestRoadPlayer() != -1) {
+			Player oldP = katane.getPlayerN(w.getLongestRoadPlayer());
+			oldP.setVictoryPoint(oldP.getVictoryPoint() - 2); // Hard-coded longest road victory points
+		}
+		w.setLongestRoadPlayer(katane.getPlayerNumber(newP));
+		newP.setVictoryPoint(newP.getVictoryPoint() + 2);
 	}
 
 	public boolean buildDolorean (Player player, World world, Coordinates coor) {
@@ -58,7 +70,7 @@ public class BuildManagerWorker {
 			System.out.println("Error while creating a Dolorean: not enough ressources");
 			return false;
 		} else {
-			if (townSet.isTown(coordinates) == true ) {
+			if (townSet.isTown(coordinates) == true) {
 				System.out.println("Error while creating a Dolorean: There is already a town there");
 				return false;
 			} else {
@@ -109,14 +121,16 @@ public class BuildManagerWorker {
 	}
 
 	public boolean buildRoad (World world, Coordinates coor) {
-		buildRoad (katane.getCurrentPlayer(), world, coor);
+		return buildRoad (katane.getCurrentPlayer(), world, coor);
 	}
 	public boolean buildDolorean (World world, Coordinates coor) {
-		buildDolorean (katane.getCurrentPlayer(), world, coor);
+		return buildDolorean (katane.getCurrentPlayer(), world, coor);
 	}
 	public boolean buildTimeTown (World world, Coordinates coor) {
-		buildTimeTown (katane.getCurrentPlayer(), world, coor);
+		return buildTimeTown (katane.getCurrentPlayer(), world, coor);
 	}
+
+	/* Returns a list of ArrayList of Coordinates containing all the possibles road builds */
 	public ArrayList<Coordinates> possibleRoadsBuild (Player player, World world) {
 
 		RoadMap roadSet = world.getRoadSet();
@@ -124,7 +138,7 @@ public class BuildManagerWorker {
 		ArrayList<Coordinates> coordinateList = new ArrayList<Coordinates>();
 		Coordinates coorPlayerTown;
 		for (Town t : player.getTownList()) {
-			System.out.println("1ère ville exlorée" + t.toString());
+			System.out.println("1er ville exploree" + t.toString());
 			coorPlayerTown = t.getCoordinates();
 
 			// this part is identical
@@ -163,16 +177,90 @@ public class BuildManagerWorker {
 		return coordinateList;
 	}
 
-	/* returns the length of the road NOT FINISHED */
-	public int explorePath(RoadMap roadSet, Player player, Coordinates coor) {
+	/* returns the longest path length of the road.  Doesn't count the first coordinates in the length - Explore to the opposite side of prevCoor*/
+	public int explorePathOneDirection(RoadMap roadSet, Player player, Coordinates coor, Coordinates prevCoor) {
 
-		int maxLen = 0;
+		int maxLen = 0; // This is the length of the current longest path.
 		int i = Road.getLengthPositionReference(), k;
-		// only at the end Road.setLengthPositionReference(i+1);
-		boolean oneWay = false, deadEnd = false;
+		Coordinates coorAdjRoads;
 
-		StepInformations step = new StepInformations(coor, 0); //step one side
-		// ATTENTINO on peut push une route intersection
+		StepInformations step = new StepInformations(coor, i + 1);
+		Stack<StepInformations> stRoads = new Stack<StepInformations>();
+		stRoads.push(step);
+
+		while (stRoads.isEmpty() == false) {
+			step = stRoads.pop();
+			k = step.length;
+
+			if (maxLen < k) { // update longest length
+				maxLen = k;
+			}
+			Coordinates coorRoad = step.coordinate;
+			Road r = roadSet.getRoad(coorRoad);
+
+			r.setLengthPosition(k+1); // Mark the road
+
+			coorAdjRoads = (coorRoad.roadToAdjacentRoadsOneDirection(prevCoor)).get(0); // First possibility
+
+			// Explore the left side
+			if (step.everythingExplored == false) {
+				if (step.wasThere == false && isOwnerRoadAndNeverUsed(roadSet, player, coorAdjRoads, i)) {
+					// There is a road left side
+					step.wasThere = true;
+					stRoads.push(step); // Keep the path
+					step = new StepInformations(coorAdjRoads, k + 1); // Next road to explore
+					stRoads.push(step);
+					prevCoor = coorRoad;
+
+				} else {
+					// Explore the rigth side
+					step.everythingExplored = true;
+					coorAdjRoads = (coorRoad.roadToAdjacentRoadsOneDirection(prevCoor)).get(1); // Second possibility
+					if (roadSet.isRoad(coorAdjRoads)) {
+
+						if (isOwnerRoadAndNeverUsed(roadSet, player, coorAdjRoads, i)) {
+							stRoads.push(step); // keep the path
+							step = new StepInformations(coorAdjRoads, k + 1); // add a right road to explore
+							stRoads.push(step);
+							prevCoor = coorRoad;
+						} else {
+							r.setLengthPosition(i); // Unmark the road
+							prevCoor = getCoordinatesStackDepth2(stRoads, coorRoad); // Update the previous road (open the stack for that)
+							k = k - 1;
+						}
+					} else {
+						prevCoor = getCoordinatesStackDepth2(stRoads, coorRoad); // Update the previous road (open the stack for that)
+						r.setLengthPosition(i); // Unmark the road
+						k = k - 1;
+					}
+				}
+			} else {
+				r.setLengthPosition(i); // Unmark
+				prevCoor = getCoordinatesStackDepth2(stRoads, coorRoad); // update previous road
+				k = k - 1;
+			}
+		}
+		return maxLen - i - 1;
+	}
+
+	/* This returns the longest road (in roadSet) of a player (player) passing by a given road coordinate (coor).
+	 * First of all, we explore the side one on a left-right exploration (see binary tree recursive exploration).
+	 *
+	 * If we find an intersection or a dead-end, we computes the maximum length of the other side path. And compares the sum with maxLen - The ex-longestLength */
+	public int getLongestRoad (RoadMap roadSet, Player player, Coordinates coor) {
+
+		int maxLen = 0, lenSide = 0, pathLen = 0;
+		Road.setLengthPositionReference(Road.getLengthPositionReference() + 2); // Update to avoid being broken by possibleRoad()
+		int ref = Road.getLengthPositionReference(), k; // ref is an offset
+		Coordinates coorAdjRoad, coorRoad;
+
+		// Get a near road coordinate - doesn't matter which one chose, just to have the same direction
+		Coordinates prevCoor = (coor.roadToAdjacentRoads()).get(0), prevCoorOppositeSide = (coor.roadToAdjacentRoads()).get(2);
+
+		// Initialize and add the initial road with an index of (ref + 1)
+		StepInformations step = new StepInformations(coor, ref + 1);
+
+		// Initialize the stack of the steps informations (road coordinates, current path length, coordinates belong to path (was already there in this path), is there an intersection, and force step removing (avoid infinity loops)
 		Stack<StepInformations> stRoads = new Stack<StepInformations>();
 		stRoads.push(step);
 
@@ -180,76 +268,98 @@ public class BuildManagerWorker {
 			printStack(stRoads);
 			step = stRoads.pop();
 			k = step.length;
-			if (maxLen < k) {
-				maxLen = k;
-			}
-			Coordinates coorRoad = step.coordinate;
+			lenSide = k - ref; // the real length without the offset "ref"
+
+			coorRoad = step.coordinate;
 			Road r = roadSet.getRoad(coorRoad);
-			System.out.println(r.toString());
-			oneWay = false;
+			r.setLengthPosition(k+1); // Mark the road, to avoid other process(e.g. explorePathOneDirection) and this one to use it.
 
-			Coordinates coorAdjRoads;
-			coorAdjRoads = (coorRoad.roadToAdjacentRoads()).get(2); // First possibility
+			coorAdjRoad = (coorRoad.roadToAdjacentRoadsOneDirection(prevCoor)).get(0); // First possibility - Avoid reverting the direction of exploration - and get the first next road possibility.
 
-			/*
-			// Start saving
-			if (roadSet.isRoad(coorAdjRoads) && step.intersection =! false && roadSet.isOwner(coorAdjRoads, player) && (roadSet.getRoad(coorAdjRoads)).getLengthPosition() < i + 1) {
+			if (step.everythingExplored == false) {
+				// First time there - or second if there is an intersection
+				if (step.wasThere == false && isOwnerRoadAndNeverUsed(roadSet, player, coorAdjRoad, ref)) {
+					// First time going to this path - And there is a player's road
 
-				coorAdjRoads = (coorRoad.townToAdjacentRoads()).get(3); // First possibility
-				if (roadSet.isRoad(coorAdjRoads) && (roadSet.isOwner(coorAdjRoads, player) && (roadSet.getRoad(coorAdjRoads)).getLengthPosition() < i + 1)) {
-					System.out.println("Intersection anticipée");
-
-				}
-			}
-			*/
-
-			// end saving
-
-			// Explore the first side
-			System.out.println("-- On est à " + coorAdjRoads.toString() + " --");
-			if (roadSet.isRoad(coorAdjRoads)) {
-
-				if (step.intersection =! false && roadSet.isOwner(coorAdjRoads, player) && (roadSet.getRoad(coorAdjRoads)).getLengthPosition() < i + 1) {
-					System.out.println("Une route du coté 1 " + coorRoad.toString());
-					Coordinates cTmp = (coorRoad.roadToAdjacentRoads()).get(3);
-					if (roadSet.isRoad(cTmp) && roadSet.isOwner(cTmp, player) && (roadSet.getRoad(cTmp)).getLengthPosition() < i + 1) {
-						//intersection
-						System.out.println("Intersection !");
-						step.intersection = true;
+					pathLen = explorePathOneDirection(roadSet, player, coor, prevCoorOppositeSide);
+					if (maxLen < lenSide + pathLen) {
+						maxLen = lenSide + pathLen;
 					}
-					stRoads.push(step);
-					step = new StepInformations(coorAdjRoads, k + 1);
-					stRoads.push(step);
+
+					step.wasThere = true;
+					stRoads.push(step); // saves the old path
+					step = new StepInformations(coorAdjRoad, k + 1);
+					stRoads.push(step); // Add the left Road to exploration
+					prevCoor = coorRoad; // Update previous road (avoid revert travel)
 
 				} else {
-					System.out.println("Pas de route au coté 1");
-					step.intersection = false;
-					oneWay = true;
-					// Other side
-					coorAdjRoads = (coorRoad.roadToAdjacentRoads()).get(3); // Second possibility
-					if (roadSet.isRoad(coorAdjRoads)) {
+					// There were no road on the other side - or this now the right path
+					step.everythingExplored = true;
 
-						if (roadSet.isOwner(coorAdjRoads, player) && (roadSet.getRoad(coorAdjRoads)).getLengthPosition() < i + 1) {
-							System.out.println("Une route du coté 2");
-							stRoads.push(step);
-							step = new StepInformations(coorAdjRoads, k + 1);
-							stRoads.push(step);
+					coorAdjRoad = (coorRoad.roadToAdjacentRoadsOneDirection(prevCoor)).get(1); // Second possibility
+
+					if (roadSet.isRoad(coorAdjRoad)) {
+
+						if (isOwnerRoadAndNeverUsed(roadSet, player, coorAdjRoad, ref)) {
+							// There is a rigth-road to explore
+							stRoads.push(step); // saves the old path
+							step = new StepInformations(coorAdjRoad, k + 1);
+							stRoads.push(step); // Add the rigth road to exploration
+							prevCoor = coorRoad; // Update the previous road
 						} else {
-							System.out.println("Pas de route au coté 2");
-							oneWay = true ^ deadEnd;
-							// Dead-end Need a check
+							// The right path is a dead end, invokes the other side longest road exploration
+							pathLen = explorePathOneDirection(roadSet, player, coor, prevCoorOppositeSide); // Explore the other side
+							if (maxLen < lenSide + pathLen) {
+								maxLen = lenSide + pathLen;
+							}
+							r.setLengthPosition(ref); // Unmark the road
+							prevCoor = getCoordinatesStackDepth2(stRoads, coorRoad); // Update the previous road (open the stack for that)
 							k = k - 1;
 						}
+					} else {
+						pathLen = explorePathOneDirection(roadSet, player, coor, prevCoorOppositeSide); // Explore the other side
+						if (maxLen < lenSide + pathLen) {
+							maxLen = lenSide + pathLen;
+						}
+						prevCoor = getCoordinatesStackDepth2(stRoads, coorRoad); // Update the previous road (open the stack for that)
+						k = k - 1;
+						r.setLengthPosition(ref); // road cleaning
 					}
 				}
+			} else {
+				r.setLengthPosition(ref); //clean road
+				prevCoor = getCoordinatesStackDepth2(stRoads, coorRoad);
+				k = k - 1;
 			}
 		}
 		return maxLen;
 	}
 
-	private int getOtherSide(Stack<StepInformations> st, Coordinates coor) {
-		StepInformations s = st.pop();
-		return 0;
+	/* Retrieves StepInformation 2 depth below the top of the stack */
+	private Coordinates getCoordinatesStackDepth2 (Stack<StepInformations> st, Coordinates defaultCoordinates) {
+		StepInformations stepPrev, stepPrev2;
+		if (st.isEmpty() == false) {
+			stepPrev = st.pop();
+			if (st.isEmpty() == false) {
+				stepPrev2 = st.pop();
+				st.push(stepPrev2);
+
+			} else {
+				st.push(stepPrev);
+				System.out.println("Error not enough stack");
+				return defaultCoordinates;
+			}
+			st.push(stepPrev);
+			return stepPrev2.coordinate;
+		} else {
+			System.out.println("Error not enough stack");
+			return defaultCoordinates;
+		}
+	}
+
+	/* Check if a road exist, belongs to the player, and is unmarked */
+	private boolean isOwnerRoadAndNeverUsed(RoadMap roadSet, Player p, Coordinates c, int currentIndex) {
+		return roadSet.isRoad(c) && roadSet.isOwner(c, p) && ((roadSet.getRoad(c)).getLengthPosition() <= currentIndex);
 	}
 
 	private void printStack(Stack<StepInformations> st) {
@@ -266,6 +376,8 @@ public class BuildManagerWorker {
 			st.push(tmp);
 		}
 	}
+
+	/* Add a coordinate in a ArrayList of Coordinates without sames coordinates */
 	private void addWithoutRepetition (ArrayList<Coordinates> coordinateList, Coordinates coordinate) {
 		Iterator<Coordinates> i = coordinateList.iterator();
 		Coordinates c;
@@ -278,3 +390,4 @@ public class BuildManagerWorker {
 		coordinateList.add(coordinate);
 	}
 }
+

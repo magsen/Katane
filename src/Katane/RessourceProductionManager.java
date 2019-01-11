@@ -2,7 +2,7 @@
 *     File Name           :     RessourceProductionManager.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2018-12-26 17:53]
+*     Last Modified       :     [2019-01-11 01:26]
 *     Description         :     Handler of the ressource attribution to the players
 **********************************************************************************/
 package Katane;
@@ -36,5 +36,4 @@ public class RessourceProductionManager {
 			}
 		}
 	}
-
 }

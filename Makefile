@@ -18,7 +18,7 @@ OUTPUT_EXEC=$(OUTPUT_DIR)/$(OUT).jar
 FLAGS_WARNING_SYNTAX=-Xlint:all -Xdiags:verbose
 FLAGS_WARNING_DOCUMENTATION=-Xdoclint:all # This forces the documentation
 FLAGS_WARNINGS=$(FLAGS_WARNING_SYNTAX) # $(FLAGS_WARNING_DOCUMENTATION)
-FLAGS= $(FLAGS_WARNINGS) $(DEBUG)
+FLAGS= #$(FLAGS_WARNINGS) $(DEBUG)
 
 
 ifeq ($(PACKAGE_TO_COMPILE_SOURCE),) # Case there is no Package to create - It's the first run

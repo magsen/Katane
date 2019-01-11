@@ -2,7 +2,6 @@
 *     File Name           :     Katane.java
 *     Created By          :     The LO43 Katane team
 *     Creation Date       :     [2018-09-14 13:32]
-*     Last Modified       :     [2019-01-10 05:36]
 *     Description         :     Katane is the main class of the Model part of the Model/Control/View architechture
 **********************************************************************************/
 
@@ -63,18 +62,18 @@ public class Katane {
 		/* Instanciation of GUI */ 
 		
 		this.mainGUI = new MainGUI(this);
-		
+	}
 		
 		
 		/* example of trade */
-		//int rQuantity[]= {0,0,0,0,0};
-		//TM.trade(player.get(0), player.get(1) , rQuantity );
+		int rQuantity[]= {0,0,0,0,0};
+		TM.trade(player.get(0), player.get(1) , rQuantity );
 		
 		/* example of lambda generic to get ressource */
-		//for(Ressource ressource : this.player.get(0).getSpecificRessource((ressource)-> ressource instanceof Wood)){
-		//	((Wood) ressource).hit();
-		//}
-		
+		for(Ressource ressource : this.player.get(0).getSpecificRessource((ressource)-> ressource instanceof Wood)){
+			((Wood) ressource).hit();
+		}
+
 	}
 
 	
@@ -107,6 +106,51 @@ public class Katane {
 			startTurn();/* exit and start new turn (avoid recursive call) */
 		}
 	}
+
+
+
+
+
+	/*
+	 * GameRoutine Class
+	 * StartTheCurrent Turn
+	 * This method is call automaticaly at the end of a turn
+	 * 
+	 * Link to RessourceProductionManager
+	 */
+	public void startTurn() {
+		this.currentPlayerIndex += 1;
+		if(this.currentPlayerIndex > 4) {this.currentPlayerIndex=1;}
+		this.currentPlayer = this.getPlayerN(currentPlayerIndex);
+		RPM.attributesRessources();
+		dice1.roll();
+		dice2.roll();
+	}
+	/*
+	 * GameRoutine Class
+	 * EndTheCurrent Turn
+	 * This method end the turn and auto-call a new turn if there is no victory
+	 * 
+	 * 
+	 */
+	public boolean endTurn() {
+		/* Finish the game */
+		isThereVictory();
+		if(victory) {
+			victory();/* launche victory event */
+			return false;
+		}else {
+			return true;/* exit and start new turn (avoid recursive call) */
+		}
+	}
+	public void isThereVictory() {
+		for(Player p : player) {
+			if(p.getVictoryPoint()>=10) {
+				victory = true;
+			}
+		}
+		
+	}
 	public void isThereVictory() {
 		for(Player p : player) {
 			if(p.getVictoryPoint()>=10) {
@@ -133,18 +177,26 @@ public class Katane {
 	public Player getPlayer (int playerNumber) {
 		return player.get(playerNumber);
 	}
-	
-	public Player getCurrentPlayer () {
-		return currentPlayer;
-	}
+
 	public Integer getCurrentPlayerIndex () {
 		return currentPlayerIndex;
 	}
-	
+
+	public int getPlayerNumber(Player player) {
+		for (Player p : this.player) {
+			if (p == player) {
+				return p.getPlayerNumber();
+			}
+		}
+		return -1;
+	}
+
+	public Player getCurrentPlayer () {
+		return currentPlayer;
+	}
 	public BuildManagerWorker getBMW () {
 		return BMW;
 	}
-	
 	public TradeManager getTM () {
 		return TM;
 	}

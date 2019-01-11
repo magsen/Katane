@@ -685,3 +685,4 @@ public class ImportImages {
 		avatarArray = new Image[] {daemonAvatar, kerriganAvatar,tossAvatar,zergAvatar,artasAvatar,daemonAvatar,humanAvatar,nightelfAvatar,orcAvatar,undeadAvatar,daemonAvatar};
 	}
 }
+

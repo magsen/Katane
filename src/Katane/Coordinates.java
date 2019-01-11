@@ -150,6 +150,52 @@ public class Coordinates {
 		}
 		return townCoordinatesList;
 	}
+	
+	/* Convert the coordinates of a road to a list of coordinates of adjacents roads */
+	public ArrayList<Coordinates> roadToAdjacentRoadsOneDirection (Coordinates prevCoor) {
+		ArrayList<Coordinates> townCoordinatesList = new ArrayList<Coordinates>();
+		Coordinates coor;
+		if (y % 3 == 0) {
+			if (prevCoor == null || (prevCoor.equals(new Coordinates(x, y - 1)) == false && prevCoor.equals(new Coordinates(x, y + 1)) == false) ) {
+				coor = new Coordinates(x, y - 1);
+				townCoordinatesList.add(coor);
+				coor = new Coordinates(x, y + 1);
+				townCoordinatesList.add(coor);
+			} else {
+				coor = new Coordinates(x+1, y - 1);
+				townCoordinatesList.add(coor);
+				coor = new Coordinates(x+1, y - 2);
+				townCoordinatesList.add(coor);
+			}
+		} else  {
+			if ( (y-1) % 3 == 0) {
+				if (prevCoor == null || (prevCoor.equals(new Coordinates(x, y - 1)) == false && prevCoor.equals(new Coordinates(x, y - 2)) == false) ) {
+					coor = new Coordinates(x, y - 1);
+					townCoordinatesList.add(coor);
+					coor = new Coordinates(x, y - 2);
+					townCoordinatesList.add(coor);
+				} else {
+					coor = new Coordinates(x - 1, y + 2);
+					townCoordinatesList.add(coor);
+					coor = new Coordinates(x, y + 1);
+					townCoordinatesList.add(coor);
+				}
+			} else {
+				if (prevCoor == null || (prevCoor.equals(new Coordinates(x, y - 1)) == false && prevCoor.equals(new Coordinates(x - 1, y + 1)) == false) ) {
+					coor = new Coordinates(x, y - 1);
+					townCoordinatesList.add(coor);
+					coor = new Coordinates(x - 1, y + 1);
+					townCoordinatesList.add(coor);
+				} else {
+					coor = new Coordinates(x, y + 2);
+					townCoordinatesList.add(coor);
+					coor = new Coordinates(x, y + 1);
+					townCoordinatesList.add(coor);
+				}
+			}
+		}
+		return townCoordinatesList;
+	}
 
 	/* Convert the coordinates of a town  to a list of coordinates of adjacents towns */
 	public ArrayList<Coordinates> townToAdjacentTowns () {

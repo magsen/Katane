@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.*;
 import javax.swing.*;
-import model.*;
 import Katane.Brick;
 import Katane.Grain;
 import Katane.Katane;

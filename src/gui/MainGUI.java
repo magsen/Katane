@@ -122,7 +122,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	/**
 	 * The BuildingCostMenu , which displays the required raw materials
 	 */
-	private BuildingCostsMenu buildingCostsMenuPanel;
+	BuildingCostsMenu buildingCostsMenuPanel;
 
 	/**
 	 * Panel called, if you want to choose, from whom you want to steal raw materials
@@ -365,16 +365,40 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setPreferredSize(new Dimension(width, height));
+		
+		
+		
 	}
 
 	private void setupInteraction() {
 
 		buildingcosts.setActionCommand("menu.buildingcosts"); 
-		//buildingcosts.addActionListener(katane);
+		buildingcosts.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/ 
+			
+			
+			
+			
+			
+		}});
 		
 		buildButton.setActionCommand("node.settlement");
-		//buildButton.addActionListener(katane);
-
+		buildButton.addActionListener(new ActionListener() {public void
+		actionPerformed(ActionEvent e) { 
+			
+		/*NEED TO BE EDIT*/ 
+		
+		
+		
+		
+		
+		}});
+		
+		
+		
+		/* POLYGONFLAG */
 		//polygonMap.addMouseListener(katane);
 		//this.addMouseListener(katane);
 	}

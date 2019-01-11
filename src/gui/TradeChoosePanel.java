@@ -208,8 +208,13 @@ actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/
 		}
 		
 		cancelBtn.addActionListener(new ActionListener() {public void
-			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ 
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/ 
+			
+			
 			katane.getMainGUI().tradeePanel.setVisible(false);
+	
 		}});
 		cancelBtn.setActionCommand("chos.-1"); //$NON-NLS-1$
 	}

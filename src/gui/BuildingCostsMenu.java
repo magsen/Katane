@@ -1,6 +1,9 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 /*
@@ -17,7 +20,7 @@ public class BuildingCostsMenu extends JPanel {
 	 * The width of the panel Ãæ°å¿í¶È
 	 */
 	private int width;
-
+	private PlayerButton cancelBtn;
 	/**
 	 * The height
 	 */
@@ -158,6 +161,8 @@ public class BuildingCostsMenu extends JPanel {
 		costs3.setFont(f);
 		costs4 = new JLabel("=");
 		costs4.setFont(f);
+		cancelBtn = new PlayerButton(ImportImages.cancelBtn, size, size);
+		
 	}
 
 	private void setupInteraction() {
@@ -181,7 +186,20 @@ public class BuildingCostsMenu extends JPanel {
 		settlementpanel.setToolTipText(Messages.getString("BuildingCostsMenu.Siedlung"));
 		citypanel.setToolTipText(Messages.getString("BuildingCostsMenu.Stadt")); 
 		cardpanel.setToolTipText(Messages.getString("BuildingCostsMenu.Entwicklungskarte"));
-
+		
+		cancelBtn.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/ 
+			
+			
+			//katane.getMainGUI().buildingCostsMenuPanel.setVisible(false);
+			setVisible(false);
+			
+		}});
+		cancelBtn.setActionCommand("chos.-1"); //$NON-NLS-1$
+		
+		
 	}
 
 	private void addWidgets() {
@@ -350,6 +368,6 @@ public class BuildingCostsMenu extends JPanel {
 		c.anchor = GridBagConstraints.CENTER;
 		c.insets = new Insets(10, 0, 0, 5);
 		bgpanel.add(ore3, c);
-
+		bgpanel.add(cancelBtn);
 	}
 }

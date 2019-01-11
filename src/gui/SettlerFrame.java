@@ -110,7 +110,15 @@ public class SettlerFrame extends PlayerFrame {
 	public void setupInteraction() {
 		bCard.setActionCommand("menu.card"); //$NON-NLS-1$
 		bCard.addActionListener(new ActionListener() {public void
-			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ }});
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/ 
+			
+			
+			katane.getMainGUI().buildingCostsMenuPanel.setVisible(true);
+			
+			
+		}});
 		bCard.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent me){
 				((PlayerButton)me.getSource()).changeIcon(ImportImages.cardBtnActive);
@@ -121,7 +129,10 @@ public class SettlerFrame extends PlayerFrame {
 		});
 		bTrade.setActionCommand("menu.trade"); //$NON-NLS-1$
 		bTrade.addActionListener(new ActionListener() {public void
-			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ 
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/ 
+			
 			mainGUI.showTradeesPanel();
 			
 		}});

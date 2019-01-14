@@ -514,7 +514,7 @@ public class ImportImages {
 
 		tossAvatar = new ImageIcon(getClass().getResource(
 				"graphics/avatars/toss.png")).getImage();
-		artasAvatar = new ImageIcon(getClass().getResource("graphics/avatars/artas.jpg")).getImage();
+		artasAvatar = new ImageIcon(getClass().getResource("graphics/avatars/artas.png")).getImage();
 		
 		daemonAvatar = new ImageIcon(getClass().getResource("graphics/avatars/daemon.png")).getImage();
 		

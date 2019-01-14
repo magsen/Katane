@@ -30,7 +30,7 @@ public class Launcher {
 	}
 
 	public static void gameConsole (Katane katane) {
-		ArrayList<World> liste = katane.getWorld();
+		ArrayList<World> listeW = katane.getWorld();
 		Player P = katane.getPlayer(0), P2 = katane.getPlayer(1);
 		World W = listeW.get(0);
 		TownMap townMap = W.getTownSet();

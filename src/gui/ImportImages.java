@@ -376,7 +376,7 @@ public class ImportImages {
 	 */
 	public void loadPics() {
 		
-		robber = new ImageIcon(getClass().getResource("graphics/buildings/raeuber.png")).getImage();
+		robber = new ImageIcon(getClass().getResource("graphics/buildings/robber.png")).getImage();
 		
 		//english = new ImageIcon(getClass().getResource("graphics/other/english.png")).getImage();
 		
@@ -514,7 +514,7 @@ public class ImportImages {
 
 		tossAvatar = new ImageIcon(getClass().getResource(
 				"graphics/avatars/toss.png")).getImage();
-		artasAvatar = new ImageIcon(getClass().getResource("graphics/avatars/artas.png")).getImage();
+		artasAvatar = new ImageIcon(getClass().getResource("graphics/avatars/artas.jpg")).getImage();
 		
 		daemonAvatar = new ImageIcon(getClass().getResource("graphics/avatars/daemon.png")).getImage();
 		

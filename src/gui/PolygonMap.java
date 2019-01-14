@@ -521,7 +521,7 @@ public class PolygonMap extends JLayeredPane {
 		for (int i = 0; i < informationMap.length; i++) {
 			for (int j = 0; j < informationMap[0].length; j++) {
 				Image img = null;
-				Image img2 = ImportImages.lumberBtn;
+				Image img2 = null;
 				Image img3 = null;
 				
 				// removes
@@ -596,16 +596,16 @@ public class PolygonMap extends JLayeredPane {
 				}*/
 
 				if (img != null) {
-					g.drawImage(img, (int) hexagonMap[i][j].getBounds().getX(),
-							(int) hexagonMap[i][j].getBounds().getY(),
+					g.drawImage(img, (int) hexagonMap[i][j].getBounds().getX() - 265,
+							(int) hexagonMap[i][j].getBounds().getY() + 182,
 							widthTile, heightTile, this);
 				}
 				if (img2 != null) {
 					if (informationMap[i][j].isBrigand()) {
 						g.drawImage(
 							img2,
-							(int) (hexagonMap[i][j].getBounds().getCenterX() - heightIcon / 3.2),
-							(int) (hexagonMap[i][j].getBounds().getCenterY() - widthIcon / 3.2),
+							(int) (hexagonMap[i][j].getBounds().getCenterX() - heightIcon / 3.2) - 265,
+							(int) (hexagonMap[i][j].getBounds().getCenterY() - widthIcon / 3.2) + 182,
 							(int) (widthIcon * 0.7), (int) (widthIcon * 0.7),
 							this);
 					}
@@ -648,8 +648,8 @@ public class PolygonMap extends JLayeredPane {
 				}
 				if (img3 != null) {
 					g.drawImage(img3, (int) hexagonMap[i][j].getBounds()
-							.getCenterX() - widthChit / 2,
-							(int) hexagonMap[i][j].getBounds().getCenterY()
+							.getCenterX() - widthChit / 2 - 265 ,
+							(int) hexagonMap[i][j].getBounds().getCenterY() + 182
 									- heightChit / 2, widthChit, heightChit,
 							this);
 				}
@@ -663,13 +663,15 @@ public class PolygonMap extends JLayeredPane {
 						&& informationMap[i][j].getRessource() != Constants.GRAINHARBOR
 						&& informationMap[i][j].getRessource() != Constants.HARBOR*/
 					Image img1 = ImportImages.robber;
-					g.drawImage(img1, (int) hexagonMap[i][j]
-							.getTileActionArea().getBounds().getCenterX()
-							- (widthTile / 3 + widthTile / 10),
-							(int) hexagonMap[i][j].getTileActionArea()
-									.getBounds().getCenterY()
-									- heightTile / 3, widthTile / 2,
-							widthTile / 2, this);
+					if (informationMap[i][j].isBrigand()) {
+						g.drawImage(img1, (int) hexagonMap[i][j]
+								.getTileActionArea().getBounds().getCenterX()
+								- (widthTile / 3 + widthTile / 10),
+								(int) hexagonMap[i][j].getTileActionArea()
+										.getBounds().getCenterY()
+										- heightTile / 3, widthTile / 2,
+								widthTile / 2, this);
+					}
 				}
 			}
 		}
@@ -682,31 +684,31 @@ public class PolygonMap extends JLayeredPane {
 		harborTypeO = ImportImages.harbor5;
 		// Drawing the different port types (alignments) 
 		graphic.drawImage(harborTypeSO, (int) hexagonMap[0][1].getBounds()
-				.getX(), (int) hexagonMap[0][1].getBounds().getY(), widthTile,
+				.getX()-328, (int) hexagonMap[0][1].getBounds().getY()+70, widthTile,
 				heightTile, this);
 		graphic.drawImage(harborTypeSW, (int) hexagonMap[0][3].getBounds()
-				.getX(), (int) hexagonMap[0][3].getBounds().getY(), widthTile,
+				.getX()-328, (int) hexagonMap[0][3].getBounds().getY()+70, widthTile,
 				heightTile, this);
 		graphic.drawImage(harborTypeSW, (int) hexagonMap[1][5].getBounds()
-				.getX(), (int) hexagonMap[1][5].getBounds().getY(), widthTile,
+				.getX()-328, (int) hexagonMap[1][5].getBounds().getY()+70, widthTile,
 				heightTile, this);
 		graphic.drawImage(harborTypeO, (int) hexagonMap[2][0].getBounds()
-				.getX(), (int) hexagonMap[2][0].getBounds().getY(), widthTile,
+				.getX()-328, (int) hexagonMap[2][0].getBounds().getY()+70, widthTile,
 				heightTile, this);
 		graphic.drawImage(harborTypeW, (int) hexagonMap[3][6].getBounds()
-				.getX(), (int) hexagonMap[3][6].getBounds().getY(), widthTile,
+				.getX()-328, (int) hexagonMap[3][6].getBounds().getY()+70, widthTile,
 				heightTile, this);
 		graphic.drawImage(harborTypeO, (int) hexagonMap[4][0].getBounds()
-				.getX(), (int) hexagonMap[4][0].getBounds().getY(), widthTile,
+				.getX()-328, (int) hexagonMap[4][0].getBounds().getY()+70, widthTile,
 				heightTile, this);
 		graphic.drawImage(harborTypeNW, (int) hexagonMap[5][5].getBounds()
-				.getX(), (int) hexagonMap[5][5].getBounds().getY(), widthTile,
+				.getX() -328, (int) hexagonMap[5][5].getBounds().getY() +70, widthTile,
 				heightTile, this);
 		graphic.drawImage(harborTypeNO, (int) hexagonMap[6][1].getBounds()
-				.getX(), (int) hexagonMap[6][1].getBounds().getY(), widthTile,
+				.getX()-328, (int) hexagonMap[6][1].getBounds().getY()+70, widthTile,
 				heightTile, this);
 		graphic.drawImage(harborTypeNW, (int) hexagonMap[6][3].getBounds()
-				.getX(), (int) hexagonMap[6][3].getBounds().getY(), widthTile,
+				.getX()-328, (int) hexagonMap[6][3].getBounds().getY()+70, widthTile,
 				heightTile, this);
 		graphic.setColor(new Color(139, 69, 19));
 		Road[] worldRoads = world.getRoads();		

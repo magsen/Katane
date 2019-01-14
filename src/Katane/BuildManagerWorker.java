@@ -24,7 +24,7 @@ public class BuildManagerWorker {
 		this.katane = katane;
 	}
 
-	/* CARE ASSUME THAT THE RULES AUTHORIZE THIS PLACEMENT */
+
 	public boolean buildRoad (Player player, World world, Coordinates coor) {
 		Coordinates coordinates = new Coordinates(coor);
 		TownMap townSet = world.getTownSet();
@@ -43,6 +43,32 @@ public class BuildManagerWorker {
 				roadSet.updateAdjacentRoads(coordinates, road);
 				townSet.updateAdjacentRoads(coordinates, roadSet, road);
 				player.consumeRessourceRoad();
+				if (world.setLongestRoadValue(getLongestRoad (roadSet, player, coordinates))) {
+					changePlayerLongestRoad(world, player);
+				}
+				return true;
+			}
+		}
+	}
+	
+	public boolean buildRoad (Player player, World world, Coordinates coor, boolean b) {
+		Coordinates coordinates = new Coordinates(coor);
+		TownMap townSet = world.getTownSet();
+		RoadMap roadSet = world.getRoadSet();
+		if (player.isEnoughRessourceRoad() == false) {
+			System.out.println("Error while creating a Road: not enough ressources");
+			return false;
+		} else {
+			if (roadSet.isRoad(coordinates) == true) {
+				System.out.println("Error while creating a Road: There is already a road there");
+				return false;
+			} else {
+				Road road = new Road(player, coordinates);
+				road.setAdjacentRoads(roadSet.generateAdjacentRoads(coordinates)); // Set the road nead
+				roadSet.addRoadToMap(coordinates, road);
+				roadSet.updateAdjacentRoads(coordinates, road);
+				townSet.updateAdjacentRoads(coordinates, roadSet, road);
+				//player.consumeRessourceRoad();
 				if (world.setLongestRoadValue(getLongestRoad (roadSet, player, coordinates))) {
 					changePlayerLongestRoad(world, player);
 				}
@@ -265,7 +291,7 @@ public class BuildManagerWorker {
 		stRoads.push(step);
 
 		while (stRoads.isEmpty() == false) {
-			printStack(stRoads);
+			//printStack(stRoads);
 			step = stRoads.pop();
 			k = step.length;
 			lenSide = k - ref; // the real length without the offset "ref"
@@ -346,13 +372,13 @@ public class BuildManagerWorker {
 
 			} else {
 				st.push(stepPrev);
-				System.out.println("Error not enough stack");
+				//System.out.println("Error not enough stack");
 				return defaultCoordinates;
 			}
 			st.push(stepPrev);
 			return stepPrev2.coordinate;
 		} else {
-			System.out.println("Error not enough stack");
+			//System.out.println("Error not enough stack");
 			return defaultCoordinates;
 		}
 	}

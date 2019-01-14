@@ -2,6 +2,8 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;//It is used to receive mouse events, making it easy to create listener objects.
 import java.awt.event.MouseEvent;//Mouse events and mouse movement events.
 import java.util.ArrayList;//Provides a resizable array and implements the List interface.
@@ -425,14 +427,14 @@ public class CardMenu extends JPanel {
 
 	/**
 	 * Updating the map menu
-	 */
+	 *//*
 	public void update() {
 		settler = katane.getCurrentPlayer();
 		dev = settler.getDevelopmentCards();
-		invention.setEnabled(dev.contains(Constants.GETRESOURCES));//Enables (or disables) the button.
+		invention.setEnabled(dev.contains(Constants.GETRESOURCES));*///Enables (or disables) the button.
 		/*boolean java.util.ArrayList.contains(Object o) : 
 		  Returns true if this list contains the specified element.More formally, returns true if and only if this list containsat least one element e 
-		*/
+		*//*
 		inventionAmount.getLabel().setText(settler.getAmountOfDevCard(Constants.GETRESOURCES) + "");
 		streets.setEnabled(dev.contains(Constants.BUILDSTREETS));
 		streetsAmount.getLabel().setText(settler.getAmountOfDevCard(Constants.BUILDSTREETS) + "");
@@ -444,7 +446,7 @@ public class CardMenu extends JPanel {
 		victoryAmount.getLabel().setText(settler.getAmountOfDevCard(Constants.VICTORYPOINTS) + "");
 		backside.setEnabled(settler.getWool() >= 1 && settler.getOre() >= 1 && settler.getGrain() >= 1);
 		backsideAmount.getLabel().setText((Constants.DEVCARDS_MAX - katane.getIsland().getDrawnDevCard())+ "");
-	}
+	}*/
 	
 	public CardMenu getThis(){
 		return this;

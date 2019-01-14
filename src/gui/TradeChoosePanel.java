@@ -199,17 +199,27 @@ public class TradeChoosePanel extends JPanel{
 	 * Adds the <code>TradeChoosePanel</code> interaction with the <code>Katane</code>.
 	 */
 	private void setupInteraction() {
-		for(int i = 0; i < opponents.length; i++) {
+		for(int i = 0; i < 2; i++) {
 			buttons[i].addActionListener(new ActionListener() {public void
-actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ 
-				System.out.println("l");
+				actionPerformed(ActionEvent e) {
+				
+				
+				
+				System.out.println("TRADE WITH THIS PERSON");
 			}});
+			
 			buttons[i].setActionCommand("chos." + opponents[i].getPlayerNumber()); //$NON-NLS-1$
 		}
 		
+		
 		cancelBtn.addActionListener(new ActionListener() {public void
-			actionPerformed(ActionEvent e) { /*NEED TO BE EDIT*/ 
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/ 
+			
+			
 			katane.getMainGUI().tradeePanel.setVisible(false);
+	
 		}});
 		cancelBtn.setActionCommand("chos.-1"); //$NON-NLS-1$
 	}

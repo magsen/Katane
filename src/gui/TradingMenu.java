@@ -385,7 +385,7 @@ public class TradingMenu extends JPanel implements ChangeListener,
 				.setColumns(2);
 		
 		exit = new PlayerButton(ImportImages.cancelBtn, size/2,size/2);
-		exitLabel = new JLabel("Menu verlassen");
+		exitLabel = new JLabel("Trade menu");
 		exitLabel.setFont(new Font("Times New Roman", Font.ITALIC, size/3));
 
 		/**
@@ -447,8 +447,8 @@ public class TradingMenu extends JPanel implements ChangeListener,
 		 * This is the dropdown menu for the selection of the trading partner
 		 */
 		tradepartners = new JComboBox();
-		tradepartners.addItem(Messages.getString("TradingMenu.Hafen")); //$NON-NLS-1$
-		tradepartners.addItem(Messages.getString("TradingMenu.Spieler")); //$NON-NLS-1$
+		tradepartners.addItem(Messages.getString("Joueur fictif1")); //$NON-NLS-1$
+		tradepartners.addItem(Messages.getString("Joueur fictif2")); //$NON-NLS-1$
 
 		/**
 		 * In the following, the font for the labels and JComboBoxes is set
@@ -907,7 +907,7 @@ public class TradingMenu extends JPanel implements ChangeListener,
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-		banktrade = tradepartners.getSelectedItem().equals(Messages.getString("TradingMenu.Hafen")); //$NON-NLS-1$
+		banktrade = tradepartners.getSelectedItem().equals(Messages.getString("TradingMenu")); //$NON-NLS-1$
 		reset();
 		update();
 	}

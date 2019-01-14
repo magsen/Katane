@@ -1,4 +1,3 @@
-
 package gui;
 
 import java.awt.*;
@@ -9,7 +8,6 @@ import javax.swing.*;
 import Katane.Katane;
 import Katane.Player;
 import Katane.World;
-import Katane.*; //uncomment
 
 /**
  * Contains all visual components of the game.
@@ -123,7 +121,7 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 	/**
 	 * The BuildingCostMenu , which displays the required raw materials
 	 */
-	private BuildingCostsMenu buildingCostsMenuPanel;
+	BuildingCostsMenu buildingCostsMenuPanel;
 
 	/**
 	 * Panel called, if you want to choose, from whom you want to steal raw materials
@@ -362,20 +360,45 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 		polygonMap.setBounds(0, 0, width, height);
 
 		contentPanel.setOpaque(false);
-		//polygonMap.setOpaque(false);
+		polygonMap.setOpaque(false);
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setPreferredSize(new Dimension(width, height));
+		
+		
+		
 	}
 
 	private void setupInteraction() {
 
 		buildingcosts.setActionCommand("menu.buildingcosts"); 
-		//buildingcosts.addActionListener(katane);
+		buildingcosts.addActionListener(new ActionListener() {public void
+			actionPerformed(ActionEvent e) { 
+			
+			/*NEED TO BE EDIT*/ 
+			
+			buildingCostsMenuPanel.setVisible(true);
+			getBuildButton().setVisible(true);
+			//getBuildPanelRoad().setVisible(true);
+			
+		}});
 		
 		buildButton.setActionCommand("node.settlement");
-		//buildButton.addActionListener(katane);
+		buildButton.addActionListener(new ActionListener() {public void
+		actionPerformed(ActionEvent e) { 
+			
+		/*NEED TO BE EDIT*/ 
+		
+		
+			System.out.println("BuildMenu");
+		
+		
+		}});
 
+		
+		
+		
+		/* POLYGONFLAG */
 		//polygonMap.addMouseListener(katane);
 		//this.addMouseListener(katane);
 	}
@@ -580,4 +603,5 @@ public class MainGUI extends JFrame{ //ÈÝÆ÷
 
 
 }
+
 
